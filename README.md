@@ -1,4 +1,6 @@
-  <h1> <img src="./assets/logo.svg" alt="logo" width='30px'/> React Responsvie 3D Carousel</h1>
+<h1> <img src="./assets/logo.svg" alt="logo" width='30px'/> React Responsvie 3D Carousel</h1>
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 Responsive 3D carousel for React app. It supports TypeScript, and the code is converted with Babel to support the last two versions of each browser.
 
