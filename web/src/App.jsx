@@ -1,11 +1,12 @@
-import { useMemo, useState } from 'react'
-import './App.css'
-import { Carousel } from 'react-responsive-3d-carousel'
+import React, { useMemo, useState } from 'react'
+import logoSvg from '../public/logo.svg'
+import Carousel from '../../src/components/Carousel'
+import './App.scss'
 
 function App() {
   const [numberOfSlides, setNumberOfSlides] = useState(5)
 
-  const [width, setWidth] = useState('400px')
+  const [width, setWidth] = useState('500px')
   const [height, setHeight] = useState('300px')
   const [depth, setDepth] = useState(2)
   const [interval, setInterval] = useState(3000)
@@ -22,6 +23,7 @@ function App() {
   const [arrowsHeight, setArrowsHeight] = useState('4.2rem')
   const [arrowsDefaultColor, setArrowsDefaultColor] = useState('#ffffff')
   const [arrowsHoveredColor, setArrowsHoveredColor] = useState('#888888')
+  const [arrowsStrokeWidth, setArrowsStrokeWidth] = useState(4.5)
 
   const [showIndicators, setShowIndicators] = useState(true)
   const [indicatorsSize, setIndicatorsSize] = useState('small')
@@ -52,13 +54,17 @@ function App() {
 
   return (
     <div className="carousel-3d-page">
-      <div>
-        <h1 className="carousel-3d-page__title">
+      <div className="carousel-3d-page__header">
+        <img className="carousel-3d-page__header__logo" src={logoSvg} />
+        <h1 className="carousel-3d-page__header__title">
           React Responsive 3D Carousel
         </h1>
         <div className="carousel-3d-page__links">
           <div>
-            <a href="">
+            <a
+              name="to github"
+              href="https://github.com/Byongho96/react-responsive-3d-carousel"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -73,7 +79,10 @@ function App() {
             </a>
           </div>
           <div>
-            <a href="">
+            <a
+              name="to npm"
+              href="https://www.npmjs.com/package/react-responsive-3d-carousel"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="15"
@@ -106,6 +115,7 @@ function App() {
         arrowsHeight={arrowsHeight}
         arrowsDefaultColor={arrowsDefaultColor}
         arrowsHoveredColor={arrowsHoveredColor}
+        arrowsStrokeWidth={arrowsStrokeWidth}
         showIndicators={showIndicators}
         indicatorsSize={indicatorsSize}
         indicatorsActiveColor={indicatorsActiveColor}
@@ -305,6 +315,19 @@ function App() {
               name="arrows-hovered-color"
               value={arrowsHoveredColor}
               onChange={(e) => setArrowsHoveredColor(e.target.value)}
+            />
+          </div>
+          <div className="carousel-3d-page__form__input">
+            <label htmlFor="arrows-stroke-width-input">arrowsStrokeWidth</label>
+            <input
+              type="number"
+              min="1"
+              max="20"
+              step="0.5"
+              id="arrows-stroke-width-input"
+              name="arrows-stroke-width"
+              value={arrowsStrokeWidth}
+              onChange={(e) => setArrowsStrokeWidth(e.target.value)}
             />
           </div>
         </form>

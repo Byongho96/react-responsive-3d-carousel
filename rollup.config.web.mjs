@@ -7,6 +7,7 @@ import terser from '@rollup/plugin-terser'
 import postcss from 'rollup-plugin-postcss'
 import autoprefixer from 'autoprefixer'
 
+import url from '@rollup/plugin-url'
 import copy from 'rollup-plugin-copy'
 import replace from 'rollup-plugin-replace'
 
@@ -32,6 +33,7 @@ export default [
         plugins: [autoprefixer()],
       }),
 
+      url(),
       copy({
         targets: [{ src: 'web/public/**', dest: 'dist/' }],
       }),

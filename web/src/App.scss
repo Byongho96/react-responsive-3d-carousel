@@ -1,23 +1,30 @@
-.react-responsive-3d-carousel__carousel {
-  /* box-sizing: border-box !important; */
-  /* margin: 30px !important; */
-  /* padding: 0 !important; */
-}
-
 .carousel-3d-page {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 20px;
-  /* max-height: 98vh; */
 }
 
-.carousel-3d-page__title {
-  font-size: 2rem;
-  font-weight: 600;
+.carousel-3d-page__header {
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  gap: 15px;
   margin: 2rem 0 1rem;
   padding: 0;
+}
+
+.carousel-3d-page__header__title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+}
+
+.carousel-3d-page__header__logo {
+  width: 2rem;
+  height: 2rem;
 }
 
 .carousel-3d-page__links {
