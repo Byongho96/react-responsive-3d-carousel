@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 212.9 263.84">
+  <g id="right-trapezoid">
+    <polygon fill="#70cfef80" points="71.92 53.87 71.92 219.87 212.9 263.84 212.9 0 71.92 53.87"/>
+  </g>
+  <g id="left-trapezoid">
+    <polygon fill="#70cfef" points="0 48.21 0 240.83 113.63 190.46 113.63 93.37 0 48.21"/>
+  </g>
+</svg>

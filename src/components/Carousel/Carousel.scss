@@ -1,0 +1,40 @@
+.react-responsive-3d-carousel__carousel {
+  position: relative;
+  width: 100%;
+  padding: 2rem 0 2rem 0;
+  overflow: hidden;
+  box-sizing: content-box;
+}
+
+.react-responsive-3d-carousel__carousel__list {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.react-responsive-3d-carousel__carousel__list__item {
+  overflow: hidden;
+  position: absolute;
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+  box-shadow: 0 0.7rem 1.1rem 0.18rem rgba(1, 1, 1, 0.3);
+}
+
+.react-responsive-3d-carousel__carousel__list__item > * {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.react-responsive-3d-carousel__carousel__list__item.landscape > * {
+  width: 100%;
+  height: auto;
+}
+
+.react-responsive-3d-carousel__carousel__list__item.portrait > * {
+  width: auto;
+  height: 100%;
+}

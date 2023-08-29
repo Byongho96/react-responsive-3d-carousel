@@ -1,0 +1,8 @@
+dist
+lib
+coverage
+
+**/.git
+**/.svn
+**/.hg
+**/node_modules

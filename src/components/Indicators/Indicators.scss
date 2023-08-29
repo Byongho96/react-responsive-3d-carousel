@@ -1,0 +1,59 @@
+.react-responsive-3d-carousel__indicators {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+  bottom: 0.3rem;
+  left: 0;
+
+  //reset list css
+  margin: 0;
+  padding: 0;
+  text-indent: 0;
+  list-style-type: none;
+}
+
+.react-responsive-3d-carousel__indicators.small {
+  gap: 0.8rem;
+}
+
+.react-responsive-3d-carousel__indicators.medium {
+  gap: 0.9rem;
+}
+
+.react-responsive-3d-carousel__indicators.large {
+  gap: 1.1rem;
+}
+
+.react-responsive-3d-carousel__indicators__item {
+  //reset list css
+  margin: 0;
+  padding: 0;
+  text-indent: 0;
+  list-style-type: none;
+}
+
+.react-responsive-3d-carousel__indicators__item svg {
+  filter: drop-shadow(0px 0.15rem 0.15rem rgba(56, 56, 56, 0.3));
+  cursor: pointer;
+}
+
+.react-responsive-3d-carousel__indicators__item.small svg {
+  width: 0.65rem;
+  height: 0.65rem;
+}
+
+.react-responsive-3d-carousel__indicators__item.medium svg {
+  width: 0.85rem;
+  height: 0.85rem;
+}
+
+.react-responsive-3d-carousel__indicators__item.large svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.react-responsive-3d-carousel__indicators__item path {
+  transition: fill 0.2s ease-in-out;
+}
