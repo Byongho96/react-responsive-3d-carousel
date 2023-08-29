@@ -1,7 +1,4 @@
-<div style="display: flex; align-items: center; gap:20px;">
-  <img src="./assets/logo.svg"  alt="logo" width='40px'/>
-  <h1>React Responsvie 3D Carousel</h1>
-</div>
+  <h1> <img src="./assets/logo.svg" alt="logo" width='30px'/> React Responsvie 3D Carousel</h1>
 
 Responsive 3D carousel for React app. It supports TypeScript, and the code is converted with Babel to support the last two versions of each browser.
 
