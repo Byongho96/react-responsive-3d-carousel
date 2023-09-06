@@ -68,13 +68,13 @@ export interface CarouselProps {
  */
 const Carousel: React.FC<CarouselProps> = ({
   children = [],
-  width = '25rem',
-  height = '18.75rem',
+  width = '500px',
+  height = '300px',
   spread = 'wide',
-  depth = 1.2,
+  depth = 1,
   autoPlay = true,
   interval = 3000,
-  transitionTime = 300,
+  transitionTime = 500,
   infiniteLoop = true,
   startIndex = 0,
   showStatus = true,
