@@ -1,4 +1,7 @@
 .react-responsive-3d-carousel__carousel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
   width: 100%;
   padding: 2rem 0 2rem 0;
@@ -8,10 +11,19 @@
 
 .react-responsive-3d-carousel__carousel__list {
   position: relative;
-  width: 100%;
+  width: 95%;
   height: 100%;
   perspective: 1000px;
   transform-style: preserve-3d;
+  transition: width 0.3s ease-in-out;
+}
+
+.react-responsive-3d-carousel__carousel__list.normal {
+  width: 85%;
+}
+
+.react-responsive-3d-carousel__carousel__list.narrow {
+  width: 75%;
 }
 
 .react-responsive-3d-carousel__carousel__list__item {

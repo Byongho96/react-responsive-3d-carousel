@@ -17,6 +17,7 @@ export interface CarouselProps {
   children: React.ReactNode | React.ReactNode[]
   width?: string
   height?: string
+  spread?: 'wide' | 'normal' | 'narrow'
   depth?: number
   autoPlay?: boolean
   interval?: number
@@ -43,6 +44,7 @@ export interface CarouselProps {
  * @param children Carousel items
  * @param width Width of a carousel item
  * @param height Height of a carousel item
+ * @param spread The extent to carousel items are spread out
  * @param depth 3D depth of carousel
  * @param autoPlay Automatically play the carousel
  * @param interval Time interval before the next carousel item (ms)
@@ -68,6 +70,7 @@ const Carousel: React.FC<CarouselProps> = ({
   children = [],
   width = '25rem',
   height = '18.75rem',
+  spread = 'wide',
   depth = 1.2,
   autoPlay = true,
   interval = 3000,
@@ -213,7 +216,7 @@ const Carousel: React.FC<CarouselProps> = ({
       style={{ height: height }}
     >
       <div
-        className="react-responsive-3d-carousel__carousel__list"
+        className={`react-responsive-3d-carousel__carousel__list ${spread}`}
         ref={containerRef}
       >
         {childrenArray.map((child: React.ReactNode, curIndex: number) => (
