@@ -17,6 +17,20 @@ import {
 
 /**
  *
+ * @param curIndex Index of the current carousel item
+ * @param carouselItems Collection of carousel items
+ */
+export function setOneCarouselStyle(
+  curIndex: number,
+  carouselItems: HTMLCollection
+) {
+  const curItem = carouselItems[curIndex] as HTMLDivElement
+
+  curItem && Object.assign(curItem.style, getCurItemStyle())
+}
+
+/**
+ *
  * @param length The total length of carousel items
  * @param curIndex Index of the current carousel item
  * @param width Width of a current carousel item

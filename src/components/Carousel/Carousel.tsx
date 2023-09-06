@@ -3,6 +3,7 @@ import useSwipe from '../../hooks/useSwipe'
 import { getNextIndex, getPrevIndex } from '../../utils/getCarouselIndex'
 import {
   setFiveCarouselStyle,
+  setOneCarouselStyle,
   setThreeCarouselStyle,
   setTwoCarouselStyle,
 } from '../../utils/setCarouselStyle'
@@ -105,6 +106,14 @@ const Carousel: React.FC<CarouselProps> = ({
   }, [childrenArray])
 
   /**
+   * Adjust curIndex if it's greater than length
+   */
+  const adjustCurIndex = useEffect(() => {
+    if (curIndex < length) return
+    setCurIndex(length - 1)
+  }, [length])
+
+  /**
    * Slide to the previous carousel item
    */
   const slidePrev = useCallback(() => {
@@ -171,7 +180,7 @@ const Carousel: React.FC<CarouselProps> = ({
     const carouselItems = containerEle.children
 
     if (length < 2) {
-      // pass
+      setOneCarouselStyle(curIndex, carouselItems)
     } else if (length < 3) {
       setTwoCarouselStyle(length, curIndex, width, depth, carouselItems)
     } else if (length < 5) {
