@@ -125,7 +125,7 @@ const Carousel: React.FC<CarouselProps> = ({
   /**
    * Adjust curIndex if it's greater than length
    */
-  const adjustCurIndex = useEffect(() => {
+  useEffect(() => {
     if (curIndex < length) return
     setCurIndex(length - 1)
   }, [length])
