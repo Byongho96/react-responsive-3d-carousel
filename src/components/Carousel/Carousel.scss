@@ -22,19 +22,8 @@
   box-shadow: 0 0.7rem 1.1rem 0.18rem rgba(1, 1, 1, 0.3);
 }
 
-.react-responsive-3d-carousel__carousel__list__item > * {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.react-responsive-3d-carousel__carousel__list__item.landscape > * {
+.react-responsive-3d-carousel__carousel__list__item__content {
   width: 100%;
-  height: auto;
-}
-
-.react-responsive-3d-carousel__carousel__list__item.portrait > * {
-  width: auto;
   height: 100%;
+  object-fit: cover;
 }

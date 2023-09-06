@@ -106,6 +106,23 @@ const Carousel: React.FC<CarouselProps> = ({
   }, [childrenArray])
 
   /**
+   * Add class to the carousel content elements
+   */
+  useEffect(() => {
+    const container = containerRef.current as HTMLDivElement
+    const carouselItems = Array.from(
+      container.children as HTMLCollectionOf<HTMLDivElement>
+    )
+
+    for (const carouselItem of carouselItems) {
+      const carouselContent = carouselItem.firstElementChild as HTMLElement
+      carouselContent.classList.add(
+        'react-responsive-3d-carousel__carousel__list__item__content'
+      )
+    }
+  }, [length])
+
+  /**
    * Adjust curIndex if it's greater than length
    */
   const adjustCurIndex = useEffect(() => {
@@ -201,9 +218,7 @@ const Carousel: React.FC<CarouselProps> = ({
       >
         {childrenArray.map((child: React.ReactNode, curIndex: number) => (
           <div
-            className={`react-responsive-3d-carousel__carousel__list__item ${
-              width > height ? 'landscape' : 'portrait'
-            }`}
+            className="react-responsive-3d-carousel__carousel__list__item"
             key={curIndex}
             style={{
               width: width,

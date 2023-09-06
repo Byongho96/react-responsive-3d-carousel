@@ -66,6 +66,8 @@ module.exports = {
     },
   },
   rules: {
+    '@typescript-eslint/no-explicit-any': 0,
+    '@typescript-eslint/no-unsafe-argument': 0,
     '@typescript-eslint/no-var-requires': 0, // allow commonJS
     'import/no-unresolved': [
       2,
