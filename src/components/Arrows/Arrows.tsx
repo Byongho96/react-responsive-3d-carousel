@@ -24,11 +24,11 @@ export interface ArrowsProps {
 const Arrows: React.FC<ArrowsProps> = ({
   onClickLeft,
   onClickRight,
-  width = '2.2rem',
-  height = '4.2rem',
+  width = '3rem',
+  height = '5.2rem',
   defaultColor = 'rgb(255, 255, 255)',
   hoveredColor = 'rgba(34, 34, 34, 0.53)',
-  strokeWidth = 4.5,
+  strokeWidth = 5,
 }) => {
   const leftArrowRef = useRef<HTMLButtonElement>(null)
   const rightArrowRef = useRef<HTMLButtonElement>(null)
