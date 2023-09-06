@@ -8,9 +8,10 @@ function App() {
 
   const [width, setWidth] = useState('500px')
   const [height, setHeight] = useState('300px')
-  const [depth, setDepth] = useState(2)
+  const [spread, setSpread] = useState('wide')
+  const [depth, setDepth] = useState(1)
   const [interval, setInterval] = useState(3000)
-  const [transitionTime, setTransitionTime] = useState(300)
+  const [transitionTime, setTransitionTime] = useState(500)
   const [autoPlay, setAutoPlay] = useState(true)
   const [infiniteLoop, setInfiniteLoop] = useState(true)
 
@@ -19,11 +20,11 @@ function App() {
   const [statusColor, setStatusColor] = useState('#ffffff')
 
   const [showArrows, setShowArrows] = useState(true)
-  const [arrowsWidth, setArrowsWidth] = useState('2.2rem')
-  const [arrowsHeight, setArrowsHeight] = useState('4.2rem')
+  const [arrowsWidth, setArrowsWidth] = useState('3.2rem')
+  const [arrowsHeight, setArrowsHeight] = useState('5rem')
   const [arrowsDefaultColor, setArrowsDefaultColor] = useState('#ffffff')
   const [arrowsHoveredColor, setArrowsHoveredColor] = useState('#888888')
-  const [arrowsStrokeWidth, setArrowsStrokeWidth] = useState(4.5)
+  const [arrowsStrokeWidth, setArrowsStrokeWidth] = useState(5)
 
   const [showIndicators, setShowIndicators] = useState(true)
   const [indicatorsSize, setIndicatorsSize] = useState('small')
@@ -102,6 +103,7 @@ function App() {
       <Carousel
         width={width}
         height={height}
+        spread={spread}
         depth={depth}
         interval={interval}
         transitionTime={transitionTime}
@@ -165,10 +167,22 @@ function App() {
             />
           </div>
           <div className="carousel-3d-page__form__input">
+            <label htmlFor="spread-select">spread</label>
+            <select
+              name="spread"
+              id="spread-select"
+              onChange={(e) => setSpread(e.target.value)}
+            >
+              <option value="wide">wide</option>
+              <option value="normal">normal</option>
+              <option value="narrow">narrow</option>
+            </select>
+          </div>
+          <div className="carousel-3d-page__form__input">
             <label htmlFor="depth-input">depth</label>
             <input
               type="number"
-              min="0"
+              min="0.5"
               max="10"
               step="0.5"
               id="depth-input"
