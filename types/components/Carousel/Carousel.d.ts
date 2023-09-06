@@ -4,6 +4,7 @@ export interface CarouselProps {
     children: React.ReactNode | React.ReactNode[];
     width?: string;
     height?: string;
+    spread?: 'wide' | 'normal' | 'narrow';
     depth?: number;
     autoPlay?: boolean;
     interval?: number;
@@ -29,6 +30,7 @@ export interface CarouselProps {
  * @param children Carousel items
  * @param width Width of a carousel item
  * @param height Height of a carousel item
+ * @param spread The extent to carousel items are spread out
  * @param depth 3D depth of carousel
  * @param autoPlay Automatically play the carousel
  * @param interval Time interval before the next carousel item (ms)
