@@ -8,6 +8,7 @@ export interface ArrowsProps {
     defaultColor?: string;
     hoveredColor?: string;
     strokeWidth?: number;
+    isShadow?: boolean;
 }
 /**
  * Arrows on both sides of the carousel
@@ -17,6 +18,7 @@ export interface ArrowsProps {
  * @param height Height of an arrow
  * @param defaultColor Color of arrows not hovered
  * @param hoveredColor Color of arrows hovered
+ * @param isShadow Is there shadow in the arrows
  */
 declare const Arrows: React.FC<ArrowsProps>;
 export default Arrows;

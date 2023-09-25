@@ -11,19 +11,23 @@ export interface CarouselProps {
     transitionTime?: number;
     infiniteLoop?: boolean;
     startIndex?: number;
+    isShadow?: boolean;
     showStatus?: boolean;
     statusSize?: 'small' | 'medium' | 'large';
     statusColor?: string;
+    isStatusShadow?: boolean;
     showArrows?: boolean;
     arrowsWidth?: string;
     arrowsHeight?: string;
     arrowsDefaultColor?: string;
     arrowsHoveredColor?: string;
     arrowsStrokeWidth?: number;
+    isArrowsShadow?: boolean;
     showIndicators?: boolean;
     indicatorsSize?: 'small' | 'medium' | 'large';
     indicatorsActiveColor?: string;
     indicatorsInactiveColor?: string;
+    isIndicatorsShadow?: boolean;
 }
 /**
  *
@@ -37,19 +41,23 @@ export interface CarouselProps {
  * @param transitionTime Time interval for sliding (ms)
  * @param infiniteLoop Infinite loop for sliding the carousel (ms)
  * @param startIndex Index of carousel items to start the slide
+ * @param isShadow Is there shadow in the carousel items
  * @param showStatus Whether to show top right status
  * @param statusSize Size of status
  * @param statusColor Color of status
+ * @param isStatusShadow Is there shadow in the status
  * @param showArrows Whether to show arrow buttons on both sides
  * @param arrowsWidth Width of an arrow
  * @param arrowsHeight Height of an arrow
  * @param arrowsDefaultColor Color of arrows not hovered
  * @param arrowsHoveredColor Color of arrows hovereds
  * @param arrowsStrokeWidth Stroke width of arrows svg path
+ * @param isArrowsShadow Is there shadow in the arrows
  * @param showIndicators Whether to show the bottom indicators
  * @param indicatorsSize Size of indicators
  * @param indicatorsActiveColor Color of an active indicator
  * @param indicatorsInactiveColor Color of inactive indicators
+ * @param isIndicatorsShadow Is there shadow in the indicators
  * @returns
  */
 declare const Carousel: React.FC<CarouselProps>;

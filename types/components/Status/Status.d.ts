@@ -5,6 +5,7 @@ export interface StatusProps {
     index: number;
     size?: 'small' | 'medium' | 'large';
     color?: string;
+    isShadow?: boolean;
 }
 /**
  * Status at the top right of the carousel
@@ -12,6 +13,7 @@ export interface StatusProps {
  * @param index (Value - 1) to be displayed on the left of '/'
  * @param size Size of status
  * @param activeColor Color of status font
+ * @param isShadow Is there shadow in the status
  */
 declare const Status: React.FC<StatusProps>;
 export default Status;

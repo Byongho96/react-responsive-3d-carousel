@@ -6,6 +6,7 @@ export interface IndicatorsProps {
     size?: 'small' | 'medium' | 'large';
     activeColor?: string;
     inactiveColor?: string;
+    isShadow?: boolean;
     onClick: (i: number) => void;
 }
 /**
@@ -15,6 +16,7 @@ export interface IndicatorsProps {
  * @param size Size of indicators
  * @param activeColor Color of an active indicator
  * @param inactiveColor Color of inactive indicators
+ * @param isShadow Is there shadow in the indicators
  * @param onClick Function to run when each indicator is clicked
  */
 declare const Indicators: React.FC<IndicatorsProps>;
