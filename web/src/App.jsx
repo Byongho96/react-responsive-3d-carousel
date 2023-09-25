@@ -1,11 +1,56 @@
-import React, { useMemo, useState } from 'react'
-import logoSvg from '../public/logo.svg'
+import React, { useEffect, useMemo, useState } from 'react'
 import Carousel from '../../src/components/Carousel'
+import logoSvg from '../public/logo.svg'
+import catImg from '../public/media/cat.jpg'
+import cloudImg from '../public/media/cloud.jpg'
+import forestImg from '../public/media/forest.jpg'
+import mountainImg from '../public/media/mountain.jpg'
+import puppyImg from '../public/media/puppy.jpg'
 import './App.scss'
+const oceanVid = './media/ocean.mp4'
+const waterVid = './media/water.mp4'
+
+// quries for unsplash api
+const MEDIA_ARRAY = [
+  <img src={catImg} alt="cat" />,
+  <video src={waterVid} alt="water" muted loop autoPlay />,
+  <img src={puppyImg} alt="puppy" />,
+  <iframe src="https://www.youtube.com/embed/Rrf8uQFvICE" />,
+  <a
+    href="https://www.npmjs.com/package/react-responsive-3d-carousel"
+    aria-label="to npm"
+    target="_blank"
+    style={{ textDecoration: 'none' }}
+  >
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        overflow: 'hidden',
+        width: '100%',
+        height: '100%',
+        objectFit: 'cover',
+        color: '#ffffff',
+        fontSize: '2rem',
+        fontWeight: '800',
+        textAlign: 'center',
+        textDecoration: 'none',
+        backgroundColor: '#666666',
+      }}
+    >
+      Click Me!
+    </div>
+  </a>,
+  <img src={mountainImg} alt="mountain" />,
+  <img src={cloudImg} alt="cloud" />,
+  <iframe src="https://www.youtube.com/embed/gdZLi9oWNZg" />,
+  <img src={forestImg} alt="forest" />,
+  <video src={oceanVid} alt="ocean" muted loop autoPlay />,
+]
 
 function App() {
   const [numberOfSlides, setNumberOfSlides] = useState(5)
-
   const [width, setWidth] = useState('500px')
   const [height, setHeight] = useState('300px')
   const [spread, setSpread] = useState('wide')
@@ -14,49 +59,68 @@ function App() {
   const [transitionTime, setTransitionTime] = useState(500)
   const [autoPlay, setAutoPlay] = useState(true)
   const [infiniteLoop, setInfiniteLoop] = useState(true)
+  const [isShadow, setIsShadow] = useState(true)
 
   const [showStatus, setShowStatus] = useState(true)
   const [statusSize, setStatusSize] = useState('small')
   const [statusColor, setStatusColor] = useState('#ffffff')
+  const [isStatusShadow, setIsStatusShadow] = useState(true)
 
   const [showArrows, setShowArrows] = useState(true)
-  const [arrowsWidth, setArrowsWidth] = useState('3.2rem')
-  const [arrowsHeight, setArrowsHeight] = useState('5rem')
+  const [arrowsWidth, setArrowsWidth] = useState('48px')
+  const [arrowsHeight, setArrowsHeight] = useState('53px')
   const [arrowsDefaultColor, setArrowsDefaultColor] = useState('#ffffff')
   const [arrowsHoveredColor, setArrowsHoveredColor] = useState('#888888')
   const [arrowsStrokeWidth, setArrowsStrokeWidth] = useState(5)
+  const [isArrowsShadow, setIsArrowsShadow] = useState(true)
 
   const [showIndicators, setShowIndicators] = useState(true)
   const [indicatorsSize, setIndicatorsSize] = useState('small')
   const [indicatorsActiveColor, setIndicatorsActiveColor] = useState('#ffffff')
   const [indicatorsInactiveColor, setIndicatorsInactiveColor] =
     useState('#999999')
+  const [isIndicatorsShadow, setIsIndicatorsShadow] = useState(true)
 
-  const queries = [
-    'cat',
-    'river',
-    'dog',
-    'forest',
-    'mountain',
-    'ocean',
-    'city',
-    'desert',
-    'palace',
-    'sky',
-  ]
-
-  const numberArray = useMemo(() => {
-    const newArray = []
-    for (let i = 0; i < numberOfSlides; i++) {
-      newArray.push(i)
+  // handle set number of slides
+  const handleSetNumberOfSlides = function (num) {
+    const number = Number(num)
+    if (number > 10) {
+      setNumberOfSlides(10)
+    } else if (number < 0) {
+      setNumberOfSlides(0)
+    } else {
+      setNumberOfSlides(number)
     }
-    return newArray
+  }
+
+  // make integer array from the number of carousel slides
+  const mediaArray = useMemo(() => {
+    return MEDIA_ARRAY.slice(0, numberOfSlides)
   }, [numberOfSlides])
+
+  // set mobile prop value when innerwidth < 720px
+  useEffect(() => {
+    const handleResize = function setMobileProps() {
+      if (window.innerWidth < 720) {
+        setWidth('250px')
+        setHeight('180px')
+        setShowArrows(false)
+      }
+    }
+    addEventListener('resize', handleResize)
+    return () => {
+      removeEventListener('resize', handleResize)
+    }
+  }, [])
 
   return (
     <div className="carousel-3d-page">
       <div className="carousel-3d-page__header">
-        <img className="carousel-3d-page__header__logo" src={logoSvg} />
+        <img
+          className="carousel-3d-page__header__logo"
+          alt="logo"
+          src={logoSvg}
+        />
         <h1 className="carousel-3d-page__header__title">
           React Responsive 3D Carousel
         </h1>
@@ -65,6 +129,7 @@ function App() {
             <a
               name="to github"
               href="https://github.com/Byongho96/react-responsive-3d-carousel"
+              aria-label="to gihub"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -83,6 +148,7 @@ function App() {
             <a
               name="to npm"
               href="https://www.npmjs.com/package/react-responsive-3d-carousel"
+              aria-label="to npm"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -109,27 +175,25 @@ function App() {
         transitionTime={transitionTime}
         autoPlay={autoPlay}
         infiniteLoop={infiniteLoop}
+        isShadow={isShadow}
         showStatus={showStatus}
         statusSize={statusSize}
         statusColor={statusColor}
+        isStatusShadow={isStatusShadow}
         showArrows={showArrows}
         arrowsWidth={arrowsWidth}
         arrowsHeight={arrowsHeight}
         arrowsDefaultColor={arrowsDefaultColor}
         arrowsHoveredColor={arrowsHoveredColor}
         arrowsStrokeWidth={arrowsStrokeWidth}
+        isArrowsShadow={isArrowsShadow}
         showIndicators={showIndicators}
         indicatorsSize={indicatorsSize}
         indicatorsActiveColor={indicatorsActiveColor}
         indicatorsInactiveColor={indicatorsInactiveColor}
+        isIndicatorsShadow={isIndicatorsShadow}
       >
-        {numberArray.map((_, index) => (
-          <img
-            src={`https://source.unsplash.com/random/?${queries[index % 10]}`}
-            alt={`unsplash-image-${index + 1}`}
-            key={`${index}-${queries[index % 10]}`}
-          />
-        ))}
+        {mediaArray}
       </Carousel>
       <section className="carousel-3d-page__form-section">
         <form className="carousel-3d-page__form">
@@ -140,10 +204,10 @@ function App() {
               type="number"
               min="0"
               max="10"
-              id="number-of-slides"
+              id="number-of-slides-input"
               name="number-of-slides"
               value={numberOfSlides}
-              onChange={(e) => setNumberOfSlides(e.target.value)}
+              onChange={(e) => handleSetNumberOfSlides(e.target.value)}
             />
           </div>
           <div className="carousel-3d-page__form__input">
@@ -239,6 +303,16 @@ function App() {
               onChange={(e) => setInfiniteLoop(e.target.checked)}
             />
           </div>
+          <div className="carousel-3d-page__form__input">
+            <label htmlFor="is-shadow-input">isShadow</label>
+            <input
+              type="checkbox"
+              id="is-shadow-input"
+              name="is-shadow"
+              checked={isShadow}
+              onChange={(e) => setIsShadow(e.target.checked)}
+            />
+          </div>
         </form>
         <form className="carousel-3d-page__form">
           <h2 className="carousel-3d-page__form__title">Status</h2>
@@ -272,6 +346,16 @@ function App() {
               name="status-color"
               value={statusColor}
               onChange={(e) => setStatusColor(e.target.value)}
+            />
+          </div>
+          <div className="carousel-3d-page__form__input">
+            <label htmlFor="is-status-shadow-input">isStatusShadow</label>
+            <input
+              type="checkbox"
+              id="is-status-shadow-input"
+              name="is-status-shadow"
+              checked={isStatusShadow}
+              onChange={(e) => setIsStatusShadow(e.target.checked)}
             />
           </div>
         </form>
@@ -344,6 +428,16 @@ function App() {
               onChange={(e) => setArrowsStrokeWidth(e.target.value)}
             />
           </div>
+          <div className="carousel-3d-page__form__input">
+            <label htmlFor="is-arrows-shadow-input">isArrowsShadow</label>
+            <input
+              type="checkbox"
+              id="is-arrows-shadow-input"
+              name="is-arrows-shadow"
+              checked={isArrowsShadow}
+              onChange={(e) => setIsArrowsShadow(e.target.checked)}
+            />
+          </div>
         </form>
         <form className="carousel-3d-page__form">
           <h2 className="carousel-3d-page__form__title">Indicators</h2>
@@ -391,6 +485,18 @@ function App() {
               name="indicators-inactive-color"
               value={indicatorsInactiveColor}
               onChange={(e) => setIndicatorsInactiveColor(e.target.value)}
+            />
+          </div>
+          <div className="carousel-3d-page__form__input">
+            <label htmlFor="is-indicators-shadow-input">
+              isIndicatorShadow
+            </label>
+            <input
+              type="checkbox"
+              id="is-indicators-shadow-input"
+              name="is-indicators-shadow"
+              checked={isIndicatorsShadow}
+              onChange={(e) => setIsIndicatorsShadow(e.target.checked)}
             />
           </div>
         </form>

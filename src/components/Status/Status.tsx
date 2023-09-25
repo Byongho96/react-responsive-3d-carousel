@@ -7,6 +7,7 @@ export interface StatusProps {
   index: number
   size?: 'small' | 'medium' | 'large'
   color?: string
+  isShadow?: boolean
 }
 
 /**
@@ -15,16 +16,20 @@ export interface StatusProps {
  * @param index (Value - 1) to be displayed on the left of '/'
  * @param size Size of status
  * @param activeColor Color of status font
+ * @param isShadow Is there shadow in the status
  */
 const Status: React.FC<StatusProps> = ({
   length,
   index,
   size = 'small',
   color = 'rgb(255, 255, 255)',
+  isShadow = true,
 }) => {
   return (
     <div
-      className={`react-responsive-3d-carousel__status ${size}`}
+      className={`react-responsive-3d-carousel__status ${size} ${
+        isShadow ? 'shadow' : ''
+      }`}
       style={{ color: color }}
     >{`${index + 1} / ${length}`}</div>
   )

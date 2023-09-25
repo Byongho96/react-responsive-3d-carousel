@@ -1,8 +1,8 @@
 .react-responsive-3d-carousel__status {
   position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  text-shadow: 0.02em 0.1em 0.2em black;
+  top: 8px;
+  right: 8px;
+  font-weight: 600;
 }
 
 .react-responsive-3d-carousel__status.small {
@@ -15,4 +15,8 @@
 
 .react-responsive-3d-carousel__status.large {
   font-size: 1.2em;
+}
+
+.react-responsive-3d-carousel__status.shadow {
+  text-shadow: 0.02em 0.1em 0.2em black;
 }

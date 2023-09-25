@@ -8,6 +8,7 @@ export interface IndicatorsProps {
   size?: 'small' | 'medium' | 'large'
   activeColor?: string
   inactiveColor?: string
+  isShadow?: boolean
   onClick: (i: number) => void
 }
 
@@ -18,6 +19,7 @@ export interface IndicatorsProps {
  * @param size Size of indicators
  * @param activeColor Color of an active indicator
  * @param inactiveColor Color of inactive indicators
+ * @param isShadow Is there shadow in the indicators
  * @param onClick Function to run when each indicator is clicked
  */
 const Indicators: React.FC<IndicatorsProps> = ({
@@ -26,6 +28,7 @@ const Indicators: React.FC<IndicatorsProps> = ({
   size = 'small',
   activeColor = 'rgb(255, 255, 255)',
   inactiveColor = 'rgba(67, 67, 67, 0.4)',
+  isShadow = true,
   onClick,
 }) => {
   return (
@@ -33,7 +36,9 @@ const Indicators: React.FC<IndicatorsProps> = ({
       {Array.from({ length }, (_, i) => (
         <li
           key={i}
-          className={`react-responsive-3d-carousel__indicators__item ${size}`}
+          className={`react-responsive-3d-carousel__indicators__item ${size} ${
+            isShadow ? 'shadow' : ''
+          }`}
           onClick={() => onClick(i)}
         >
           {/* circle svg */}

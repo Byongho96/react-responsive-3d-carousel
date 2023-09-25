@@ -24,8 +24,11 @@
 }
 
 .react-responsive-3d-carousel__arrows svg {
-  filter: drop-shadow(0px 3px 3px rgba(56, 56, 56, 0.4));
   cursor: pointer;
+}
+
+.react-responsive-3d-carousel__arrows.shadow svg {
+  filter: drop-shadow(0px 3px 3px rgba(56, 56, 56, 0.4));
 }
 
 .react-responsive-3d-carousel__arrows path {

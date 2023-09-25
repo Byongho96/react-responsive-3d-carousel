@@ -95,19 +95,23 @@ export default App() {
 | transitionTime          | number                     | 500                      | Slide transition animation time (ms)                                   |
 | infiniteLoop            | boolean                    | true                     | Carousel slide animation indefinitely or not                           |
 | startIndex              | number                     | 0                        | The first carousel item index to be centered                           |
+| isShadow                | boolean                    | true                     | Whether or not there are shadows of carousel items                     |
 | showStatus              | boolean                    | true                     | Whether to display top right status text (Ex: `2/5`)                   |
 | statusSize              | 'small', 'medium', 'large' | 'small'                  | The size of status text                                                |
 | statusColor             | string                     | 'rgb(255, 255, 255)'     | The color of status text                                               |
+| isStatusShadow          | boolean                    | true                     | Whether or not there are shadows of the status                         |
 | showArrows              | boolean                    | true                     | Whether arrow buttons are displayed at both ends                       |
-| arrowsWidth             | string                     | '3.2rem'                 | The width of each arrow <br/> All CSS length unit is available         |
-| arrowsHeight            | string                     | '5rem'                   | The height of each arrow <br/> All CSS length unit is available        |
+| arrowsWidth             | string                     | '48px'                   | The width of each arrow <br/> All CSS length unit is available         |
+| arrowsHeight            | string                     | '83px'                   | The height of each arrow <br/> All CSS length unit is available        |
 | arrowsDefaultColor      | string                     | 'rgb(255, 255, 255)'     | The color of arrows not hovered                                        |
 | arrowsHoveredColor      | string                     | 'rgba(34, 34, 34, 0.53)' | The color of arrows hovered                                            |
 | arrowsStrokeWidth       | number                     | 5                        | The stroke width of arrows path                                        |
+| isArrowsShadow          | boolean                    | true                     | Whether or not there are shadows of arrows                             |
 | showIndicators          | boolean                    | true                     | Whether to display bottom indicators                                   |
 | indicatorsSize          | 'small', 'medium', 'large' | 'small'                  | The size of indicators                                                 |
 | indicatorsActiveColor   | string                     | 'rgb(255, 255, 255)'     | The color of an indicator activated                                    |
 | indicatorsInactiveColor | string                     | 'rgba(67, 67, 67, 0.4)'  | The color of indicators inactivated                                    |
+| isIndicatorsShadow      | boolean                    | true                     | Whether or not there are shadows of the ndicators                      |
 
 ## Customizing
 

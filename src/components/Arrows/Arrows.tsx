@@ -10,6 +10,7 @@ export interface ArrowsProps {
   defaultColor?: string
   hoveredColor?: string
   strokeWidth?: number
+  isShadow?: boolean
 }
 
 /**
@@ -20,15 +21,17 @@ export interface ArrowsProps {
  * @param height Height of an arrow
  * @param defaultColor Color of arrows not hovered
  * @param hoveredColor Color of arrows hovered
+ * @param isShadow Is there shadow in the arrows
  */
 const Arrows: React.FC<ArrowsProps> = ({
   onClickLeft,
   onClickRight,
-  width = '3rem',
-  height = '5.2rem',
+  width = '48px',
+  height = '83px',
   defaultColor = 'rgb(255, 255, 255)',
   hoveredColor = 'rgba(34, 34, 34, 0.53)',
   strokeWidth = 5,
+  isShadow = true,
 }) => {
   const leftArrowRef = useRef<HTMLButtonElement>(null)
   const rightArrowRef = useRef<HTMLButtonElement>(null)
@@ -47,7 +50,9 @@ const Arrows: React.FC<ArrowsProps> = ({
   return (
     <>
       <button
-        className="react-responsive-3d-carousel__arrows left"
+        className={`react-responsive-3d-carousel__arrows left ${
+          isShadow ? 'shadow' : ''
+        }`}
         onClick={onClickLeft}
         ref={leftArrowRef}
         type="button"
@@ -73,7 +78,9 @@ const Arrows: React.FC<ArrowsProps> = ({
         </svg>
       </button>
       <button
-        className="react-responsive-3d-carousel__arrows right"
+        className={`react-responsive-3d-carousel__arrows right ${
+          isShadow ? 'shadow' : ''
+        }`}
         onClick={onClickRight}
         ref={rightArrowRef}
         type="button"
