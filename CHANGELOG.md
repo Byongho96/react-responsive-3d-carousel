@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/Byongho96/react-responsive-3d-carousel/compare/v1.1.1...v1.2.0) (2023-09-25)
+
+
+### Features
+
+* add props to adjust shadow status ([9aed8e1](https://github.com/Byongho96/react-responsive-3d-carousel/commit/9aed8e13408827940cf1e495b044e7d33a374f89))
+
 ### [1.1.1](https://github.com/Byongho96/react-responsive-3d-carousel/compare/v1.1.0...v1.1.1) (2023-09-06)
 
 ## [1.1.0](https://github.com/Byongho96/react-responsive-3d-carousel/compare/v0.0.3...v1.1.0) (2023-09-06)
