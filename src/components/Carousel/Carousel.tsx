@@ -1,4 +1,11 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import React, {
+  Children,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 import useSwipe from '../../hooks/useSwipe'
 import { getNextIndex, getPrevIndex } from '../../utils/getCarouselIndex'
 import {
@@ -110,7 +117,7 @@ const Carousel: React.FC<CarouselProps> = ({
    * Convert children props to array
    */
   const childrenArray = useMemo(() => {
-    return React.Children.toArray(children)
+    return Children.toArray(children)
   }, [children])
 
   /**
@@ -119,23 +126,6 @@ const Carousel: React.FC<CarouselProps> = ({
   const length = useMemo(() => {
     return childrenArray.length
   }, [childrenArray])
-
-  /**
-   * Add class to the carousel content elements
-   */
-  useEffect(() => {
-    const container = containerRef.current as HTMLDivElement
-    const carouselItems = Array.from(
-      container.children as HTMLCollectionOf<HTMLDivElement>
-    )
-
-    for (const carouselItem of carouselItems) {
-      const carouselContent = carouselItem.firstElementChild as HTMLElement
-      carouselContent.classList.add(
-        'react-responsive-3d-carousel__carousel__list__item__content'
-      )
-    }
-  }, [length])
 
   /**
    * Adjust curIndex if it's greater than length
@@ -233,7 +223,7 @@ const Carousel: React.FC<CarouselProps> = ({
       >
         {childrenArray.map((child: React.ReactNode, curIndex: number) => (
           <div
-            className={`react-responsive-3d-carousel__carousel__list__item ${
+            className={`react-responsive-3d-carousel__carousel__item ${
               isShadow ? 'shadow' : ''
             }`}
             key={curIndex}

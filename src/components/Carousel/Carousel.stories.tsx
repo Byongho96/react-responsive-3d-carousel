@@ -77,7 +77,14 @@ const VariousTemplate: ComponentStory<typeof Carousel> = ({ ...args }) => (
         }}
       />
     </a>
-    <video src={videoSrc} alt={`sample-video`} muted autoPlay loop />
+    <video
+      src={videoSrc}
+      alt={`sample-video`}
+      muted
+      autoPlay
+      loop
+      controls={true}
+    />
     <iframe src="https://www.youtube.com/embed/Rrf8uQFvICE" />
     <div
       style={{
