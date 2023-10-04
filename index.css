@@ -1,0 +1,275 @@
+.react-responsive-3d-carousel__arrows {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  padding: 0.2vw;
+  transform: translateY(-50%);
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  overflow: visible;
+  background: transparent;
+}
+
+.react-responsive-3d-carousel__arrows.left {
+  left: 0;
+}
+
+.react-responsive-3d-carousel__arrows.right {
+  right: 0;
+}
+
+.react-responsive-3d-carousel__arrows svg {
+  cursor: pointer;
+}
+
+.react-responsive-3d-carousel__arrows.shadow svg {
+  filter: drop-shadow(0px 3px 3px rgba(56, 56, 56, 0.4));
+}
+
+.react-responsive-3d-carousel__arrows path {
+  stroke: var(--default-color, #ffffff);
+  transition: stroke 0.2s ease-in-out;
+}
+
+.react-responsive-3d-carousel__arrows:hover path {
+  stroke: var(--hover-color, rgba(34, 34, 34, 0.5333333333));
+}
+.react-responsive-3d-carousel__indicators {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 6px;
+  margin: 0;
+  padding: 0;
+  text-indent: 0;
+  list-style-type: none;
+}
+
+.react-responsive-3d-carousel__indicators.small {
+  gap: 11px;
+}
+
+.react-responsive-3d-carousel__indicators.medium {
+  gap: 15px;
+}
+
+.react-responsive-3d-carousel__indicators.large {
+  gap: 18px;
+}
+
+.react-responsive-3d-carousel__indicators li {
+  width: 10px;
+  height: 10px;
+  margin: 0;
+  padding: 0;
+  border-radius: 50%;
+  background-color: #ffffff;
+  text-indent: 0;
+  list-style-type: none;
+  transition: background-color 0.2s ease-in;
+  cursor: pointer;
+}
+
+.react-responsive-3d-carousel__indicators.shadow li {
+  box-shadow: 0px 0.15rem 0.15rem rgba(56, 56, 56, 0.3);
+}
+
+.react-responsive-3d-carousel__indicators.small li {
+  width: 10px;
+  height: 10px;
+}
+
+.react-responsive-3d-carousel__indicators.medium li {
+  width: 13px;
+  height: 13px;
+}
+
+.react-responsive-3d-carousel__indicators.large li {
+  width: 16px;
+  height: 16px;
+}
+.react-responsive-3d-carousel__status {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-weight: 600;
+}
+
+.react-responsive-3d-carousel__status.small {
+  font-size: 0.8rem;
+}
+
+.react-responsive-3d-carousel__status.medium {
+  font-size: 1rem;
+}
+
+.react-responsive-3d-carousel__status.large {
+  font-size: 1.2em;
+}
+
+.react-responsive-3d-carousel__status.shadow {
+  text-shadow: 0.02em 0.1em 0.2em black;
+}
+.react-responsive-3d-carousel__carousel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  padding: 2rem 0 2rem 0;
+  overflow: hidden;
+  box-sizing: content-box;
+}
+
+.react-responsive-3d-carousel__carousel__list {
+  position: relative;
+  width: 95%;
+  height: 100%;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  transition: width 0.3s ease-in-out;
+}
+
+.react-responsive-3d-carousel__carousel__list.normal {
+  width: 85%;
+}
+
+.react-responsive-3d-carousel__carousel__list.narrow {
+  width: 75%;
+}
+
+.react-responsive-3d-carousel__carousel__list.wide {
+  width: 95%;
+}
+
+.react-responsive-3d-carousel__carousel__item {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+}
+
+.react-responsive-3d-carousel__carousel__item.shadow {
+  box-shadow: 0 0.7rem 1.1rem 0.18rem rgba(1, 1, 1, 0.3);
+}
+
+.react-responsive-3d-carousel__carousel__item > * {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.carousel-3d-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.carousel-3d-page__header {
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  gap: 15px;
+  margin: 2rem 0 1rem;
+  padding: 0;
+}
+
+.carousel-3d-page__header__title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.carousel-3d-page__header__logo {
+  width: 2rem;
+  height: 2rem;
+}
+
+.carousel-3d-page__links {
+  display: flex;
+  gap: 20px;
+  position: absolute;
+  top: 3rem;
+  right: 2rem;
+}
+
+.carousel-3d-page__links svg {
+  width: 2rem;
+  height: 2rem;
+}
+
+.carousel-3d-page__form-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  gap: 20px;
+  overflow: auto;
+}
+
+.carousel-3d-page__form__title {
+  align-self: center;
+  margin: 0 0 0.5em 0;
+  padding: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.carousel-3d-page__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border: 1px solid black;
+  padding: 1em;
+  gap: 10px;
+}
+
+.carousel-3d-page__form__input {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  justify-content: start;
+}
+
+@media (max-width: 720px) {
+  .carousel-3d-page__header {
+    margin: 3rem 0 1rem;
+  }
+  .carousel-3d-page__header__logo {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .carousel-3d-page__header__title {
+    font-size: 1.5rem;
+  }
+  .carousel-3d-page__links {
+    top: 1rem;
+  }
+  .carousel-3d-page__form-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 20px;
+    width: 100%;
+  }
+  .carousel-3d-page__form__input {
+    display: grid;
+    justify-items: center;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 5px;
+  }
+}
