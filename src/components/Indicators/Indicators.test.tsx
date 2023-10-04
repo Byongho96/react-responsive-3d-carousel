@@ -91,11 +91,8 @@ describe('The color of indicators', () => {
 
     for (let i = 0; i < length; i++) {
       const indicatorEle = indicatorElements[i]
-      expect(indicatorEle).toBeInTheDocument()
-
-      const indicatorPath = indicatorEle.getElementsByTagName('path')[0]
-      expect(indicatorPath).toHaveStyle(
-        `fill :
+      expect(indicatorEle).toHaveStyle(
+        `background-color :
         ${i === index ? activeColor : inactiveColor}`
       )
     }
