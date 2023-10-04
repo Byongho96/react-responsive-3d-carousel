@@ -12,13 +12,21 @@ const waterVid = './media/water.mp4'
 
 // quries for unsplash api
 const MEDIA_ARRAY = [
-  <img src={catImg} alt="cat" />,
-  <video src={waterVid} alt="water" muted loop autoPlay />,
-  <img src={puppyImg} alt="puppy" />,
-  <iframe src="https://www.youtube.com/embed/Rrf8uQFvICE" />,
+  <img src={catImg} alt=" cat in the woods" />,
+  <video muted loop autoPlay>
+    <source src={waterVid} />
+    <p>a video of paint spreading into the water</p>
+  </video>,
+  <img src={puppyImg} alt="Chihuahua on the blanket" />,
+  <iframe
+    src="https://www.youtube.com/embed/_ITiwPMUzho?si=_ox71JTwQ6Q5pKin"
+    title="YouTube video player"
+    frameborder="0"
+  />,
   <a
     href="https://www.npmjs.com/package/react-responsive-3d-carousel"
-    aria-label="to npm"
+    title="npm package"
+    aria-label="react responsive 3D carousel npm package"
     target="_blank"
     style={{ textDecoration: 'none' }}
   >
@@ -42,11 +50,21 @@ const MEDIA_ARRAY = [
       Click Me!
     </div>
   </a>,
-  <img src={mountainImg} alt="mountain" />,
-  <img src={cloudImg} alt="cloud" />,
-  <iframe src="https://www.youtube.com/embed/gdZLi9oWNZg" />,
-  <img src={forestImg} alt="forest" />,
-  <video src={oceanVid} alt="ocean" muted loop autoPlay />,
+  <img
+    src={mountainImg}
+    alt="a lake among the mountain ranges in sunny weather"
+  />,
+  <img src={cloudImg} alt="a cloud over the blue sea" />,
+  <iframe
+    src="https://www.youtube.com/embed/gdZLi9oWNZg?si=UZQJ_TvyHIFx_sFe"
+    title="YouTube video player"
+    frameborder="0"
+  />,
+  <img src={forestImg} alt="sunset forest road" />,
+  <video muted loop autoPlay>
+    <source src={oceanVid} />
+    <p>Aerial shot of beach waves with drones</p>
+  </video>,
 ]
 
 function App() {
@@ -68,7 +86,7 @@ function App() {
 
   const [showArrows, setShowArrows] = useState(true)
   const [arrowsWidth, setArrowsWidth] = useState('48px')
-  const [arrowsHeight, setArrowsHeight] = useState('53px')
+  const [arrowsHeight, setArrowsHeight] = useState('83px')
   const [arrowsDefaultColor, setArrowsDefaultColor] = useState('#ffffff')
   const [arrowsHoveredColor, setArrowsHoveredColor] = useState('#888888')
   const [arrowsStrokeWidth, setArrowsStrokeWidth] = useState(5)
@@ -100,16 +118,10 @@ function App() {
 
   // set mobile prop value when innerwidth < 720px
   useEffect(() => {
-    const handleResize = function setMobileProps() {
-      if (window.innerWidth < 720) {
-        setWidth('250px')
-        setHeight('180px')
-        setShowArrows(false)
-      }
-    }
-    addEventListener('resize', handleResize)
-    return () => {
-      removeEventListener('resize', handleResize)
+    if (window.innerWidth < 720) {
+      setWidth('250px')
+      setHeight('180px')
+      setShowArrows(false)
     }
   }, [])
 
@@ -118,7 +130,7 @@ function App() {
       <div className="carousel-3d-page__header">
         <img
           className="carousel-3d-page__header__logo"
-          alt="logo"
+          alt="react responsive 3D carousel logo"
           src={logoSvg}
         />
         <h1 className="carousel-3d-page__header__title">
@@ -127,9 +139,9 @@ function App() {
         <div className="carousel-3d-page__links">
           <div>
             <a
-              name="to github"
               href="https://github.com/Byongho96/react-responsive-3d-carousel"
-              aria-label="to gihub"
+              title="github"
+              aria-label="react responsive 3D carousel github source code"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -146,9 +158,9 @@ function App() {
           </div>
           <div>
             <a
-              name="to npm"
               href="https://www.npmjs.com/package/react-responsive-3d-carousel"
-              aria-label="to npm"
+              title="npm package"
+              aria-label="react responsive 3D carousel npm package"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
