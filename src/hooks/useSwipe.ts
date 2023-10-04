@@ -1,5 +1,8 @@
 import { useEffect } from 'react'
 
+const MIN_SWIPE_DISTANCE = 30 // px
+const HORIZONTAL_SWIPE_RATIO = 3 // (offsetX / offsetY)
+
 /**
  * Executes the corresponding function according to the direction of the touch swipe
  * @param containerRef HTML elements to detect touch events
@@ -33,17 +36,19 @@ const useSwipe = (
       const touchoffsetX = lastTouch.clientX - touchStartPos.x
       const touchoffsetY = lastTouch.clientY - touchStartPos.y
 
-      const isHorizontalSwipe =
-        Math.abs(touchoffsetX) >= 70 && Math.abs(touchoffsetY) <= 30
+      const isSwipe =
+        touchoffsetX ** 2 + touchoffsetY ** 2 > MIN_SWIPE_DISTANCE ** 2
+      if (!isSwipe) return
 
-      if (isHorizontalSwipe) {
-        const isSwipeLeft = touchoffsetX < 0
-        isSwipeLeft ? onSwipeLeft() : onSwipeRight()
-      }
+      const isHorizontalSwipe =
+        Math.abs(touchoffsetX) > HORIZONTAL_SWIPE_RATIO * Math.abs(touchoffsetY)
+      if (!isHorizontalSwipe) return
+
+      touchoffsetX < 0 ? onSwipeLeft() : onSwipeRight()
     }
 
-    container.addEventListener('touchstart', touchStart)
-    container.addEventListener('touchend', touchEnd)
+    container.addEventListener('touchstart', touchStart, { passive: true })
+    container.addEventListener('touchend', touchEnd, { passive: true })
 
     return () => {
       container.removeEventListener('touchstart', touchStart)
