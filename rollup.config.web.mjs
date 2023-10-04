@@ -30,6 +30,7 @@ export default [
       terser(),
 
       postcss({
+        extract: true,
         plugins: [autoprefixer()],
       }),
 

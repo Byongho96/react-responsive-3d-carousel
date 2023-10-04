@@ -1,34 +1,39 @@
-<h1> <img src="./assets/logo.svg" alt="logo" width='30px'/> React Responsvie 3D Carousel</h1>
+<h1> <img src="./assets/logo.svg" alt="react responsive carousel logo" width='30px'/> React Responsvie 3D Carousel</h1>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-Responsive 3D carousel component for React app. It's designed to be **easy to use**, and you can **customize** it to your style through a variety of props.
+The React Responsive 3D Carousel is a versatile component designed for React applications. It offers a responsive user interface that adapts seamlessly to different screen widths. Notably, it also includes support for recognizing swipe gestures on mobile devices.
 
-It supports TypeScript, and the last two versions of each browser.
+Getting started with this package is straightforward. Explore the documentation for installation and usage instructions.
 
 ## Demo Page & Links
 
 <div align="center" style="margin: 20px 0;">
 
-<img src="./assets/demo.gif" alt="demo" width='900'/>
+<img src="./assets/demo.gif" alt="react responsive 3d carousel example gif" width='900'/>
 
 </div>
 
-- **[Demo Page](https://byongho96.github.io/react-responsive-3d-carousel)**
-- [Github](https://github.com/Byongho96/react-responsive-3d-carousel)
-- [npm](https://www.npmjs.com/package/react-responsive-3d-carousel)
+- **[Demo Page](https://byongho96.github.io/react-responsive-3d-carousel)**: Experience it in advance on the demo page!
+- [Github Source Code](https://github.com/Byongho96/react-responsive-3d-carousel)
+- [NPM Package](https://www.npmjs.com/package/react-responsive-3d-carousel)
 
-## Features
+## Key Features
 
 <div align="center" style="margin: 20px 0;">
 
-<img src="./assets/features.png" alt="features" width='700'/>
+<img src="./assets/features.png" alt="react responsive 3d carousel key features" width='700'/>
 
 </div>
 
+- Source map-excluded JavaScript file size is 12KB.
+- Experience a responsive design that adapts to various screen sizes.
+- Enable swipe gesture recognition to enhance mobile usability.
+- Supports TypeScript and CommonJS.
+
 ## Installation
 
-Install the package with the following command. **React should be preinstalled**.
+Install the package with the following command. **React should be pre-installed**.
 
 ```bash
 npm install react-responsive-3d-carousel
@@ -36,7 +41,7 @@ npm install react-responsive-3d-carousel
 
 ## Usage
 
-You can pass down **any `<tag/>`** you want
+You can pass down <mark>any \<tag/></mark> you want
 
 ```jsx
 import React from 'react'
@@ -45,10 +50,10 @@ import { Carousel } from 'react-responsive-3d-carousel'
 export default App() {
   return (
     <Carousel>
-      <img src="https://source.unsplash.com/random/?dog" alt="sample-image-1" />
-      <img src="https://source.unsplash.com/random/?cat" alt="sample-image-2" />
-      <video src="https://source.unsplash.com/random/?river" alt="sample-video" muted autoPlay loop />
-      <iframe src="https://www.youtube.com/embed/Rrf8uQFvICE"/>
+      <img src="https://example-image-url-1" alt="example-image-1" />
+      <img src="https://example-image-url-2" alt="example-image-2" />
+      <video src="https://example-video-url" muted autoPlay loop />
+      <iframe src="https://www.youtube.com/embed/example" title="YouTube video player" frameborder="0"/>
       <div>
         <p>Hello</p>
       </div>
@@ -57,7 +62,7 @@ export default App() {
 }
 ```
 
-If you **don't** pass down the `<image/>`, `<video/>`, or `<iframe/>` tag **directly**, the following **CSS styles** must be applied to render as expected.
+If the tag you want to display on the screen **does not go down directly**, you must add the following styling.
 
 ```jsx
 import React from 'react'
@@ -115,19 +120,22 @@ export default App() {
 
 ## Customizing
 
-If necessary, you can **override** the CSS with `important!`.  
-The class name can be found in the browser's developer tool or [source code](https://github.com/Byongho96/react-responsive-3d-carousel/tree/main/src/components).
+If necessary, you can **override the CSS** with `!important`. The class name can be found in the browser's developer tools or [source code](https://github.com/Byongho96/react-responsive-3d-carousel/tree/main/src/components).
 
 ```css
-.react-responsive-3d-carousel__indicators__item svg {
-  width: 3rem !important;
-  height: 3rem !important;
+.react-responsive-3d-carousel__indicators li {
+  width: 36px !important;
+  height: 36px !important;
 }
 ```
 
-<img src="./assets/customization.png" alt="features" width='900'/>
+<img src="./assets/customization.png" alt="customized rendering of carousel indicators" width='900'/>
 
 ## Contributing
 
-Since this is my first npm pacakge. Welcome to conributing.  
-Here's [contributing guide](https://github.com/Byongho96/react-responsive-3d-carousel/blob/main/CONTRIBUTING.md) contains details on how to setup dev environment.
+Since this is my first npm package. Welcome to conributing.  
+Here's [contributing guide](https://github.com/Byongho96/react-responsive-3d-carousel/blob/main/CONTRIBUTING.md) that contains details on how to set up a development environment.
+
+## Issues
+
+If you encounter an issue, please don't hesitate to let me know. Provide a detailed explanation along with any relevant images, and I'll do my best to make improvements. [Github Issues](https://github.com/Byongho96/react-responsive-3d-carousel/issues)
