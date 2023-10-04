@@ -56,7 +56,7 @@ const Arrows: React.FC<ArrowsProps> = ({
         onClick={onClickLeft}
         ref={leftArrowRef}
         type="button"
-        aria-label="the Next Carousel Slide"
+        aria-label="previous slide"
       >
         {/* left arrow svg */}
         <svg
@@ -84,7 +84,7 @@ const Arrows: React.FC<ArrowsProps> = ({
         onClick={onClickRight}
         ref={rightArrowRef}
         type="button"
-        aria-label="the Prev Carousel Slide"
+        aria-label="next slide"
       >
         {/* right arrow svg */}
         <svg

@@ -12,7 +12,7 @@ export function getCurItemStyle() {
 export function getDefaultItemStyle(width: string, depth: number) {
   return {
     left: '50%',
-    transform: `translate3d(-50%, 0, calc(-200px * ${depth}))`,
+    transform: `translate3d(-50%, 0, calc(-300px * ${depth}))`,
     opacity: '0',
   }
 }

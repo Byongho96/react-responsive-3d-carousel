@@ -26,12 +26,13 @@ const Status: React.FC<StatusProps> = ({
   isShadow = true,
 }) => {
   return (
-    <div
+    <p
       className={`react-responsive-3d-carousel__status ${size} ${
         isShadow ? 'shadow' : ''
       }`}
       style={{ color: color }}
-    >{`${index + 1} / ${length}`}</div>
+      aria-label={`${index + 1} of ${length}`}
+    >{`${index + 1} / ${length}`}</p>
   )
 }
 
