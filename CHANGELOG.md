@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/Byongho96/react-responsive-3d-carousel/compare/v1.2.0...v1.3.0) (2023-10-04)
+
+
+### Features
+
+* improve web accessibility ([299494c](https://github.com/Byongho96/react-responsive-3d-carousel/commit/299494c164577b52eb859979c450c7b1950e4f78))
+
+
+### Bug Fixes
+
+* improve mobile swipe gesture awareness ([992ded4](https://github.com/Byongho96/react-responsive-3d-carousel/commit/992ded47e7ee92e6adabf2bf62ecd17e7f26c25d))
+* rendering error of carosel items ([9c2afb2](https://github.com/Byongho96/react-responsive-3d-carousel/commit/9c2afb233713959e9db0599697f5082dcc56975b))
+
 ## [1.2.0](https://github.com/Byongho96/react-responsive-3d-carousel/compare/v1.1.1...v1.2.0) (2023-09-25)
 
 
