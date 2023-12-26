@@ -1,8 +1,14 @@
+# Fork the repository
+
+Create a new fork to your repsoitory:
+
+<img src="./assets/contributing/fork.png" alt="repository fork button" width='500'/>
+
 # Setup the development environment
 
-clone the repository:
+Cloned the forked repository :
 
-- `git clone https://github.com/Byongho96/react-responsive-3d-carousel.git`
+- `git clone {the_cloned_repository}`
 
 Ensure you have the right node version:
 
@@ -12,9 +18,11 @@ Install dependencies:
 
 - `npm install`
 
-Run storybook for development:
+[Optional] Run storybook for development:
 
 - `npm run storybook`
+
+# Commit the changes
 
 Run the tests:
 
@@ -24,11 +32,11 @@ Format the files:
 
 - `npm run format:write`
 
-# Commit Conventsion
+Commit the changes:
 
-By default, commitlint with `@commitlint/config-conventiona` is applied. You can check the convention [here](https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional#type-enum). However, to summarize, it is as follows.
+- By default, commitlint with `@commitlint/config-conventional` is applied. You can check the convention [here](https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional#type-enum). However, to summarize, it is as follows.
 
-- **New feature**
+* **New feature**
 
   ```
   feat: <description>
@@ -36,10 +44,16 @@ By default, commitlint with `@commitlint/config-conventiona` is applied. You can
   [optional body]
   ```
 
-- **Bug Fixes**
+* **Bug Fixes**
 
   ```
   fix: <description>
 
   [optional body]
   ```
+
+# Contribute
+
+Contribute(pull request) from forked repository to the original repository:
+
+<img src="./assets/contributing/fork.png" alt="repository fork button" width='500'/>

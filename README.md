@@ -14,9 +14,9 @@ Getting started with this package is straightforward. Explore the documentation 
 
 </div>
 
-- **[Demo Page](https://byongho96.github.io/react-responsive-3d-carousel)**: Experience it in advance on the demo page!
-- [Github Source Code](https://github.com/Byongho96/react-responsive-3d-carousel)
-- [NPM Package](https://www.npmjs.com/package/react-responsive-3d-carousel)
+- **[demo page](https://byongho96.github.io/react-responsive-3d-carousel)**
+- [github source code](https://github.com/Byongho96/react-responsive-3d-carousel)
+- [npm package](https://www.npmjs.com/package/react-responsive-3d-carousel)
 
 ## Key Features
 
