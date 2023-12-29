@@ -1,4 +1,3 @@
-<h1> <img src="./assets/logo.svg" alt="react responsive carousel logo" width='30px'/> React Responsvie 3D Carousel</h1>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
