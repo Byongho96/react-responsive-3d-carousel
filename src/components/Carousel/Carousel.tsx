@@ -50,7 +50,6 @@ export interface CarouselProps {
   isIndicatorsShadow?: boolean
   selectable?: boolean
   pauseOnHover?: boolean
-  onClickItem?: (index: number) => void
   onClickSelectedItem?: (index: number) => void
 }
 
@@ -115,7 +114,6 @@ const Carousel: React.FC<CarouselProps> = ({
   isIndicatorsShadow = true,
   selectable = false,
   pauseOnHover = false,
-  onClickItem,
   onClickSelectedItem,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null) // The carousel container element
@@ -167,32 +165,22 @@ const Carousel: React.FC<CarouselProps> = ({
   const selectSlide = useCallback(
     (index: number) => {
       if (selectable) {
-        if (curIndex === index && onClickSelectedItem)
-          onClickSelectedItem(index)
-        else if (onClickItem) onClickItem(index)
         setCurIndex(index)
       }
-    },
-    [curIndex, selectable, onClickSelectedItem, onClickItem]
-  )
-
-  const startPause = useCallback(
-    (index: number) => {
-      if (pauseOnHover && curIndex === index) {
-        pause.current = true
+      if (curIndex === index && onClickSelectedItem) {
+        onClickSelectedItem(index)
       }
     },
-    [curIndex, pauseOnHover]
+    [curIndex, selectable, onClickSelectedItem]
   )
 
-  const releasePause = useCallback(
-    (index: number) => {
-      if (pauseOnHover && curIndex === index) {
-        pause.current = false
-      }
-    },
-    [curIndex, pauseOnHover]
-  )
+  const startPause = useCallback(() => {
+    if (pauseOnHover) pause.current = true
+  }, [pauseOnHover])
+
+  const releasePause = useCallback(() => {
+    if (pauseOnHover) pause.current = false
+  }, [pauseOnHover])
 
   /**
    * Slide along swipe direction
@@ -246,16 +234,14 @@ const Carousel: React.FC<CarouselProps> = ({
     const containerEle = containerRef.current as HTMLDivElement
     const carouselItems = containerEle.children
 
-    if (!pause.current) {
-      if (length < 2) {
-        setOneCarouselStyle(curIndex, carouselItems)
-      } else if (length < 3) {
-        setTwoCarouselStyle(length, curIndex, width, depth, carouselItems)
-      } else if (length < 5) {
-        setThreeCarouselStyle(length, curIndex, width, depth, carouselItems)
-      } else {
-        setFiveCarouselStyle(length, curIndex, width, depth, carouselItems)
-      }
+    if (length < 2) {
+      setOneCarouselStyle(curIndex, carouselItems)
+    } else if (length < 3) {
+      setTwoCarouselStyle(length, curIndex, width, depth, carouselItems)
+    } else if (length < 5) {
+      setThreeCarouselStyle(length, curIndex, width, depth, carouselItems)
+    } else {
+      setFiveCarouselStyle(length, curIndex, width, depth, carouselItems)
     }
   }, [length, curIndex, width, depth])
 
@@ -267,6 +253,8 @@ const Carousel: React.FC<CarouselProps> = ({
       <div
         className={`react-responsive-3d-carousel__carousel__list ${spread}`}
         ref={containerRef}
+        onPointerEnter={startPause}
+        onPointerLeave={releasePause}
       >
         {childrenArray.map((child: React.ReactNode, curIndex: number) => (
           <div
@@ -281,8 +269,6 @@ const Carousel: React.FC<CarouselProps> = ({
               cursor: selectable ? 'pointer' : 'initial',
             }}
             onClick={() => selectSlide(curIndex)}
-            onPointerEnter={() => startPause(curIndex)}
-            onPointerLeave={() => releasePause(curIndex)}
           >
             {child}
           </div>
