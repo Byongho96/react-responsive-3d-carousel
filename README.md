@@ -117,9 +117,6 @@ export default App() {
 | indicatorsActiveColor   | string                     | 'rgb(255, 255, 255)'     | The color of an indicator activated                                    |
 | indicatorsInactiveColor | string                     | 'rgba(67, 67, 67, 0.4)'  | The color of indicators inactivated                                    |
 | isIndicatorsShadow      | boolean                    | true                     | Whether or not there are shadows of the ndicators                      |
-| pauseOnHover            | boolean                    | false                    | Stops slide alimation when user hovers the carousel                    |
-| selectable              | boolean                    | false                    | Any slide clicked is positioned to center                              |
-| onClickSelectedItem     | (index: number) => void    | null                     | When the centered item is clicked this event is fired                  |
 
 ## Customizing
 

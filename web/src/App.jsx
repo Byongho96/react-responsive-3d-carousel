@@ -92,8 +92,6 @@ function App() {
   const [arrowsStrokeWidth, setArrowsStrokeWidth] = useState(5)
   const [isArrowsShadow, setIsArrowsShadow] = useState(true)
 
-  const [selectable, setSelectable] = useState(false)
-  const [pauseOnHover, setPauseOnHover] = useState(false)
   const [showIndicators, setShowIndicators] = useState(true)
   const [indicatorsSize, setIndicatorsSize] = useState('small')
   const [indicatorsActiveColor, setIndicatorsActiveColor] = useState('#ffffff')
@@ -202,8 +200,6 @@ function App() {
         arrowsStrokeWidth={arrowsStrokeWidth}
         isArrowsShadow={isArrowsShadow}
         showIndicators={showIndicators}
-        selectable={selectable}
-        pauseOnHover={pauseOnHover}
         indicatorsSize={indicatorsSize}
         indicatorsActiveColor={indicatorsActiveColor}
         indicatorsInactiveColor={indicatorsInactiveColor}
@@ -513,26 +509,6 @@ function App() {
               name="is-indicators-shadow"
               checked={isIndicatorsShadow}
               onChange={(e) => setIsIndicatorsShadow(e.target.checked)}
-            />
-            <label htmlFor="selectable-input">
-              selectable
-            </label>
-            <input
-              type="checkbox"
-              id="selectable-input"
-              name="selectable"
-              checked={selectable}
-              onChange={(e) => setSelectable(e.target.checked)}
-            />
-            <label htmlFor="pauseOnHover-input">
-              pauseOnHover
-            </label>
-            <input
-              type="checkbox"
-              id="pauseOnHover-input"
-              name="pauseOnHover"
-              checked={pauseOnHover}
-              onChange={(e) => setPauseOnHover(e.target.checked)}
             />
           </div>
         </form>
