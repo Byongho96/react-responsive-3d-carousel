@@ -48,6 +48,9 @@ export interface CarouselProps {
   indicatorsActiveColor?: string
   indicatorsInactiveColor?: string
   isIndicatorsShadow?: boolean
+  selectable?: boolean
+  pauseOnHover?: boolean
+  onClickSelectedItem?: (index: number) => void
 }
 
 /**
@@ -109,6 +112,9 @@ const Carousel: React.FC<CarouselProps> = ({
   indicatorsActiveColor,
   indicatorsInactiveColor,
   isIndicatorsShadow = true,
+  selectable = false,
+  pauseOnHover = false,
+  onClickSelectedItem,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null) // The carousel container element
   const [curIndex, setCurIndex] = useState(startIndex) // Current center carousel's index
@@ -136,9 +142,15 @@ const Carousel: React.FC<CarouselProps> = ({
   }, [length])
 
   /**
+   * Pause
+   */
+  const pause = useRef(false) // Flag to pause carousel loop
+
+  /**
    * Slide to the previous carousel item
    */
   const slidePrev = useCallback(() => {
+    if (pause.current) return
     setCurIndex((curIndex: number) => getPrevIndex(length, curIndex))
   }, [length])
 
@@ -146,8 +158,29 @@ const Carousel: React.FC<CarouselProps> = ({
    * Slide to the next carousel item
    */
   const slideNext = useCallback(() => {
+    if (pause.current) return
     setCurIndex((curIndex: number) => getNextIndex(length, curIndex))
   }, [length])
+
+  const selectSlide = useCallback(
+    (index: number) => {
+      if (selectable) {
+        setCurIndex(index)
+      }
+      if (curIndex === index && onClickSelectedItem) {
+        onClickSelectedItem(index)
+      }
+    },
+    [curIndex, selectable, onClickSelectedItem]
+  )
+
+  const startPause = useCallback(() => {
+    if (pauseOnHover) pause.current = true
+  }, [pauseOnHover])
+
+  const releasePause = useCallback(() => {
+    if (pauseOnHover) pause.current = false
+  }, [pauseOnHover])
 
   /**
    * Slide along swipe direction
@@ -157,7 +190,7 @@ const Carousel: React.FC<CarouselProps> = ({
   /**
    * Auto Play
    */
-  const [isFinished, setIsFinished] = useState(false) // End of an loop, when 'infiniteLoop' is false
+  const [isFinished, setIsFinished] = useState<boolean>(false) // End of an loop, when 'infiniteLoop' is false
 
   useEffect(() => {
     if (infiniteLoop) {
@@ -220,6 +253,8 @@ const Carousel: React.FC<CarouselProps> = ({
       <div
         className={`react-responsive-3d-carousel__carousel__list ${spread}`}
         ref={containerRef}
+        onPointerEnter={startPause}
+        onPointerLeave={releasePause}
       >
         {childrenArray.map((child: React.ReactNode, curIndex: number) => (
           <div
@@ -231,7 +266,9 @@ const Carousel: React.FC<CarouselProps> = ({
               width: width,
               height: height,
               transition: `all ${transitionTime}ms ease-in-out`,
+              cursor: selectable ? 'pointer' : 'initial',
             }}
+            onClick={() => selectSlide(curIndex)}
           >
             {child}
           </div>
