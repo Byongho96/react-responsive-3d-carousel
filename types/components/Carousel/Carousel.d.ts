@@ -11,6 +11,9 @@ export interface CarouselProps {
     transitionTime?: number;
     infiniteLoop?: boolean;
     startIndex?: number;
+    selectable?: boolean;
+    pauseOnHover?: boolean;
+    onClickCenteredItem?: (index: number) => void;
     isShadow?: boolean;
     showStatus?: boolean;
     statusSize?: 'small' | 'medium' | 'large';
@@ -41,6 +44,9 @@ export interface CarouselProps {
  * @param transitionTime Time interval for sliding (ms)
  * @param infiniteLoop Infinite loop for sliding the carousel (ms)
  * @param startIndex Index of carousel items to start the slide
+ * @param selectable Is there shadow in the indicators
+ * @param pauseOnHover Is there shadow in the indicators
+ * @param onClickCenteredItem Is there shadow in the indicators
  * @param isShadow Is there shadow in the carousel items
  * @param showStatus Whether to show top right status
  * @param statusSize Size of status
