@@ -1,6 +1,6 @@
 # Fork the repository
 
-Create a new fork to your repsoitory:
+Fork this repository to your account:
 
 <img src="./assets/contributing/fork.png" alt="repository fork button" width='500'/>
 
@@ -8,7 +8,7 @@ Create a new fork to your repsoitory:
 
 Cloned the forked repository :
 
-- `git clone {the_cloned_repository}`
+- `git clone {forked_repository}`
 
 Ensure you have the right node version:
 
@@ -54,6 +54,6 @@ Commit the changes:
 
 # Contribute
 
-Contribute(pull request) from forked repository to the original repository:
+Contribute a pull request from the forked repository to the original repository:
 
-<img src="./assets/contributing/fork.png" alt="repository fork button" width='500'/>
+<img src="./assets/contributing/contribute.png" alt="repository fork button" width='500'/>
