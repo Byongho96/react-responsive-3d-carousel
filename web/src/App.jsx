@@ -23,33 +23,24 @@ const MEDIA_ARRAY = [
     title="YouTube video player"
     frameborder="0"
   />,
-  <a
-    href="https://www.npmjs.com/package/react-responsive-3d-carousel"
-    title="npm package"
-    aria-label="react responsive 3D carousel npm package"
-    target="_blank"
-    style={{ textDecoration: 'none' }}
+
+  <div
+    style={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: '100%',
+      height: '100%',
+      color: '#ffffff',
+      fontSize: '2rem',
+      fontWeight: '800',
+      textAlign: 'center',
+      textDecoration: 'none',
+      backgroundColor: '#666666',
+    }}
   >
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        overflow: 'hidden',
-        width: '100%',
-        height: '100%',
-        objectFit: 'cover',
-        color: '#ffffff',
-        fontSize: '2rem',
-        fontWeight: '800',
-        textAlign: 'center',
-        textDecoration: 'none',
-        backgroundColor: '#666666',
-      }}
-    >
-      Click Me!
-    </div>
-  </a>,
+    Hello
+  </div>,
   <img
     src={mountainImg}
     alt="a lake among the mountain ranges in sunny weather"
@@ -77,6 +68,8 @@ function App() {
   const [transitionTime, setTransitionTime] = useState(500)
   const [autoPlay, setAutoPlay] = useState(true)
   const [infiniteLoop, setInfiniteLoop] = useState(true)
+  const [selectable, setSelectable] = useState(true)
+  const [pauseOnHover, setPauseOnHover] = useState(true)
   const [isShadow, setIsShadow] = useState(true)
 
   const [showStatus, setShowStatus] = useState(true)
@@ -92,8 +85,6 @@ function App() {
   const [arrowsStrokeWidth, setArrowsStrokeWidth] = useState(5)
   const [isArrowsShadow, setIsArrowsShadow] = useState(true)
 
-  const [selectable, setSelectable] = useState(false)
-  const [pauseOnHover, setPauseOnHover] = useState(false)
   const [showIndicators, setShowIndicators] = useState(true)
   const [indicatorsSize, setIndicatorsSize] = useState('small')
   const [indicatorsActiveColor, setIndicatorsActiveColor] = useState('#ffffff')
@@ -329,6 +320,26 @@ function App() {
               onChange={(e) => setIsShadow(e.target.checked)}
             />
           </div>
+          <div className="carousel-3d-page__form__input">
+            <label htmlFor="selectable-input">selectable</label>
+            <input
+              type="checkbox"
+              id="selectable-input"
+              name="selectable"
+              checked={selectable}
+              onChange={(e) => setSelectable(e.target.checked)}
+            />
+          </div>
+          <div className="carousel-3d-page__form__input">
+            <label htmlFor="pause-on-hover-input">pauseOnHover</label>
+            <input
+              type="checkbox"
+              id="pause-on-hoverr-input"
+              name="pause-on-hoverr"
+              checked={pauseOnHover}
+              onChange={(e) => setPauseOnHover(e.target.checked)}
+            />
+          </div>
         </form>
         <form className="carousel-3d-page__form">
           <h2 className="carousel-3d-page__form__title">Status</h2>
@@ -513,26 +524,6 @@ function App() {
               name="is-indicators-shadow"
               checked={isIndicatorsShadow}
               onChange={(e) => setIsIndicatorsShadow(e.target.checked)}
-            />
-            <label htmlFor="selectable-input">
-              selectable
-            </label>
-            <input
-              type="checkbox"
-              id="selectable-input"
-              name="selectable"
-              checked={selectable}
-              onChange={(e) => setSelectable(e.target.checked)}
-            />
-            <label htmlFor="pauseOnHover-input">
-              pauseOnHover
-            </label>
-            <input
-              type="checkbox"
-              id="pauseOnHover-input"
-              name="pauseOnHover"
-              checked={pauseOnHover}
-              onChange={(e) => setPauseOnHover(e.target.checked)}
             />
           </div>
         </form>

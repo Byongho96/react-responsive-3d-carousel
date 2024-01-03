@@ -14,9 +14,9 @@ Getting started with this package is straightforward. Explore the documentation 
 
 </div>
 
-- **[demo page](https://byongho96.github.io/react-responsive-3d-carousel)**
-- [github source code](https://github.com/Byongho96/react-responsive-3d-carousel)
-- [npm package](https://www.npmjs.com/package/react-responsive-3d-carousel)
+- **[Demo Page](https://byongho96.github.io/react-responsive-3d-carousel)**
+- [Github](https://github.com/Byongho96/react-responsive-3d-carousel)
+- [npm](https://www.npmjs.com/package/react-responsive-3d-carousel)
 
 ## Key Features
 
@@ -89,37 +89,37 @@ export default App() {
 
 ## Props
 
-| Name                    | Type                       | Default                  | Description                                                            |
-| ----------------------- | -------------------------- | ------------------------ | ---------------------------------------------------------------------- |
-| width                   | string                     | '500px'                  | The width of each carousel item<br/> All CSS length unit is available  |
-| height                  | string                     | '300px'                  | The height of each carousel item<br/> All CSS length unit is available |
-| spread                  | 'wide', 'normal', 'narrow' | 'wide'                   | The extent to carousel items are spread out                            |
-| depth                   | number                     | 1                        | The 3D Depth of carousel                                               |
-| autoPlay                | boolean                    | true                     | Automatically play carousel slide animation or not                     |
-| interval                | number                     | 3000                     | Slide transition time interval (ms)                                    |
-| transitionTime          | number                     | 500                      | Slide transition animation time (ms)                                   |
-| infiniteLoop            | boolean                    | true                     | Carousel slide animation indefinitely or not                           |
-| startIndex              | number                     | 0                        | The first carousel item index to be centered                           |
-| isShadow                | boolean                    | true                     | Whether or not there are shadows of carousel items                     |
-| showStatus              | boolean                    | true                     | Whether to display top right status text (Ex: `2/5`)                   |
-| statusSize              | 'small', 'medium', 'large' | 'small'                  | The size of status text                                                |
-| statusColor             | string                     | 'rgb(255, 255, 255)'     | The color of status text                                               |
-| isStatusShadow          | boolean                    | true                     | Whether or not there are shadows of the status                         |
-| showArrows              | boolean                    | true                     | Whether arrow buttons are displayed at both ends                       |
-| arrowsWidth             | string                     | '48px'                   | The width of each arrow <br/> All CSS length unit is available         |
-| arrowsHeight            | string                     | '83px'                   | The height of each arrow <br/> All CSS length unit is available        |
-| arrowsDefaultColor      | string                     | 'rgb(255, 255, 255)'     | The color of arrows not hovered                                        |
-| arrowsHoveredColor      | string                     | 'rgba(34, 34, 34, 0.53)' | The color of arrows hovered                                            |
-| arrowsStrokeWidth       | number                     | 5                        | The stroke width of arrows path                                        |
-| isArrowsShadow          | boolean                    | true                     | Whether or not there are shadows of arrows                             |
-| showIndicators          | boolean                    | true                     | Whether to display bottom indicators                                   |
-| indicatorsSize          | 'small', 'medium', 'large' | 'small'                  | The size of indicators                                                 |
-| indicatorsActiveColor   | string                     | 'rgb(255, 255, 255)'     | The color of an indicator activated                                    |
-| indicatorsInactiveColor | string                     | 'rgba(67, 67, 67, 0.4)'  | The color of indicators inactivated                                    |
-| isIndicatorsShadow      | boolean                    | true                     | Whether or not there are shadows of the ndicators                      |
-| pauseOnHover            | boolean                    | false                    | Stops slide alimation when user hovers the carousel                    |
-| selectable              | boolean                    | false                    | Any slide clicked is positioned to center                              |
-| onClickSelectedItem     | (index: number) => void    | null                     | When the centered item is clicked this event is fired                  |
+| Name                    | Type                       | Default                  | Description                                            |
+| ----------------------- | -------------------------- | ------------------------ | ------------------------------------------------------ |
+| width                   | string                     | '500px'                  | Width of each carousel item (Accepts all CSS units)    |
+| height                  | string                     | '300px'                  | Height of each carousel item (Accepts all CSS units)   |
+| spread                  | 'wide', 'normal', 'narrow' | 'wide'                   | Adjusts the horizontal spacing between carousel items. |
+| depth                   | number                     | 1                        | 3D depth of the carousel                               |
+| autoPlay                | boolean                    | true                     | Automatically play slide animation                     |
+| interval                | number                     | 3000                     | Slide transition time interval (ms)                    |
+| transitionTime          | number                     | 500                      | Slide transition animation time (ms)                   |
+| infiniteLoop            | boolean                    | true                     | Enable slide animation infinitely                      |
+| startIndex              | number                     | 0                        | Index of the first carousel item to be centered        |
+| pauseOnHover            | boolean                    | true                     | Stop slide animation when user hovers over carousel    |
+| selectable              | boolean                    | true                     | Clicking a carousel item positions it to the center    |
+| onClickCenteredItem     | (index: number) => void    | undefined                | Event fired when centered item is clicked              |
+| isShadow                | boolean                    | true                     | Display shadows of carousel items                      |
+| showStatus              | boolean                    | true                     | Display top right status text (e.g., `2/5`)            |
+| statusSize              | 'small', 'medium', 'large' | 'small'                  | Size of the status text                                |
+| statusColor             | string                     | 'rgb(255, 255, 255)'     | Color of the status text                               |
+| isStatusShadow          | boolean                    | true                     | Display shadows for the status text                    |
+| showArrows              | boolean                    | true                     | Display arrow buttons at both ends                     |
+| arrowsWidth             | string                     | '48px'                   | Width of each arrow (Accepts all CSS units)            |
+| arrowsHeight            | string                     | '83px'                   | Height of each arrow (Accepts all CSS units)           |
+| arrowsDefaultColor      | string                     | 'rgb(255, 255, 255)'     | Color of arrows when not hovered                       |
+| arrowsHoveredColor      | string                     | 'rgba(34, 34, 34, 0.53)' | Color of arrows when hovered                           |
+| arrowsStrokeWidth       | number                     | 5                        | The stroke width of arrows path                        |
+| isArrowsShadow          | boolean                    | true                     | Display shadows for arrows                             |
+| showIndicators          | boolean                    | true                     | Display bottom indicators                              |
+| indicatorsSize          | 'small', 'medium', 'large' | 'small'                  | Size of the indicators                                 |
+| indicatorsActiveColor   | string                     | 'rgb(255, 255, 255)'     | Color of an activated indicator                        |
+| indicatorsInactiveColor | string                     | 'rgba(67, 67, 67, 0.4)'  | Color of inactivated indicators                        |
+| isIndicatorsShadow      | boolean                    | true                     | Display shadows for the indicators                     |
 
 ## Customizing
 

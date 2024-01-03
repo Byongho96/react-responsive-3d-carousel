@@ -31,6 +31,9 @@ export interface CarouselProps {
   transitionTime?: number
   infiniteLoop?: boolean
   startIndex?: number
+  selectable?: boolean
+  pauseOnHover?: boolean
+  onClickCenteredItem?: (index: number) => void
   isShadow?: boolean
   showStatus?: boolean
   statusSize?: 'small' | 'medium' | 'large'
@@ -48,9 +51,6 @@ export interface CarouselProps {
   indicatorsActiveColor?: string
   indicatorsInactiveColor?: string
   isIndicatorsShadow?: boolean
-  selectable?: boolean
-  pauseOnHover?: boolean
-  onClickSelectedItem?: (index: number) => void
 }
 
 /**
@@ -65,6 +65,9 @@ export interface CarouselProps {
  * @param transitionTime Time interval for sliding (ms)
  * @param infiniteLoop Infinite loop for sliding the carousel (ms)
  * @param startIndex Index of carousel items to start the slide
+ * @param selectable Is there shadow in the indicators
+ * @param pauseOnHover Is there shadow in the indicators
+ * @param onClickCenteredItem Is there shadow in the indicators
  * @param isShadow Is there shadow in the carousel items
  * @param showStatus Whether to show top right status
  * @param statusSize Size of status
@@ -95,6 +98,9 @@ const Carousel: React.FC<CarouselProps> = ({
   transitionTime = 500,
   infiniteLoop = true,
   startIndex = 0,
+  selectable = true,
+  pauseOnHover = true,
+  onClickCenteredItem = (index: number) => console.log(index),
   isShadow = true,
   showStatus = true,
   statusSize,
@@ -112,9 +118,6 @@ const Carousel: React.FC<CarouselProps> = ({
   indicatorsActiveColor,
   indicatorsInactiveColor,
   isIndicatorsShadow = true,
-  selectable = false,
-  pauseOnHover = false,
-  onClickSelectedItem,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null) // The carousel container element
   const [curIndex, setCurIndex] = useState(startIndex) // Current center carousel's index
@@ -142,9 +145,21 @@ const Carousel: React.FC<CarouselProps> = ({
   }, [length])
 
   /**
-   * Pause
+   * Handle pause
    */
   const pause = useRef(false) // Flag to pause carousel loop
+
+  const startPause = useCallback(() => {
+    if (pauseOnHover) {
+      pause.current = true
+    }
+  }, [pauseOnHover])
+
+  const releasePause = useCallback(() => {
+    if (pauseOnHover) {
+      pause.current = false
+    }
+  }, [pauseOnHover])
 
   /**
    * Slide to the previous carousel item
@@ -162,70 +177,42 @@ const Carousel: React.FC<CarouselProps> = ({
     setCurIndex((curIndex: number) => getNextIndex(length, curIndex))
   }, [length])
 
-  const selectSlide = useCallback(
-    (index: number) => {
-      if (selectable) {
-        setCurIndex(index)
-      }
-      if (curIndex === index && onClickSelectedItem) {
-        onClickSelectedItem(index)
-      }
-    },
-    [curIndex, selectable, onClickSelectedItem]
-  )
-
-  const startPause = useCallback(() => {
-    if (pauseOnHover) pause.current = true
-  }, [pauseOnHover])
-
-  const releasePause = useCallback(() => {
-    if (pauseOnHover) pause.current = false
-  }, [pauseOnHover])
-
   /**
    * Slide along swipe direction
    */
   useSwipe(containerRef, slideNext, slidePrev)
 
   /**
-   * Auto Play
+   * Auto Play (Slide)
    */
-  const [isFinished, setIsFinished] = useState<boolean>(false) // End of an loop, when 'infiniteLoop' is false
+  const isFinished = useRef(false) // Flag to stop infinite animation loop
 
   useEffect(() => {
     if (infiniteLoop) {
-      setIsFinished(false)
+      isFinished.current = false
     }
   }, [infiniteLoop])
 
   useEffect(() => {
-    // invalid conditions
-    if (!autoPlay) return
-    if (isFinished) return
-    // auto slide interval function
-    const intervalFunc = function autoSlide() {
+    // Invalid conditions
+    if (!autoPlay || isFinished.current) return
+
+    // Auto slide
+    const autoSlide = () => {
       if (curIndex == length - 1 && !infiniteLoop) {
         intervalId && clearInterval(intervalId)
-        setIsFinished(true)
+        isFinished.current = true
         return
       }
       slideNext()
     }
-    // set the auto slide interval fucntion
-    const intervalId = setInterval(intervalFunc, interval)
-    // clean up
+
+    const intervalId = setInterval(autoSlide, interval)
+
     return () => {
       intervalId && clearInterval(intervalId)
     }
-  }, [
-    autoPlay,
-    interval,
-    infiniteLoop,
-    length,
-    curIndex,
-    isFinished,
-    slideNext,
-  ])
+  }, [autoPlay, interval, infiniteLoop, length, curIndex, slideNext])
 
   /**
    * CSS Transition according to the 'curIndex'
@@ -244,6 +231,18 @@ const Carousel: React.FC<CarouselProps> = ({
       setFiveCarouselStyle(length, curIndex, width, depth, carouselItems)
     }
   }, [length, curIndex, width, depth])
+
+  /**
+   * Handle clicking carousel items
+   */
+  const clickSlide = (index: number) => {
+    if (selectable) {
+      setCurIndex(index)
+    }
+    if (curIndex === index && onClickCenteredItem) {
+      onClickCenteredItem(index)
+    }
+  }
 
   return (
     <div
@@ -268,7 +267,7 @@ const Carousel: React.FC<CarouselProps> = ({
               transition: `all ${transitionTime}ms ease-in-out`,
               cursor: selectable ? 'pointer' : 'initial',
             }}
-            onClick={() => selectSlide(curIndex)}
+            onClick={() => clickSlide(curIndex)}
           >
             {child}
           </div>
