@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/Byongho96/react-responsive-3d-carousel/compare/v1.3.1...v1.4.0) (2024-01-03)
+
+
+### Features
+
+* new docs and selectable features ([00b5298](https://github.com/Byongho96/react-responsive-3d-carousel/commit/00b5298fe33811db4b2de870b27d9e3e501848c6))
+* pause on hover and selectable items ([3f3a878](https://github.com/Byongho96/react-responsive-3d-carousel/commit/3f3a87899ea272b355ba9917796908bae60fa3ba))
+* selectable items and pause on hover ([f338c5e](https://github.com/Byongho96/react-responsive-3d-carousel/commit/f338c5e168b2bf50f71ea978b41619635eb421df))
+
 ### [1.3.1](https://github.com/Byongho96/react-responsive-3d-carousel/compare/v1.3.0...v1.3.1) (2023-12-26)
 
 ## [1.3.0](https://github.com/Byongho96/react-responsive-3d-carousel/compare/v1.2.0...v1.3.0) (2023-10-04)
