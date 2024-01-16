@@ -6,24 +6,31 @@
   "module": "lib/esm/index.js",
   "types": "lib/index.d.ts",
   "files": [
-    "lib"
+    "lib/",
+    "CHANGELOG.md",
+    "LICENSE",
+    "README.md"
   ],
   "keywords": [
     "react",
     "carousel",
-    "slider",
     "slide",
-    "responsive",
+    "slider",
     "swipe",
+    "swiper",
+    "responsive",
     "mobile-friendly",
     "react-component",
     "3d"
   ],
-  "author": "Byongho",
+  "author": "Byongho Lee <unlike96@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/Byongho96/react-responsive-3d-carousel"
+  },
+  "bugs": {
+    "url": "https://github.com/Byongho96/react-responsive-3d-carousel/issues"
   },
   "homepage": "https://byongho96.github.io/react-responsive-3d-carousel/",
   "scripts": {
@@ -33,7 +40,7 @@
     "format:check": "npx eslint . && prettier --check .",
     "format:write": "npx eslint --fix . && prettier --write .",
     "test": "jest",
-    "release": "standard-version && git add . && git commit -m 'docs: update changelog' && git push origin main && npm run publish:lib",
+    "release": "npm run build:lib && standard-version && git add . && git commit -m 'docs: update changelog' && git push origin main",
     "build:lib": "npm run format:check && npm test && rollup -c rollup.config.mjs",
     "build:web": "npm run format:check && npm test && rollup -c rollup.config.web.mjs",
     "publish:lib": "npm run build:lib && npm publish",
