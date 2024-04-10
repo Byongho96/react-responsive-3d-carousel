@@ -1,4 +1,4 @@
-<h1> <img src="./assets/logo.svg" alt="react responsive carousel logo" width='30px'/> React Responsvie 3D Carousel</h1>
+<h1> <img src="./assets/logo.svg" alt="react responsive carousel logo" width='30px'/> React Responsive 3D Carousel</h1>
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
@@ -33,7 +33,7 @@ Getting started with this package is straightforward. Explore the documentation 
 
 ## Installation
 
-Install the package with the following command. **React should be pre-installed**.
+Install the package with the following command. **React18 should be pre-installed**.
 
 ```bash
 npm install react-responsive-3d-carousel
