@@ -47,7 +47,7 @@
     "publish:web": "npm run build:web && gh-pages -d dist"
   },
   "peerDependencies": {
-    "react": "^18.2.0"
+    "react": "^18.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.22.11",
@@ -94,8 +94,8 @@
     "jest-environment-jsdom": "^29.6.4",
     "lint-staged": "^14.0.1",
     "prettier": "^3.0.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
     "rollup": "^3.28.1",
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-dts": "^6.0.0",
