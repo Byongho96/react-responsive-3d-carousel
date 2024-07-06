@@ -334,8 +334,8 @@ function App() {
             <label htmlFor="pause-on-hover-input">pauseOnHover</label>
             <input
               type="checkbox"
-              id="pause-on-hoverr-input"
-              name="pause-on-hoverr"
+              id="pause-on-hover-input"
+              name="pause-on-hover"
               checked={pauseOnHover}
               onChange={(e) => setPauseOnHover(e.target.checked)}
             />
