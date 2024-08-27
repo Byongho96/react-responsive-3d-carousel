@@ -51,6 +51,7 @@ export interface CarouselProps {
   indicatorsActiveColor?: string
   indicatorsInactiveColor?: string
   isIndicatorsShadow?: boolean
+  onChange?: (index: number) => void
 }
 
 /**
@@ -85,6 +86,7 @@ export interface CarouselProps {
  * @param indicatorsActiveColor Color of an active indicator
  * @param indicatorsInactiveColor Color of inactive indicators
  * @param isIndicatorsShadow Is there shadow in the indicators
+ * @param onChange Listen index change
  * @returns
  */
 const Carousel: React.FC<CarouselProps> = ({
@@ -118,6 +120,7 @@ const Carousel: React.FC<CarouselProps> = ({
   indicatorsActiveColor,
   indicatorsInactiveColor,
   isIndicatorsShadow = true,
+  onChange,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null) // The carousel container element
   const [curIndex, setCurIndex] = useState(startIndex) // Current center carousel's index
@@ -243,6 +246,15 @@ const Carousel: React.FC<CarouselProps> = ({
       onClickCenteredItem(index)
     }
   }
+
+  /**
+   * Call onChange on curIndex change
+   */
+  useEffect(() => {
+    if (onChange) {
+      onChange(curIndex)
+    }
+  }, [curIndex, onChange])
 
   return (
     <div
