@@ -120,6 +120,7 @@ export default App() {
 | indicatorsActiveColor   | string                     | 'rgb(255, 255, 255)'     | Color of an activated indicator                        |
 | indicatorsInactiveColor | string                     | 'rgba(67, 67, 67, 0.4)'  | Color of inactivated indicators                        |
 | isIndicatorsShadow      | boolean                    | true                     | Display shadows for the indicators                     |
+| onChange                | (index: number) => void    | undefined                | Callback when the centered index changed               |
 
 ## Customizing
 

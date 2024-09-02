@@ -86,7 +86,7 @@ export interface CarouselProps {
  * @param indicatorsActiveColor Color of an active indicator
  * @param indicatorsInactiveColor Color of inactive indicators
  * @param isIndicatorsShadow Is there shadow in the indicators
- * @param onChange Listen index change
+ * @param onChange Callback function when the current centered carousel index changes
  * @returns
  */
 const Carousel: React.FC<CarouselProps> = ({
