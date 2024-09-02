@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/Byongho96/react-responsive-3d-carousel/compare/v1.4.4...v1.5.0) (2024-09-02)
+
+
+### Features
+
+* add onChange property ([7802f05](https://github.com/Byongho96/react-responsive-3d-carousel/commit/7802f05f3e546361f7c5bd46b174ea9e59e1d524))
+
 ### [1.4.4](https://github.com/Byongho96/react-responsive-3d-carousel/compare/v1.4.3...v1.4.4) (2024-07-06)
 
 ### [1.4.3](https://github.com/Byongho96/react-responsive-3d-carousel/compare/v1.4.2...v1.4.3) (2024-04-10)
