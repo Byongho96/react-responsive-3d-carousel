@@ -1,5 +1,6 @@
 dist/
 coverage/
+storybook-static/
 
 # Created by https://www.toptal.com/developers/gitignore/api/node,macos,windows,react
 # Edit at https://www.toptal.com/developers/gitignore?templates=node,macos,windows,react
