@@ -36,7 +36,6 @@
   "scripts": {
     "prepare": "husky install",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
     "format:check": "npx eslint . && prettier --check .",
     "format:write": "npx eslint --fix . && prettier --write .",
     "test": "jest",
