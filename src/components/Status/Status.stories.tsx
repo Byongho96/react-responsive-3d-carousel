@@ -1,31 +1,38 @@
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-import Status from './Status'
+import { Meta, StoryObj } from '@storybook/react'
+import Status, { StatusProps } from './Status'
+import './Status.scss'
 
-export default {
-  title: 'responsive-3d-carousel/Status',
+const meta: Meta<typeof Status> = {
+  title: 'Components/Status',
   component: Status,
-} as ComponentMeta<typeof Status>
-
-const Template: ComponentStory<typeof Status> = (args) => <Status {...args} />
-
-export const SmallStatus = Template.bind({})
-SmallStatus.args = {
-  length: 5,
-  index: 0,
-  size: 'small',
+  argTypes: {
+    length: { control: { type: 'number', min: 1 } },
+    curIndex: { table: { disable: true } },
+  },
+  decorators: [
+    (Story) => (
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          width: '100%',
+          height: '100vh',
+        }}
+      >
+        <Story />
+      </div>
+    ),
+  ],
 }
+export default meta
 
-export const MediumStatus = Template.bind({})
-MediumStatus.args = {
-  length: 5,
-  index: 0,
-  size: 'medium',
-}
+type StatusStory = StoryObj<StatusProps>
 
-export const LargeStatus = Template.bind({})
-LargeStatus.args = {
-  length: 5,
-  index: 0,
-  size: 'large',
+export const Default: StatusStory = {
+  args: {
+    length: 5,
+    curIndex: 0,
+  },
 }

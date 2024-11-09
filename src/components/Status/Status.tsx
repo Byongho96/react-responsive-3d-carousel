@@ -1,39 +1,41 @@
 import React from 'react'
-
 import './Status.scss'
 
 export interface StatusProps {
   length: number
-  index: number
-  size?: 'small' | 'medium' | 'large'
+  curIndex: number
   color?: string
-  isShadow?: boolean
+  fontSize?: string
+  fontWeight?: string
+  shadow?: string
+  translate?: [string, string]
 }
 
-/**
- * Status at the top right of the carousel
- * @param length Value to be displayed on the right of '/'
- * @param index (Value - 1) to be displayed on the left of '/'
- * @param size Size of status
- * @param activeColor Color of status font
- * @param isShadow Is there shadow in the status
- */
 const Status: React.FC<StatusProps> = ({
   length,
-  index,
-  size = 'small',
-  color = 'rgb(255, 255, 255)',
-  isShadow = true,
+  curIndex,
+  color = '#ffffff',
+  fontSize = '1rem',
+  fontWeight = '600',
+  shadow = '0 0.05rem 0.1rem rgba(0, 0, 0, 0.5)',
+  translate = ['0px', '0px'],
 }) => {
+  const statusStyle: React.CSSProperties = {
+    color,
+    fontSize,
+    fontWeight,
+    textShadow: shadow,
+    transform: `translate(${translate[0]}, ${translate[1]})`,
+  }
+
   return (
     <p
-      className={`react-responsive-3d-carousel__status ${size} ${
-        isShadow ? 'shadow' : ''
-      }`}
-      style={{ color: color }}
-      aria-label={`${index + 1} of ${length}`}
-    >{`${index + 1} / ${length}`}</p>
+      className="react-responsive-3d-carousel__status"
+      aria-label={`${curIndex + 1} of ${length}`}
+      style={statusStyle}
+    >{`${curIndex + 1} / ${length}`}</p>
   )
 }
 
+Status.displayName = 'Status'
 export default Status
