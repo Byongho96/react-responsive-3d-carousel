@@ -1,459 +1,156 @@
 import React from 'react'
-import { render, screen, waitFor } from '@testing-library/react'
-import Carousel from './Carousel'
+import { render, fireEvent } from '@testing-library/react'
+import Carousel, { CarouselProps } from './Carousel'
 import '@testing-library/jest-dom'
-import {
-  getCurItemStyle,
-  getDefaultItemStyle,
-  getThreeCarouselNextItemStyle,
-  getThreeCarouselPrevItemStyle,
-} from '../../utils/getCarouselStyle'
 
-describe('Children of carousel', () => {
-  test('render one image', () => {
-    render(
-      <Carousel>
-        <img src="./example" />
-      </Carousel>
+describe('Carousel Component', () => {
+  const items = [
+    <div key="1">Item 1</div>,
+    <div key="2">Item 2</div>,
+    <div key="3">Item 3</div>,
+  ]
+
+  const defaultProps: CarouselProps = {
+    items,
+  }
+
+  it('renders correctly with default props', () => {
+    const { container } = render(<Carousel {...defaultProps} />)
+    const carouselContainer = container.querySelector(
+      '.react-responsive-3d-carousel'
     )
-    const imgElements = screen.getAllByRole('img')
-    expect(imgElements).toHaveLength(1)
+    expect(carouselContainer).toBeInTheDocument()
 
-    for (const imgEle of imgElements) {
-      expect(imgEle).toBeInTheDocument()
+    // 기본적으로 showArrows, showIndicators, showStatus는 true입니다.
+    const arrowsContainer = container.querySelector(
+      '.react-responsive-3d-carousel__arrows-container'
+    )
+    expect(arrowsContainer).toBeInTheDocument()
+
+    const indicatorsContainer = container.querySelector(
+      '.react-responsive-3d-carousel__indicators-container'
+    )
+    expect(indicatorsContainer).toBeInTheDocument()
+
+    const statusContainer = container.querySelector(
+      '.react-responsive-3d-carousel__status-container'
+    )
+    expect(statusContainer).toBeInTheDocument()
+  })
+
+  it('renders the correct number of items', () => {
+    const { container } = render(<Carousel {...defaultProps} />)
+    const itemElements = container.querySelectorAll(
+      '.react-responsive-3d-carousel__item'
+    )
+    expect(itemElements.length).toBe(items.length)
+  })
+
+  it('hides arrows when showArrows is false', () => {
+    const props: CarouselProps = {
+      ...defaultProps,
+      showArrows: false,
     }
+    const { container } = render(<Carousel {...props} />)
+    const arrowsContainer = container.querySelector(
+      '.react-responsive-3d-carousel__arrows-container'
+    )
+    expect(arrowsContainer).not.toBeInTheDocument()
   })
 
-  test('render three images', () => {
-    render(
-      <Carousel>
-        <img src="./example" />
-        <img src="./example" />
-        <img src="./example" />
-      </Carousel>
-    )
-    const imgElements = screen.getAllByRole('img')
-    expect(imgElements).toHaveLength(3)
-
-    for (const imgEle of imgElements) {
-      expect(imgEle).toBeInTheDocument()
+  it('hides indicators when showIndicators is false', () => {
+    const props: CarouselProps = {
+      ...defaultProps,
+      showIndicators: false,
     }
+    const { container } = render(<Carousel {...props} />)
+    const indicatorsContainer = container.querySelector(
+      '.react-responsive-3d-carousel__indicators-container'
+    )
+    expect(indicatorsContainer).not.toBeInTheDocument()
   })
 
-  test('render five images', () => {
-    render(
-      <Carousel>
-        <img src="./example" />
-        <img src="./example" />
-        <img src="./example" />
-        <img src="./example" />
-        <img src="./example" />
-      </Carousel>
-    )
-    const imgElements = screen.getAllByRole('img')
-    expect(imgElements).toHaveLength(5)
-
-    for (const imgEle of imgElements) {
-      expect(imgEle).toBeInTheDocument()
+  it('hides status when showStatus is false', () => {
+    const props: CarouselProps = {
+      ...defaultProps,
+      showStatus: false,
     }
-  })
-})
-
-describe('Slide test with four carousel', () => {
-  test('carousel auto play', async () => {
-    const autoPlay = true
-    const interval = 500
-    const transitionTime = 200
-    const width = '400px'
-    const depth = 1.7
-    render(
-      <Carousel
-        autoPlay={autoPlay}
-        interval={interval}
-        transitionTime={transitionTime}
-        width={width}
-        depth={depth}
-      >
-        <img src="./example" />
-        <img src="./example" />
-        <img src="./example" />
-        <img src="./example" />
-      </Carousel>
+    const { container } = render(<Carousel {...props} />)
+    const statusContainer = container.querySelector(
+      '.react-responsive-3d-carousel__status-container'
     )
-    const imgElements = screen.getAllByRole('img')
-
-    const firstCarousel = imgElements[0].parentElement
-    const secondCarousel = imgElements[1].parentElement
-    const thirdCarousel = imgElements[2].parentElement
-    const fourthCarousel = imgElements[3].parentElement
-
-    expect(firstCarousel).toHaveStyle(getCurItemStyle())
-    expect(secondCarousel).toHaveStyle(
-      getThreeCarouselNextItemStyle(width, depth)
-    )
-    expect(thirdCarousel).toHaveStyle(getDefaultItemStyle(width, depth))
-    expect(fourthCarousel).toHaveStyle(
-      getThreeCarouselPrevItemStyle(width, depth)
-    )
-    await waitFor(
-      () => {
-        expect(firstCarousel).toHaveStyle(
-          getThreeCarouselPrevItemStyle(width, depth)
-        )
-        expect(secondCarousel).toHaveStyle(getCurItemStyle())
-        expect(thirdCarousel).toHaveStyle(
-          getThreeCarouselNextItemStyle(width, depth)
-        )
-        expect(fourthCarousel).toHaveStyle(getDefaultItemStyle(width, depth))
-      },
-      { timeout: interval + transitionTime + 100 }
-    )
-    await waitFor(
-      () => {
-        expect(firstCarousel).toHaveStyle(getDefaultItemStyle(width, depth))
-        expect(secondCarousel).toHaveStyle(
-          getThreeCarouselPrevItemStyle(width, depth)
-        )
-        expect(thirdCarousel).toHaveStyle(getCurItemStyle())
-        expect(fourthCarousel).toHaveStyle(
-          getThreeCarouselNextItemStyle(width, depth)
-        )
-      },
-      { timeout: 2 * interval + transitionTime + 100 }
-    )
+    expect(statusContainer).not.toBeInTheDocument()
   })
 
-  test('carousel disable auto play', async () => {
-    const autoPlay = false
-    const interval = 500
-    const transitionTime = 200
-    const width = '400px'
-    const depth = 1.7
-    render(
-      <Carousel
-        autoPlay={autoPlay}
-        interval={interval}
-        transitionTime={transitionTime}
-        width={width}
-        depth={depth}
-      >
-        <img src="./example" />
-        <img src="./example" />
-        <img src="./example" />
-        <img src="./example" />
-      </Carousel>
-    )
-    const imgElements = screen.getAllByRole('img')
-
-    const firstCarousel = imgElements[0].parentElement
-    const secondCarousel = imgElements[1].parentElement
-    const thirdCarousel = imgElements[2].parentElement
-    const fourthCarousel = imgElements[3].parentElement
-
-    expect(firstCarousel).toHaveStyle(getCurItemStyle())
-    expect(secondCarousel).toHaveStyle(
-      getThreeCarouselNextItemStyle(width, depth)
-    )
-    expect(thirdCarousel).toHaveStyle(getDefaultItemStyle(width, depth))
-    expect(fourthCarousel).toHaveStyle(
-      getThreeCarouselPrevItemStyle(width, depth)
-    )
-    await waitFor(
-      () => {
-        expect(firstCarousel).toHaveStyle(getCurItemStyle())
-        expect(secondCarousel).toHaveStyle(
-          getThreeCarouselNextItemStyle(width, depth)
-        )
-        expect(thirdCarousel).toHaveStyle(getDefaultItemStyle(width, depth))
-        expect(fourthCarousel).toHaveStyle(
-          getThreeCarouselPrevItemStyle(width, depth)
-        )
-      },
-      { timeout: interval + transitionTime + 100 }
-    )
-    await waitFor(
-      () => {
-        expect(firstCarousel).toHaveStyle(getCurItemStyle())
-        expect(secondCarousel).toHaveStyle(
-          getThreeCarouselNextItemStyle(width, depth)
-        )
-        expect(thirdCarousel).toHaveStyle(getDefaultItemStyle(width, depth))
-        expect(fourthCarousel).toHaveStyle(
-          getThreeCarouselPrevItemStyle(width, depth)
-        )
-      },
-      { timeout: 2 * interval + transitionTime + 100 }
-    )
-  })
-
-  test('carousel start index', async () => {
-    const autoPlay = true
-    const interval = 500
-    const transitionTime = 200
-    const startIndex = 2
-    const width = '400px'
-    const depth = 1.7
-    render(
-      <Carousel
-        autoPlay={autoPlay}
-        interval={interval}
-        transitionTime={transitionTime}
-        startIndex={startIndex}
-        width={width}
-        depth={depth}
-      >
-        <img src="./example" />
-        <img src="./example" />
-        <img src="./example" />
-        <img src="./example" />
-      </Carousel>
-    )
-
-    const imgElements = screen.getAllByRole('img')
-
-    const firstCarousel = imgElements[startIndex % 4].parentElement
-    const secondCarousel = imgElements[(startIndex + 1) % 4].parentElement
-    const thirdCarousel = imgElements[(startIndex + 2) % 4].parentElement
-    const fourthCarousel = imgElements[(startIndex + 3) % 4].parentElement
-
-    expect(firstCarousel).toHaveStyle(getCurItemStyle())
-    expect(secondCarousel).toHaveStyle(
-      getThreeCarouselNextItemStyle(width, depth)
-    )
-    expect(thirdCarousel).toHaveStyle(getDefaultItemStyle(width, depth))
-    expect(fourthCarousel).toHaveStyle(
-      getThreeCarouselPrevItemStyle(width, depth)
-    )
-    await waitFor(
-      () => {
-        expect(firstCarousel).toHaveStyle(
-          getThreeCarouselPrevItemStyle(width, depth)
-        )
-        expect(secondCarousel).toHaveStyle(getCurItemStyle())
-        expect(thirdCarousel).toHaveStyle(
-          getThreeCarouselNextItemStyle(width, depth)
-        )
-        expect(fourthCarousel).toHaveStyle(getDefaultItemStyle(width, depth))
-      },
-      { timeout: interval + transitionTime + 100 }
-    )
-    await waitFor(
-      () => {
-        expect(firstCarousel).toHaveStyle(getDefaultItemStyle(width, depth))
-        expect(secondCarousel).toHaveStyle(
-          getThreeCarouselPrevItemStyle(width, depth)
-        )
-        expect(thirdCarousel).toHaveStyle(getCurItemStyle())
-        expect(fourthCarousel).toHaveStyle(
-          getThreeCarouselNextItemStyle(width, depth)
-        )
-      },
-      { timeout: 2 * interval + transitionTime + 100 }
-    )
-  })
-
-  test('carousel able infinite loop', async () => {
-    const autoPlay = true
-    const interval = 500
-    const transitionTime = 200
-    const width = '400px'
-    const depth = 1.7
-    const infiniteLoop = true
-    render(
-      <Carousel
-        autoPlay={autoPlay}
-        interval={interval}
-        transitionTime={transitionTime}
-        width={width}
-        depth={depth}
-        infiniteLoop={infiniteLoop}
-      >
-        <img src="./example" />
-        <img src="./example" />
-        <img src="./example" />
-        <img src="./example" />
-      </Carousel>
-    )
-
-    const imgElements = screen.getAllByRole('img')
-
-    const firstCarousel = imgElements[0].parentElement
-    const secondCarousel = imgElements[1].parentElement
-    const thirdCarousel = imgElements[2].parentElement
-    const fourthCarousel = imgElements[3].parentElement
-
-    expect(firstCarousel).toHaveStyle(getCurItemStyle())
-    expect(secondCarousel).toHaveStyle(
-      getThreeCarouselNextItemStyle(width, depth)
-    )
-    expect(thirdCarousel).toHaveStyle(getDefaultItemStyle(width, depth))
-    expect(fourthCarousel).toHaveStyle(
-      getThreeCarouselPrevItemStyle(width, depth)
-    )
-    await waitFor(
-      () => {
-        expect(firstCarousel).toHaveStyle(
-          getThreeCarouselPrevItemStyle(width, depth)
-        )
-        expect(secondCarousel).toHaveStyle(getCurItemStyle())
-        expect(thirdCarousel).toHaveStyle(
-          getThreeCarouselNextItemStyle(width, depth)
-        )
-        expect(fourthCarousel).toHaveStyle(getDefaultItemStyle(width, depth))
-      },
-      { timeout: interval + transitionTime + 100 }
-    )
-    await waitFor(
-      () => {
-        expect(firstCarousel).toHaveStyle(getDefaultItemStyle(width, depth))
-        expect(secondCarousel).toHaveStyle(
-          getThreeCarouselPrevItemStyle(width, depth)
-        )
-        expect(thirdCarousel).toHaveStyle(getCurItemStyle())
-        expect(fourthCarousel).toHaveStyle(
-          getThreeCarouselNextItemStyle(width, depth)
-        )
-      },
-      { timeout: 6 * interval + transitionTime + 100 }
-    )
-  })
-
-  test('carousel disable infinite loop', async () => {
-    const autoPlay = true
-    const interval = 500
-    const transitionTime = 200
-    const width = '400px'
-    const depth = 1.7
-    const infiniteLoop = false
-    render(
-      <Carousel
-        autoPlay={autoPlay}
-        interval={interval}
-        transitionTime={transitionTime}
-        width={width}
-        depth={depth}
-        infiniteLoop={infiniteLoop}
-      >
-        <img src="./example" />
-        <img src="./example" />
-        <img src="./example" />
-        <img src="./example" />
-      </Carousel>
-    )
-
-    const imgElements = screen.getAllByRole('img')
-
-    const firstCarousel = imgElements[0].parentElement
-    const secondCarousel = imgElements[1].parentElement
-    const thirdCarousel = imgElements[2].parentElement
-    const fourthCarousel = imgElements[3].parentElement
-
-    expect(firstCarousel).toHaveStyle(getCurItemStyle())
-    expect(secondCarousel).toHaveStyle(
-      getThreeCarouselNextItemStyle(width, depth)
-    )
-    expect(thirdCarousel).toHaveStyle(getDefaultItemStyle(width, depth))
-    expect(fourthCarousel).toHaveStyle(
-      getThreeCarouselPrevItemStyle(width, depth)
-    )
-    await waitFor(
-      () => {
-        expect(firstCarousel).toHaveStyle(
-          getThreeCarouselPrevItemStyle(width, depth)
-        )
-        expect(secondCarousel).toHaveStyle(getCurItemStyle())
-        expect(thirdCarousel).toHaveStyle(
-          getThreeCarouselNextItemStyle(width, depth)
-        )
-        expect(fourthCarousel).toHaveStyle(getDefaultItemStyle(width, depth))
-      },
-      { timeout: interval + transitionTime + 100 }
-    )
-    await waitFor(
-      () => {
-        expect(firstCarousel).toHaveStyle(
-          getThreeCarouselNextItemStyle(width, depth)
-        )
-        expect(secondCarousel).toHaveStyle(getDefaultItemStyle(width, depth))
-        expect(thirdCarousel).toHaveStyle(
-          getThreeCarouselPrevItemStyle(width, depth)
-        )
-        expect(fourthCarousel).toHaveStyle(getCurItemStyle())
-      },
-      { timeout: 6 * interval + transitionTime + 100 }
-    )
-  })
-})
-
-describe('Show components of carousel', () => {
-  test('show status', () => {
-    render(
-      <Carousel showStatus={true}>
-        <img src="./example" />
-      </Carousel>
-    )
-
-    const statusEle = screen.getByText('1 / 1')
-    expect(statusEle).toBeInTheDocument()
-  })
-
-  test('do not show status', () => {
-    render(
-      <Carousel showStatus={false}>
-        <img src="./example" />
-      </Carousel>
-    )
-    const statusEle = screen.queryByText('1 / 1')
-    expect(statusEle).toEqual(null)
-  })
-
-  test('show arrows', () => {
-    render(
-      <Carousel showArrows={true}>
-        <img src="./example" />
-      </Carousel>
-    )
-
-    const buttonElements = screen.getAllByRole('button')
-    expect(buttonElements).toHaveLength(2)
-
-    for (const buttonEle of buttonElements) {
-      expect(buttonEle).toBeInTheDocument()
+  it('calls onClickItem when an item is clicked', () => {
+    const onClickItem = jest.fn()
+    const props: CarouselProps = {
+      ...defaultProps,
+      onClickItem,
     }
-  })
-
-  test('do not show arrows', () => {
-    render(
-      <Carousel showArrows={false}>
-        <img src="./example" />
-      </Carousel>
-    )
-    const buttonElements = screen.queryAllByRole('button')
-    expect(buttonElements).toHaveLength(0)
-  })
-
-  test('show indicators', () => {
-    render(
-      <Carousel showIndicators={true}>
-        <img src="./example" />
-      </Carousel>
+    const { container } = render(<Carousel {...props} />)
+    const itemElements = container.querySelectorAll(
+      '.react-responsive-3d-carousel__item'
     )
 
-    const listElements = screen.getAllByRole('listitem')
-    expect(listElements).toHaveLength(1)
+    fireEvent.click(itemElements[1])
+    expect(onClickItem).toHaveBeenCalled()
+    expect(onClickItem).toHaveBeenCalledWith(
+      expect.any(Object),
+      1,
+      expect.anything(),
+      expect.any(Boolean)
+    )
+  })
 
-    for (const listEle of listElements) {
-      expect(listEle).toBeInTheDocument()
+  it('updates curIndex when an item is clicked if focusOnSelect is true', () => {
+    const props: CarouselProps = {
+      ...defaultProps,
+      focusOnSelect: true,
+      onChange: jest.fn(),
     }
+    const { container } = render(<Carousel {...props} />)
+    const itemElements = container.querySelectorAll(
+      '.react-responsive-3d-carousel__item'
+    )
+
+    // Click the second item
+    fireEvent.click(itemElements[1])
+
+    expect(props.onChange).toHaveBeenCalledWith(1, expect.anything())
   })
 
-  test('do not show indicators', () => {
-    render(
-      <Carousel showIndicators={false}>
-        <img src="./example" />
-      </Carousel>
+  it('does not update curIndex when focusOnSelect is false', () => {
+    const props: CarouselProps = {
+      ...defaultProps,
+      focusOnSelect: false,
+      onChange: jest.fn(),
+    }
+    const { container } = render(<Carousel {...props} />)
+    const itemElements = container.querySelectorAll(
+      '.react-responsive-3d-carousel__item'
     )
-    const buttonElements = screen.queryAllByRole('listitem')
-    expect(buttonElements).toHaveLength(0)
+
+    // Click the second item
+    fireEvent.click(itemElements[1])
+
+    expect(props.onChange).not.toHaveBeenCalled()
+  })
+
+  it('applies container styles based on props', () => {
+    const props: CarouselProps = {
+      ...defaultProps,
+      containerWidth: '500px',
+      containerHeight: '300px',
+      containerPadding: '20px',
+    }
+    const { container } = render(<Carousel {...props} />)
+    const carouselContainer = container.querySelector(
+      '.react-responsive-3d-carousel'
+    ) as HTMLElement
+
+    expect(carouselContainer).toHaveStyle(`width: ${props.containerWidth}`)
+    expect(carouselContainer).toHaveStyle(`height: ${props.containerHeight}`)
+    expect(carouselContainer).toHaveStyle(`padding: ${props.containerPadding}`)
   })
 })

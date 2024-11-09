@@ -1,323 +1,411 @@
 import React, {
-  Children,
+  createContext,
   useCallback,
   useEffect,
   useMemo,
   useRef,
   useState,
 } from 'react'
-import useSwipe from '../../hooks/useSwipe'
-import { getNextIndex, getPrevIndex } from '../../utils/getCarouselIndex'
-import {
-  setFiveCarouselStyle,
-  setOneCarouselStyle,
-  setThreeCarouselStyle,
-  setTwoCarouselStyle,
-} from '../../utils/setCarouselStyle'
-import Arrows from '../Arrows'
-import Indicators from '../Indicators'
-import Status from '../Status/Status'
-
+import CSS_VARIABLE from '../../constant/css'
+import useAutoPlay from '../../hooks/useAutoPlay'
+import useFocus from '../../hooks/useFocus'
+import useLayout, { LayoutType } from '../../hooks/useLayout'
+import useSize from '../../hooks/useSize'
+import useSwipe, { SwipeDirection } from '../../hooks/useSwipe'
+import { DefaultOption } from '../../utils/defaultLayoutInfo'
+import Arrows, { ArrowsProps } from '../Arrows/Arrows'
+import Indicators, { IndicatorsProps } from '../Indicators/Indicators'
+import Status, { StatusProps } from '../Status/Status'
 import './Carousel.scss'
 
+export type AlignType = 'center' | 'top' | 'bottom'
+
 export interface CarouselProps {
-  children: React.ReactNode | React.ReactNode[]
-  width?: string
-  height?: string
-  spread?: 'wide' | 'normal' | 'narrow'
-  depth?: number
+  children?: React.ReactNode
+
+  ariaLabel?: string
+
+  items: JSX.Element[]
+  startIndex?: number
+
+  /** Container */
+  containerWidth?: string
+  containerHeight?: string
+  containerPadding?: string
+
+  /** Carousel 2D */
+  width?: string | number // if it's a number, it's proportional to container width
+  height?: string | number // if it's a number, it's proportional to container height
+  align?: AlignType
+  boxShadow?: string
+
+  /** Carousel 3D */
+  perspective?: string
+  perspectiveOrigin?: string
+  layout?: LayoutType
+  defaultOption?: DefaultOption // Default layout option (layout === 'default')
+
+  /** Carousel Transition */
+  sizeDuration?: number
+  sizeTimingFn?: string
+  transformDuration?: number
+  transformTimingFn?: string
+
+  /** Carousel Interaction */
+  focusOnSelect?: boolean
+  pauseOnHover?: boolean
+
+  /** Carousel Callback */
+  onChange?: (index: number, item: JSX.Element) => void
+  onClickItem?: (
+    e: React.MouseEvent,
+    index: number,
+    item: JSX.Element,
+    isCurrentIndex: boolean
+  ) => void
+
+  /** Carousel Play */
   autoPlay?: boolean
   interval?: number
-  transitionTime?: number
   infiniteLoop?: boolean
-  startIndex?: number
-  selectable?: boolean
-  pauseOnHover?: boolean
-  onClickCenteredItem?: (index: number) => void
-  isShadow?: boolean
+
+  /** Carousel Focus */
+  autoFocus?: boolean
+  slideWithKeyboard?: 'none' | 'vertical' | 'horizontal' | 'both'
+
+  /** Carousel Swipe */
+  swipeable?: boolean
+  swipeDirection?: SwipeDirection
+  onSwipeStart?: (event: TouchEvent) => void
+  onSwipeEnd?: (event: TouchEvent) => void
+  onSwipeMove?: (event: TouchEvent) => void
+
+  /* Status */
   showStatus?: boolean
-  statusSize?: 'small' | 'medium' | 'large'
-  statusColor?: string
-  isStatusShadow?: boolean
+  status?: StatusProps
+
+  /* Arrows */
   showArrows?: boolean
-  arrowsWidth?: string
-  arrowsHeight?: string
-  arrowsDefaultColor?: string
-  arrowsHoveredColor?: string
-  arrowsStrokeWidth?: number
-  isArrowsShadow?: boolean
+  arrows?: ArrowsProps
+
+  /* Indicators */
   showIndicators?: boolean
-  indicatorsSize?: 'small' | 'medium' | 'large'
-  indicatorsActiveColor?: string
-  indicatorsInactiveColor?: string
-  isIndicatorsShadow?: boolean
-  onChange?: (index: number) => void
+  indicators?: IndicatorsProps
 }
 
-/**
- *
- * @param children Carousel items
- * @param width Width of a carousel item
- * @param height Height of a carousel item
- * @param spread The extent to carousel items are spread out
- * @param depth 3D depth of carousel
- * @param autoPlay Automatically play the carousel
- * @param interval Time interval before the next carousel item (ms)
- * @param transitionTime Time interval for sliding (ms)
- * @param infiniteLoop Infinite loop for sliding the carousel (ms)
- * @param startIndex Index of carousel items to start the slide
- * @param selectable Is there shadow in the indicators
- * @param pauseOnHover Is there shadow in the indicators
- * @param onClickCenteredItem Is there shadow in the indicators
- * @param isShadow Is there shadow in the carousel items
- * @param showStatus Whether to show top right status
- * @param statusSize Size of status
- * @param statusColor Color of status
- * @param isStatusShadow Is there shadow in the status
- * @param showArrows Whether to show arrow buttons on both sides
- * @param arrowsWidth Width of an arrow
- * @param arrowsHeight Height of an arrow
- * @param arrowsDefaultColor Color of arrows not hovered
- * @param arrowsHoveredColor Color of arrows hovereds
- * @param arrowsStrokeWidth Stroke width of arrows svg path
- * @param isArrowsShadow Is there shadow in the arrows
- * @param showIndicators Whether to show the bottom indicators
- * @param indicatorsSize Size of indicators
- * @param indicatorsActiveColor Color of an active indicator
- * @param indicatorsInactiveColor Color of inactive indicators
- * @param isIndicatorsShadow Is there shadow in the indicators
- * @param onChange Callback function when the current centered carousel index changes
- * @returns
- */
+type DefaultContext = {
+  curIndex: number,
+  setCurIndex: React.Dispatch<React.SetStateAction<number>>,
+}
+
+export const CarouselContext = createContext<DefaultContext>({
+  curIndex: 0,
+  setCurIndex: (_) => {},
+})
+
 const Carousel: React.FC<CarouselProps> = ({
-  children = [],
-  width = '500px',
-  height = '300px',
-  spread = 'wide',
-  depth = 1,
+  children,
+
+  ariaLabel = '3d carousel',
+
+  items,
+  startIndex = 0,
+
+  /** Container */
+  containerHeight = 'auto',
+  containerWidth = '100%',
+  containerPadding = '1rem',
+
+  /** Carousel 2D */
+  width: strNumWidth = '400px',
+  height: strNumHeight = '300px',
+  align = 'center',
+  boxShadow = '0 0.1rem 0.5rem rgba(0, 0, 0, 0.5)',
+
+  /** Carousel 3D */
+  perspective = 'auto',
+  perspectiveOrigin = 'center',
+  layout = 'default',
+  defaultOption,
+
+  /** Carousel Transition */
+  sizeDuration = 1000,
+  sizeTimingFn = 'ease-in-out',
+  transformDuration = 1000,
+  transformTimingFn = 'ease-in-out',
+
+  /** Carousel Interaction */
+  focusOnSelect = true,
+  pauseOnHover = true,
+
+  /** Carousel Callback */
+  onClickItem,
+  onChange,
+
+  /** Carousel Play */
   autoPlay = true,
   interval = 3000,
-  transitionTime = 500,
   infiniteLoop = true,
-  startIndex = 0,
-  selectable = true,
-  pauseOnHover = true,
-  onClickCenteredItem = (index: number) => console.log(index),
-  isShadow = true,
+
+  /** Carousel Focus */
+  autoFocus = false,
+  slideWithKeyboard = 'both',
+
+  /** Carousel Swipe */
+  swipeable = true,
+  swipeDirection = 'horizontal',
+  onSwipeStart,
+  onSwipeEnd,
+  onSwipeMove,
+
+  /* Status */
   showStatus = true,
-  statusSize,
-  statusColor,
-  isStatusShadow = true,
+  status,
+
+  /* Arrows */
   showArrows = true,
-  arrowsWidth,
-  arrowsHeight,
-  arrowsDefaultColor,
-  arrowsHoveredColor,
-  arrowsStrokeWidth,
-  isArrowsShadow = true,
+  arrows,
+
+  /* Indicators */
   showIndicators = true,
-  indicatorsSize,
-  indicatorsActiveColor,
-  indicatorsInactiveColor,
-  isIndicatorsShadow = true,
-  onChange,
+  indicators,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null) // The carousel container element
+  const listRef = useRef<HTMLUListElement>(null) // The carousel list element
+  const pauseRef = useRef(false) // Flag to pause carousel auto play
+
   const [curIndex, setCurIndex] = useState(startIndex) // Current center carousel's index
 
-  /**
-   * Convert children props to array
-   */
-  const childrenArray = useMemo(() => {
-    return Children.toArray(children)
-  }, [children])
+  // Transform number or string type width and height to string type
+  const width = useMemo(
+    () =>
+      typeof strNumWidth === 'number'
+        ? `calc(${strNumWidth} * var(${CSS_VARIABLE.CONTAINER_WIDTH}))`
+        : strNumWidth,
+    [strNumWidth]
+  )
+  const height = useMemo(
+    () =>
+      typeof strNumHeight === 'number'
+        ? `calc(${strNumHeight} * var(${CSS_VARIABLE.CONTAINER_HEIGHT}))`
+        : strNumHeight,
+    [strNumHeight]
+  )
+
+  const htmlItemsRef = useRef<HTMLElement[]>([])
 
   /**
-   * The total length of the carousel items
-   */
-  const length = useMemo(() => {
-    return childrenArray.length
-  }, [childrenArray])
-
-  /**
-   * Adjust curIndex if it's greater than length
+   * Memoize renderedItems
    */
   useEffect(() => {
-    if (curIndex < length) return
-    setCurIndex(length - 1)
-  }, [length])
+    const container = containerRef.current
+    if (!container) return
 
-  /**
-   * Handle pause
-   */
-  const pause = useRef(false) // Flag to pause carousel loop
-
-  const startPause = useCallback(() => {
-    if (pauseOnHover) {
-      pause.current = true
-    }
-  }, [pauseOnHover])
-
-  const releasePause = useCallback(() => {
-    if (pauseOnHover) {
-      pause.current = false
-    }
-  }, [pauseOnHover])
+    htmlItemsRef.current = Array.from(
+      container.getElementsByClassName('react-responsive-3d-carousel__item')
+    ) as HTMLElement[]
+  }, [items])
 
   /**
    * Slide to the previous carousel item
    */
   const slidePrev = useCallback(() => {
-    if (pause.current) return
-    setCurIndex((curIndex: number) => getPrevIndex(length, curIndex))
-  }, [length])
+    if (pauseRef.current) return
+    setCurIndex((curIndex: number) => {
+      if (!infiniteLoop && curIndex === 0) return curIndex
+      return (curIndex - 1 + items.length) % items.length
+    })
+  }, [items, infiniteLoop, setCurIndex])
 
   /**
    * Slide to the next carousel item
    */
   const slideNext = useCallback(() => {
-    if (pause.current) return
-    setCurIndex((curIndex: number) => getNextIndex(length, curIndex))
-  }, [length])
+    if (pauseRef.current) return
+    setCurIndex((curIndex: number) => {
+      if (!infiniteLoop && curIndex === items.length - 1) return curIndex
+      return (curIndex + 1) % items.length
+    })
+  }, [items, infiniteLoop, setCurIndex])
 
   /**
-   * Slide along swipe direction
-   */
-  useSwipe(containerRef, slideNext, slidePrev)
-
-  /**
-   * Auto Play (Slide)
-   */
-  const isFinished = useRef(false) // Flag to stop infinite animation loop
-
-  useEffect(() => {
-    if (infiniteLoop) {
-      isFinished.current = false
-    }
-  }, [infiniteLoop])
-
-  useEffect(() => {
-    // Invalid conditions
-    if (!autoPlay || isFinished.current) return
-
-    // Auto slide
-    const autoSlide = () => {
-      if (curIndex == length - 1 && !infiniteLoop) {
-        intervalId && clearInterval(intervalId)
-        isFinished.current = true
-        return
-      }
-      slideNext()
-    }
-
-    const intervalId = setInterval(autoSlide, interval)
-
-    return () => {
-      intervalId && clearInterval(intervalId)
-    }
-  }, [autoPlay, interval, infiniteLoop, length, curIndex, slideNext])
-
-  /**
-   * CSS Transition according to the 'curIndex'
+   * Sync curIndex with startIndex, if startIndex is changed
    */
   useEffect(() => {
-    const containerEle = containerRef.current as HTMLDivElement
-    const carouselItems = containerEle.children
-
-    if (length < 2) {
-      setOneCarouselStyle(curIndex, carouselItems)
-    } else if (length < 3) {
-      setTwoCarouselStyle(length, curIndex, width, depth, carouselItems)
-    } else if (length < 5) {
-      setThreeCarouselStyle(length, curIndex, width, depth, carouselItems)
-    } else {
-      setFiveCarouselStyle(length, curIndex, width, depth, carouselItems)
-    }
-  }, [length, curIndex, width, depth])
+    setCurIndex(startIndex)
+  }, [startIndex])
 
   /**
-   * Handle clicking carousel items
+   * Adjust curIndex if it's out of range
    */
-  const clickSlide = (index: number) => {
-    if (selectable) {
-      setCurIndex(index)
+  useEffect(() => {
+    if (curIndex < 0) setCurIndex(0)
+    else if (items.length - 1 < curIndex) setCurIndex(items.length - 1)
+  }, [items, curIndex])
+
+  /**
+   * Callback function for onChange
+   */
+  const isFlag = useRef(false) // Flag to prevent calling onChange on the first render
+
+  useEffect(() => {
+    if (!isFlag.current) {
+      isFlag.current = true
+      return
     }
-    if (curIndex === index && onClickCenteredItem) {
-      onClickCenteredItem(index)
-    }
+
+    onChange && onChange(curIndex, items[curIndex])
+  }, [curIndex, onChange])
+
+  // Auto play
+  useAutoPlay(autoPlay, interval, curIndex, slideNext)
+
+  // Carousel layout style
+  useLayout(
+    items,
+    htmlItemsRef,
+    align,
+    width,
+    height,
+    layout,
+    curIndex,
+    defaultOption
+  )
+
+  // Set width of the list and items as CSS variables
+  useSize( items, htmlItemsRef,listRef, width, curIndex)
+
+  // Swipe feature
+  useSwipe({
+    containerRef,
+    swipeable,
+    swipeDirection,
+    slideNext,
+    slidePrev,
+    onSwipeStart,
+    onSwipeEnd,
+    onSwipeMove,
+  })
+
+  // Focus and keyboard navigation
+  useFocus(containerRef, autoFocus, slideWithKeyboard, slideNext, slidePrev)
+
+  /**
+   * Handler functions
+   */
+  const handleClickItem = (e: React.MouseEvent, index: number) => {
+    focusOnSelect && setCurIndex(index)
+    onClickItem && onClickItem(e, index, items[curIndex], curIndex === index)
+  }
+
+  const handleMouseEnterItem = () => {
+    pauseOnHover && (pauseRef.current = true)
+  }
+
+  const handleMouseLeaveItem = () => {
+    pauseOnHover && (pauseRef.current = false)
+  }
+
+  const handleClickNextArrow = (e: React.MouseEvent) => {
+    slideNext()
+    arrows?.onClickNext && arrows.onClickNext(e)
+  }
+
+  const handleClickPrevArrow = (e: React.MouseEvent) => {
+    slidePrev()
+    arrows?.onClickPrev && arrows.onClickPrev(e)
+  }
+
+  const handleClickIndicator = (e: React.MouseEvent, index: number) => {
+    setCurIndex(index)
+    indicators?.onClick && indicators.onClick(e, index)
   }
 
   /**
-   * Call onChange on curIndex change
+   * Styles
    */
-  useEffect(() => {
-    if (onChange) {
-      onChange(curIndex)
-    }
-  }, [curIndex, onChange])
+  const containerStyle = {
+    width: containerWidth,
+    height: containerHeight,
+    padding: containerPadding,
+  }
+
+  const listStyle = {
+    perspective:
+      perspective === 'auto'
+        ? `var(${CSS_VARIABLE.CONTAINER_WIDTH})`
+        : perspective,
+    perspectiveOrigin,
+    height: containerHeight === 'auto' ? height : '100%',
+  }
+
+  const itemStyle = {
+    width: width,
+    height: height,
+    transition: `transform ${transformDuration}ms ${transformTimingFn}, width ${sizeDuration}ms ${sizeTimingFn}, height ${sizeDuration}ms ${sizeTimingFn}`,
+    cursor: focusOnSelect ? 'pointer' : 'initial',
+    top: align === 'top' ? '0%' : align === 'center' ? '50' : '100%',
+    boxShadow,
+  }
 
   return (
-    <div
-      className="react-responsive-3d-carousel__carousel"
-      style={{ height: height }}
-    >
+    <CarouselContext.Provider value={{ curIndex, setCurIndex }}>
       <div
-        className={`react-responsive-3d-carousel__carousel__list ${spread}`}
+        className="react-responsive-3d-carousel"
+        aria-label={ariaLabel}
+        tabIndex={slideWithKeyboard !== 'none' ? 0 : undefined}
+        style={containerStyle}
         ref={containerRef}
-        onPointerEnter={startPause}
-        onPointerLeave={releasePause}
       >
-        {childrenArray.map((child: React.ReactNode, curIndex: number) => (
-          <div
-            className={`react-responsive-3d-carousel__carousel__item ${
-              isShadow ? 'shadow' : ''
-            }`}
-            key={curIndex}
-            style={{
-              width: width,
-              height: height,
-              transition: `all ${transitionTime}ms ease-in-out`,
-              cursor: selectable ? 'pointer' : 'initial',
-            }}
-            onClick={() => clickSlide(curIndex)}
-          >
-            {child}
+        <ul
+          className="react-responsive-3d-carousel__list"
+          style={listStyle}
+          ref={listRef}
+        >
+          {items.map((item, index) => {
+            return (
+              <li
+                key={index}
+                className={`react-responsive-3d-carousel__item 
+                ${width !== 'auto' ? 'fixed-width' : ''} 
+                ${height !== 'auto' ? 'fixed-height' : ''}`}
+                onClick={(e) => handleClickItem(e, index)}
+                style={itemStyle}
+                onMouseEnter={handleMouseEnterItem}
+                onMouseLeave={handleMouseLeaveItem}
+              >
+                {item}
+              </li>
+            )
+          })}
+          {children}
+        </ul>
+        {showStatus && (
+          <div className="react-responsive-3d-carousel__status-container">
+            <Status length={items.length} curIndex={curIndex} {...status} />
           </div>
-        ))}
+        )}
+        {showArrows && (
+          <div className="react-responsive-3d-carousel__arrows-container">
+            <Arrows
+              onClickNext={handleClickNextArrow}
+              onClickPrev={handleClickPrevArrow}
+              {...arrows}
+            />
+          </div>
+        )}
+        {showIndicators && (
+          <div className="react-responsive-3d-carousel__indicators-container">
+            <Indicators
+              length={items.length}
+              curIndex={curIndex}
+              onClick={handleClickIndicator}
+              {...indicators}
+            />
+          </div>
+        )}
       </div>
-      {showStatus && (
-        <Status
-          length={length}
-          index={curIndex}
-          size={statusSize}
-          color={statusColor}
-          isShadow={isStatusShadow}
-        />
-      )}
-      {showArrows && (
-        <Arrows
-          onClickLeft={slidePrev}
-          onClickRight={slideNext}
-          width={arrowsWidth}
-          height={arrowsHeight}
-          defaultColor={arrowsDefaultColor}
-          hoveredColor={arrowsHoveredColor}
-          strokeWidth={arrowsStrokeWidth}
-          isShadow={isArrowsShadow}
-        />
-      )}
-      {showIndicators && (
-        <Indicators
-          length={length}
-          index={curIndex}
-          onClick={(idx: number) => setCurIndex(idx)}
-          size={indicatorsSize}
-          activeColor={indicatorsActiveColor}
-          inactiveColor={indicatorsInactiveColor}
-          isShadow={isIndicatorsShadow}
-        />
-      )}
-    </div>
+    </CarouselContext.Provider>
   )
 }
 
