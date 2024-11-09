@@ -1,10 +1,7 @@
-dist
-lib
-coverage
+# Ignore all files by default
+**
 
-CHANGELOG.md
-
-**/.git
-**/.svn
-**/.hg
-**/node_modules
+# Allow only src folder to be checked
+!src/
+!CONTRIBUTING.md
+!README.md
