@@ -44,7 +44,7 @@
     "build": "npm run format:check && npm test && rollup -c rollup.config.mjs"
   },
   "peerDependencies": {
-    "react": "^18.0.0"
+    "react": ">=17.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.22.11",
