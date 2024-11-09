@@ -1,40 +1,43 @@
 .react-responsive-3d-carousel__arrows {
-  display: flex;
-  align-items: center;
-  position: absolute;
-  top: 50%;
-  padding: 0.2vw;
-  transform: translateY(-50%);
-  // reset button css
-  border: none;
-  margin: 0;
-  padding: 0;
-  width: auto;
-  overflow: visible;
-  background: transparent;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 
-.react-responsive-3d-carousel__arrows.left {
+.react-responsive-3d-carousel__arrows > button {
+  // reset button css
+  overflow: visible;
+  width: auto;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  // color: inherit;
+
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: color 0.2s ease-in-out;
+  pointer-events: auto;
+  color: var(--arrow-color, #ffffff);
+
+  &:hover {
+    color: var(--arrow-hover-color, #22222288);
+  }
+}
+
+.react-responsive-3d-carousel__arrows > button:first-of-type {
   left: 0;
 }
 
-.react-responsive-3d-carousel__arrows.right {
+.react-responsive-3d-carousel__arrows > button:last-of-type {
   right: 0;
 }
 
-.react-responsive-3d-carousel__arrows svg {
-  cursor: pointer;
-}
-
-.react-responsive-3d-carousel__arrows.shadow svg {
-  filter: drop-shadow(0px 3px 3px rgba(56, 56, 56, 0.4));
-}
-
-.react-responsive-3d-carousel__arrows path {
-  stroke: var(--default-color, #ffffff);
-  transition: stroke 0.2s ease-in-out;
-}
-
-.react-responsive-3d-carousel__arrows:hover path {
-  stroke: var(--hover-color, #22222288);
+.react-responsive-3d-carousel__arrows > button > * {
+  width: var(--arrow-width, 2rem);
+  height: var(--arrow-height, 2rem);
+  filter: drop-shadow(var(--arrow-drop-shadow, none));
 }
