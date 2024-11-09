@@ -260,6 +260,9 @@ const Carousel: React.FC<CarouselProps> = ({
   // Auto play
   useAutoPlay(autoPlay, interval, curIndex, slideNext)
 
+  // Set width of the list and items as CSS variables
+  useSize( items, htmlItemsRef,listRef, width, curIndex)
+  
   // Carousel layout style
   useLayout(
     items,
@@ -271,9 +274,6 @@ const Carousel: React.FC<CarouselProps> = ({
     curIndex,
     defaultOption
   )
-
-  // Set width of the list and items as CSS variables
-  useSize( items, htmlItemsRef,listRef, width, curIndex)
 
   // Swipe feature
   useSwipe({
