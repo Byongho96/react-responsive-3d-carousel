@@ -40,11 +40,8 @@
     "format:check": "npx eslint . && prettier --check .",
     "format:write": "npx eslint --fix . && prettier --write .",
     "test": "jest",
-    "release": "npm run build:lib && standard-version && git add . && git commit -m 'docs: update changelog' && git push origin main",
-    "build:lib": "npm run format:check && npm test && rollup -c rollup.config.mjs",
-    "build:web": "npm run format:check && npm test && rollup -c rollup.config.web.mjs",
-    "publish:lib": "npm run build:lib && npm publish",
-    "publish:web": "npm run build:web && gh-pages -d dist"
+    "coverage": "jest --coverage",
+    "build": "npm run format:check && npm test && rollup -c rollup.config.mjs"
   },
   "peerDependencies": {
     "react": "^18.0.0"
