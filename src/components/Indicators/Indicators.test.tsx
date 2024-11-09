@@ -1,120 +1,99 @@
 import React from 'react'
-import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
-import Indicators from './Indicators'
+import { render, fireEvent } from '@testing-library/react'
+import Indicators, { IndicatorsProps } from './Indicators'
 import '@testing-library/jest-dom'
 
-describe('The number of indicators', () => {
-  test('render one indicator', () => {
-    render(<Indicators length={1} index={0} />)
-    const indicatorElements = screen.getAllByRole('listitem')
-    expect(indicatorElements).toHaveLength(1)
+describe('Indicators Component', () => {
+  const defaultProps: IndicatorsProps = {
+    length: 5,
+    curIndex: 2,
+    onClick: jest.fn(),
+  }
 
-    for (const indicatorEle of indicatorElements) {
-      expect(indicatorEle).toBeInTheDocument()
-    }
+  it('renders the correct number of indicators', () => {
+    const { getAllByRole } = render(<Indicators {...defaultProps} />)
+    const indicators = getAllByRole('listitem')
+    expect(indicators).toHaveLength(defaultProps.length)
   })
 
-  test('render three indicator', () => {
-    render(<Indicators length={3} index={0} />)
-    const indicatorElements = screen.getAllByRole('listitem')
-    expect(indicatorElements).toHaveLength(3)
-
-    for (const indicatorEle of indicatorElements) {
-      expect(indicatorEle).toBeInTheDocument()
-    }
+  it('applies the active class to the current indicator', () => {
+    const { getAllByRole } = render(<Indicators {...defaultProps} />)
+    const indicators = getAllByRole('listitem')
+    indicators.forEach((indicator, index) => {
+      if (index === defaultProps.curIndex) {
+        expect(indicator).toHaveClass('active')
+      } else {
+        expect(indicator).not.toHaveClass('active')
+      }
+    })
   })
 
-  test('render five indicator', () => {
-    render(<Indicators length={5} index={0} />)
-    const indicatorElements = screen.getAllByRole('listitem')
-    expect(indicatorElements).toHaveLength(5)
-
-    for (const indicatorEle of indicatorElements) {
-      expect(indicatorEle).toBeInTheDocument()
-    }
+  it('calls onClick with the correct index when an indicator is clicked', () => {
+    const { getAllByRole } = render(<Indicators {...defaultProps} />)
+    const indicators = getAllByRole('listitem')
+    fireEvent.click(indicators[1])
+    expect(defaultProps.onClick).toHaveBeenCalledWith(expect.any(Object), 1);
   })
-})
 
-describe('The size of indicators', () => {
-  test('render small indicators', () => {
-    const size = 'small'
+  it('renders custom indicator icon when provided', () => {
+    const CustomIcon = () => <div>Custom Icon</div>
+    const { getAllByText } = render(
+      <Indicators {...defaultProps} indicatorIcon={<CustomIcon />} />
+    )
+    const customIcons = getAllByText('Custom Icon')
+    expect(customIcons).toHaveLength(defaultProps.length)
+  })
+
+  it('applies custom styles when props are provided', () => {
+    const customProps: IndicatorsProps = {
+      ...defaultProps,
+      gap: '2rem',
+      color: '#000000',
+      width: '1rem',
+      height: '1rem',
+      activeColor: '#ff0000',
+      shadow: '0 0.1rem 0.2rem rgba(0, 0, 0, 0.7)',
+      translate: ['10px', '20px'],
+    }
+
+    const { container } = render(<Indicators {...customProps} />)
+    const indicatorsUl = container.querySelector(
+      '.react-responsive-3d-carousel__indicators'
+    ) as HTMLElement
+
+    expect(indicatorsUl).toHaveStyle(`gap: ${customProps.gap}`)
+    expect(indicatorsUl).toHaveStyle(
+      `transform: translate(${customProps.translate![0]}, ${customProps.translate![1]})`
+    )
+    expect(indicatorsUl).toHaveStyle(`--indicator-width: ${customProps.width}`)
+    expect(indicatorsUl).toHaveStyle(
+      `--indicator-height: ${customProps.height}`
+    )
+    expect(indicatorsUl).toHaveStyle(`--indicator-color: ${customProps.color}`)
+    expect(indicatorsUl).toHaveStyle(
+      `--indicator-active-color: ${customProps.activeColor}`
+    )
+    expect(indicatorsUl).toHaveStyle(
+      `--indicator-shadow: ${customProps.shadow}`
+    )
+  })
+
+  it('uses default styles when optional props are not provided', () => {
     const { container } = render(
-      <Indicators length={5} index={0} size={size} />
+      <Indicators length={3} curIndex={0} onClick={jest.fn()} />
     )
+    const indicatorsUl = container.querySelector(
+      '.react-responsive-3d-carousel__indicators'
+    ) as HTMLElement
 
-    const indicatorEle = container.firstChild
-    expect(indicatorEle).toBeInTheDocument()
-    expect(indicatorEle).toHaveClass(size)
-  })
-
-  test('render medium indicators', () => {
-    const size = 'medium'
-    const { container } = render(
-      <Indicators length={5} index={0} size={size} />
+    expect(indicatorsUl).toHaveStyle('gap: 1.5rem')
+    expect(indicatorsUl).toHaveStyle('transform: translate(0px, 0px)')
+    expect(indicatorsUl).toHaveStyle('--indicator-width: 0.6rem')
+    expect(indicatorsUl).toHaveStyle('--indicator-height: 0.6rem')
+    expect(indicatorsUl).toHaveStyle('--indicator-color: #ffffff')
+    expect(indicatorsUl).toHaveStyle('--indicator-active-color: #888888')
+    expect(indicatorsUl).toHaveStyle(
+      '--indicator-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.5)'
     )
-
-    const indicatorEle = container.firstChild
-    expect(indicatorEle).toBeInTheDocument()
-    expect(indicatorEle).toHaveClass(size)
-  })
-
-  test('render large indicators', () => {
-    const size = 'large'
-    const { container } = render(
-      <Indicators length={5} index={0} size={size} />
-    )
-
-    const indicatorEle = container.firstChild
-    expect(indicatorEle).toBeInTheDocument()
-    expect(indicatorEle).toHaveClass(size)
-  })
-})
-
-describe('The color of indicators', () => {
-  test('render five indicator with custom colors', () => {
-    const length = 5
-    const index = 3
-    const activeColor = 'rgb(12, 23, 34)'
-    const inactiveColor = 'rgb(34, 14, 88)'
-
-    render(
-      <Indicators
-        length={length}
-        index={index}
-        activeColor={activeColor}
-        inactiveColor={inactiveColor}
-      />
-    )
-
-    const indicatorElements = screen.getAllByRole('listitem')
-
-    for (let i = 0; i < length; i++) {
-      const indicatorEle = indicatorElements[i]
-      expect(indicatorEle).toHaveStyle(
-        `background-color :
-        ${i === index ? activeColor : inactiveColor}`
-      )
-    }
-  })
-})
-
-describe('Functions of Indicators', () => {
-  const user = userEvent.setup()
-  test('pass the index of the indicator as an arguemnt when clicked', async () => {
-    const onClick = (i) => {
-      console.log(i)
-    }
-    render(<Indicators length={5} index={0} onClick={onClick} />)
-
-    const indicatorElements = screen.getAllByRole('listitem')
-
-    for (let i = 0; i < length; i++) {
-      const indicatorEle = indicatorElements[i]
-      expect(indicatorEle).toBeInTheDocument()
-
-      await user.click(indicatorEle)
-      expect(onClick).toHaveBeenCalledWith(i)
-    }
   })
 })

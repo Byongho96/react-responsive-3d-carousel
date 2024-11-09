@@ -1,52 +1,80 @@
 import React from 'react'
-
 import './Indicators.scss'
 
 export interface IndicatorsProps {
   length: number
-  index: number
-  size?: 'small' | 'medium' | 'large'
+  curIndex: number
+  gap?: string
+  color?: string
+  width?: string
+  height?: string
   activeColor?: string
-  inactiveColor?: string
-  isShadow?: boolean
-  onClick: (i: number) => void
+  shadow?: string
+  translate?: [string, string]
+  indicatorIcon?: JSX.Element
+  onClick?: (e: React.MouseEvent, index: number) => void
 }
 
-/**
- * Indicators at the bottom of the carousel
- * @param length Total number of indiactors
- * @param index Index of active indicator
- * @param size Size of indicators
- * @param activeColor Color of an active indicator
- * @param inactiveColor Color of inactive indicators
- * @param isShadow Is there shadow in the indicators
- * @param onClick Function to run when each indicator is clicked
- */
 const Indicators: React.FC<IndicatorsProps> = ({
   length,
-  index,
-  size = 'small',
-  activeColor = 'rgb(255, 255, 255)',
-  inactiveColor = 'rgba(67, 67, 67, 0.4)',
-  isShadow = true,
+  curIndex,
+  color = '#ffffff',
+  width = '0.6rem',
+  height = '0.6rem',
+  gap = '1.5rem',
+  activeColor = '#888888',
+  shadow = '0 0.05rem 0.1rem rgba(0, 0, 0, 0.5)',
+  translate = ['0px', '0px'],
+  indicatorIcon,
   onClick,
 }) => {
+  const handleClick = (e: React.MouseEvent, index: number) => {
+    e.stopPropagation()
+    onClick && onClick(e, index)
+  }
+
+  const indicatorsStyle = {
+    gap,
+    transform: `translate(${translate[0]}, ${translate[1]})`,
+    '--indicator-width': width,
+    '--indicator-height': height,
+    '--indicator-color': color,
+    '--indicator-active-color': activeColor,
+    '--indicator-shadow': shadow,
+  } as React.CSSProperties
+
   return (
     <ul
-      className={`react-responsive-3d-carousel__indicators ${size} ${
-        isShadow ? 'shadow' : ''
-      }`}
+      className="react-responsive-3d-carousel__indicators"
+      style={indicatorsStyle}
     >
       {Array.from({ length }, (_, i) => (
         <li
           key={i}
-          style={{ backgroundColor: i === index ? activeColor : inactiveColor }}
-          onClick={() => onClick(i)}
+          onClick={(e) => handleClick(e, i)}
           aria-label={`slide item ${i + 1}`}
-        ></li>
+          className={i === curIndex ? 'active' : ''}
+        >
+          {indicatorIcon ? indicatorIcon : <CircleIcon />}
+        </li>
       ))}
     </ul>
   )
 }
 
+const CircleIcon = () => {
+  return (
+    <svg
+      preserveAspectRatio="none"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+    >
+      <circle cx="12" cy="12" r="10"></circle>
+    </svg>
+  )
+}
+
+Indicators.displayName = 'Indicators'
 export default Indicators
