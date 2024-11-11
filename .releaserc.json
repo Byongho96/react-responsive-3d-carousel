@@ -18,7 +18,14 @@
     [
       "@semantic-release/github",
       {
-        "assets": ["dist/**/*.{js,css}", "CHANGELOG.md"]
+        "assets": ["dist/**/*.{js,ts,css}", "CHANGELOG.md"]
+      }
+    ],
+    [
+      "@semantic-release/git",
+      {
+        "assets": ["package.json", "package-lock.json", "CHANGELOG.md"],
+        "message": "chore(release): ${nextRelease.version} [skip ci]"
       }
     ]
   ]
