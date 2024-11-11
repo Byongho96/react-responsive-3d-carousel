@@ -85,6 +85,7 @@ jobs:
           destination_dir: 'storybook'
 
   release:
+    needs: build-and-deploy-storybook
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
