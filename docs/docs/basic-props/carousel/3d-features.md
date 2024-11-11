@@ -37,7 +37,7 @@ Sets the origin point from which the viewer observes the carousel, following the
 
 When set to `'default'`, the carousel uses the standard layout, which can be adjusted further with defaultOption.
 
-For advanced control, use `CarouselLayoutInfo` to set custom placement for each item. For detailed guidance, see [Custom Layout](../advanced-api/custom-layout).
+For advanced control, use `CarouselLayoutInfo` to set custom placement for each item. For detailed guidance, see [Custom Layout](../../advanced-api/custom-layout).
 
 
 ## defaultOption
