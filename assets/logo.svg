@@ -1,9 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 243.47 263.83">
-  <g id="right-trapezoid">
-    <polygon fill="#70cfef80" points="62.58 54.55 61.8 220.55 242.23 263.83 243.47 0 62.58 54.55"/>
-  </g>
-  <g id="left-trapezoid">
-    <polygon fill="#70cfef" points="0 48.79 0 241.41 113.63 191.04 113.63 93.95 0 48.79"/>
-  </g>
+<svg width="150" height="150" viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M46 118V38.725L141 13V139L46 118Z" fill="#CBEEFF"/>
+<path d="M13 126V37L75 58.2151V102.715L13 126Z" fill="#4BBDE3"/>
 </svg>
