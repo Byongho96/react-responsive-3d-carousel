@@ -3,7 +3,7 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - '**' # Matches all branches
+      - 'main'
 
 jobs:
   setup:
