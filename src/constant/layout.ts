@@ -2,8 +2,6 @@ import { CarouselLayoutInfo } from '../utils/layoutStyle'
 
 export const DEFAULT_TWO_CAROUSEL_INDEX_TRANSFORM: CarouselLayoutInfo = {
   default: {
-    width: 'auto',
-    height: 'auto',
     translate: {
       x: 0,
       y: 0,
@@ -21,8 +19,6 @@ export const DEFAULT_TWO_CAROUSEL_INDEX_TRANSFORM: CarouselLayoutInfo = {
     },
   },
   0: {
-    width: 'auto',
-    height: 'auto',
     translate: {
       x: 0,
       y: 0,
@@ -43,8 +39,6 @@ export const DEFAULT_TWO_CAROUSEL_INDEX_TRANSFORM: CarouselLayoutInfo = {
 
 export const DEFAULT_THREE_CAROUSEL_INDEX_TRANSFORM: CarouselLayoutInfo = {
   default: {
-    width: 'auto',
-    height: 'auto',
     translate: {
       x: 0,
       y: 0,
@@ -62,8 +56,6 @@ export const DEFAULT_THREE_CAROUSEL_INDEX_TRANSFORM: CarouselLayoutInfo = {
     },
   },
   '-1': {
-    width: 'auto',
-    height: 'auto',
     translate: {
       x: -0.5,
       y: 0,
@@ -81,8 +73,6 @@ export const DEFAULT_THREE_CAROUSEL_INDEX_TRANSFORM: CarouselLayoutInfo = {
     },
   },
   0: {
-    width: 'auto',
-    height: 'auto',
     translate: {
       x: 0,
       y: 0,
@@ -100,8 +90,6 @@ export const DEFAULT_THREE_CAROUSEL_INDEX_TRANSFORM: CarouselLayoutInfo = {
     },
   },
   1: {
-    width: 'auto',
-    height: 'auto',
     translate: {
       x: 0.5,
       y: 0,
@@ -122,8 +110,6 @@ export const DEFAULT_THREE_CAROUSEL_INDEX_TRANSFORM: CarouselLayoutInfo = {
 
 export const DEFAULT_FIVE_CAROUSEL_INDEX_TRANSFORM: CarouselLayoutInfo = {
   default: {
-    width: 'auto',
-    height: 'auto',
     translate: {
       x: 0,
       y: 0,
@@ -141,8 +127,6 @@ export const DEFAULT_FIVE_CAROUSEL_INDEX_TRANSFORM: CarouselLayoutInfo = {
     },
   },
   '-2': {
-    width: 'auto',
-    height: 'auto',
     translate: {
       x: -0.5,
       y: 0,
@@ -160,8 +144,6 @@ export const DEFAULT_FIVE_CAROUSEL_INDEX_TRANSFORM: CarouselLayoutInfo = {
     },
   },
   '-1': {
-    width: 'auto',
-    height: 'auto',
     translate: {
       x: -0.25,
       y: 0,
@@ -179,8 +161,6 @@ export const DEFAULT_FIVE_CAROUSEL_INDEX_TRANSFORM: CarouselLayoutInfo = {
     },
   },
   0: {
-    width: 'auto',
-    height: 'auto',
     translate: {
       x: 0,
       y: 0,
@@ -199,8 +179,6 @@ export const DEFAULT_FIVE_CAROUSEL_INDEX_TRANSFORM: CarouselLayoutInfo = {
   },
 
   1: {
-    width: 'auto',
-    height: 'auto',
     translate: {
       x: 0.25,
       y: 0,
@@ -218,8 +196,6 @@ export const DEFAULT_FIVE_CAROUSEL_INDEX_TRANSFORM: CarouselLayoutInfo = {
     },
   },
   2: {
-    width: 'auto',
-    height: 'auto',
     translate: {
       x: 0.5,
       y: 0,

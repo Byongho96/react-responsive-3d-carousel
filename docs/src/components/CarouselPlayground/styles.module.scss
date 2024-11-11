@@ -1,0 +1,51 @@
+
+.form-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2em;
+}
+
+.form-container summary {
+  padding: 1em;
+  border-bottom: 2px solid var(--pico-muted-border-color);
+  font-weight: bold;
+}
+
+
+.form-item {
+  display: grid;
+  grid-template-columns: 8em 1fr;
+  align-items: center;
+  gap: 1em;
+  height: 3.5em;
+}
+
+.form-item label {
+  text-align: right;
+}
+
+.div-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--ifm-color-secondary-contrast-background);
+  font-size: 1.5em;
+
+  p:hover{
+    animation: shake 0.3s infinite;
+  }
+}
+
+@keyframes shake {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(5deg); }
+  50% { transform: rotate(0deg); }
+  75% { transform: rotate(-5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@media screen and (max-width: 996px) {
+  .form-container {
+    grid-template-columns: 1fr;
+  }
+}

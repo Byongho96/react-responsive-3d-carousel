@@ -61,7 +61,7 @@ export interface CarouselProps {
     e: React.MouseEvent,
     index: number,
     item: JSX.Element,
-    isCurrentIndex: boolean
+    isCurIndex: boolean
   ) => void
 
   /** Carousel Play */
@@ -96,11 +96,15 @@ export interface CarouselProps {
 type DefaultContext = {
   curIndex: number,
   setCurIndex: React.Dispatch<React.SetStateAction<number>>,
+  slideNext: () => void,
+  slidePrev: () => void,
 }
 
 export const CarouselContext = createContext<DefaultContext>({
   curIndex: 0,
   setCurIndex: (_) => {},
+  slideNext: () => {},
+  slidePrev: () => {},
 })
 
 const Carousel: React.FC<CarouselProps> = ({
@@ -193,7 +197,7 @@ const Carousel: React.FC<CarouselProps> = ({
   )
 
   const htmlItemsRef = useRef<HTMLElement[]>([])
-
+  
   /**
    * Memoize renderedItems
    */
@@ -344,12 +348,12 @@ const Carousel: React.FC<CarouselProps> = ({
     height: height,
     transition: `transform ${transformDuration}ms ${transformTimingFn}, width ${sizeDuration}ms ${sizeTimingFn}, height ${sizeDuration}ms ${sizeTimingFn}`,
     cursor: focusOnSelect ? 'pointer' : 'initial',
-    top: align === 'top' ? '0%' : align === 'center' ? '50' : '100%',
+    top: align === 'top' ? '0%' : align === 'bottom' ? '100%' : '50%',
     boxShadow,
   }
 
   return (
-    <CarouselContext.Provider value={{ curIndex, setCurIndex }}>
+    <CarouselContext.Provider value={{ curIndex, setCurIndex, slideNext, slidePrev }}>
       <div
         className="react-responsive-3d-carousel"
         aria-label={ariaLabel}

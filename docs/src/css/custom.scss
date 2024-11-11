@@ -1,0 +1,40 @@
+@use "@picocss/pico/scss/pico" with (
+  $parent-selector: ".pico",
+  $enable-semantic-container: true,
+  $enable-classes: false
+);
+
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #238daf;
+  --ifm-color-primary-dark: #207f9d;
+  --ifm-color-primary-darker: #1e7895;
+  --ifm-color-primary-darkest: #18637a;
+  --ifm-color-primary-light: #269bc1;
+  --ifm-color-primary-lighter: #28a2c9;
+  --ifm-color-primary-lightest: #39b1d8;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+
+  /* Pico variables */
+  --pico-form-element-spacing-vertical: 0.5rem;
+  --pico-form-element-spacing-horizontal: 0.75rem;
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #97d0ed;
+  --ifm-color-primary-dark: #76c1e7;
+  --ifm-color-primary-darker: #65bae4;
+  --ifm-color-primary-darkest: #34a3dc;
+  --ifm-color-primary-light: #b8dff3;
+  --ifm-color-primary-lighter: #c9e6f6;
+  --ifm-color-primary-lightest: #fafdfe;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}

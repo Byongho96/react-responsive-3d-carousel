@@ -9,7 +9,7 @@ import terser from '@rollup/plugin-terser'
 import gzipPlugin from 'rollup-plugin-gzip'
 import postcss from 'rollup-plugin-postcss'
 import autoprefixer from 'autoprefixer'
-// import dts from 'rollup-plugin-dts'
+import dts from 'rollup-plugin-dts'
 
 import packageJson from './package.json' assert { type: 'json' }
 
@@ -125,5 +125,11 @@ export default [
         use: ['sass']
       }),
     ],
+  },
+  {
+    input: "dist/types/index.d.ts",
+    output: [{ file: "dist/index.d.ts", format: "es" }],
+    external: [/\.(css|s[ac]ss)$/],
+    plugins: [dts()],
   },
 ]
