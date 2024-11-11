@@ -107,7 +107,7 @@
       "npx eslint --fix",
       "npx prettier --write"
     ],
-    "*.{css,scss}": [
+    "*.{css,scss,md}": [
       "npx prettier --write"
     ]
   }
