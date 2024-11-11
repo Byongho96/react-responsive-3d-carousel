@@ -6,7 +6,10 @@
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "files": [
-    "lib/",
+    "dist",
+    "package.json",
+    "babel.config.js",
+    "tsconfig.json",
     "CHANGELOG.md",
     "LICENSE",
     "README.md"
