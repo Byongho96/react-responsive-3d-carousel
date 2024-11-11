@@ -2,8 +2,8 @@ import { AlignType } from '../components/Carousel/Carousel'
 import CSS_VARIABLE from '../constant/css'
 
 export type LayoutInfo = {
-  width: number | string // if it's a number, it's proportional to container width
-  height: number | string // if it's a number, it's proportional to container height
+  width?: number | string // if it's a number, it's proportional to container width
+  height?: number | string // if it's a number, it's proportional to container height
   translate: {
     x: number | string // if it's a number, it's proportional to container width
     y: number | string // if it's a number, it's proportional to container height
@@ -50,13 +50,13 @@ export const transformLayoutInfoToStyle = (
   const newWidth =
     typeof width === 'number'
       ? `calc(${width} * var(${CSS_VARIABLE.CONTAINER_WIDTH}))`
-      : width
+      : (width ?? 'auto')
 
   // Transform height
   const newHeight =
     typeof height === 'number'
       ? `calc(${height} * var(${CSS_VARIABLE.CONTAINER_HEIGHT}))`
-      : height
+      : (height ?? 'auto')
 
   // Set init initTranslateY depend on the align
   let initTranslateY: number
