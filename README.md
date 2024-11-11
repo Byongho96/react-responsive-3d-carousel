@@ -13,10 +13,10 @@ A 3D carousel component for React, designed to create immersive, interactive exp
 
 ## 🔗 Important Links
 
-- **[Documentation]()**
+- **[Documentation](https://byongho96.github.io/react-responsive-3d-carousel/)**
   <!-- - [Layout Generator]() -->
   <!-- - [Examples]() -->
-- [Storybook]()
+- [Storybook](https://byongho96.github.io/react-responsive-3d-carousel/storybook/)
 - [Github Repository](https://github.com/Byongho96/react-responsive-3d-carousel)
 
 ## 🚀 Getting Started
