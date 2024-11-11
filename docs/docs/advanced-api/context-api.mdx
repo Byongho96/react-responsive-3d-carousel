@@ -1,0 +1,98 @@
+---
+sidebar_position: 2
+---
+
+# Context API
+
+The Context API in this carousel provides flexible access to the carousel's state, making it easy to build custom behaviors based on the current slide index.
+
+
+## Carousel Context
+
+`CarouselContext` is a React context that offers direct access to the current slide index and functions to update it. This enables dynamic control of the carousel's active slide from any component nested within the carousel, perfect for creating custom navigation, indicators, or slide-dependent content.
+
+```ts
+type CarouselContext = {
+  curIndex: number,
+  setCurIndex: React.Dispatch<React.SetStateAction<number>>,
+  slidePrev: () => void,
+  slideNext: () => void,
+}
+```
+## Basic Usage
+
+The `CarouselContext` is available within the `<Carousel />` component and can be accessed by any component rendered as `items` or `children`. This lets you monitor and control the carousel's current index seamlessly from within custom components.
+
+To use `CarouselContext`, import it and apply the `useContext` hook in your component.
+```jsx
+import React, { useContext } from 'react'
+import { CarouselContext } from 'react-responsive-3d-carousel'
+
+function CarouselItem() {
+  const { curIndex, setCurIndex } = useContext(CarouselContext)
+
+  const handleClick = (e) => {
+    e.stopPropagation()
+    setCurIndex(0)
+  }
+
+  return (
+    <div>
+      <p>Current Slide: {curIndex}</p>
+      <button onClick={handleClick}>Go to first slide</button>
+    </div>
+  )
+}
+```
+
+## Example
+
+<Carousel items={items} pauseOnHover={false} showArrows={false} showIndicators={false} />
+
+:::info
+
+To use the `slideNext` and `slidePrev` functions on carousel item clicks, ensure that the `pauseOnHover` prop is set to false.
+
+:::
+
+```tsx
+import { useContext } from "react";
+import { CarouselContext } from "react-responsive-3d-carousel";
+
+
+export default function CarouselItem() {
+  const { curIndex, slidePrev, slideNext } = useContext(CarouselContext);
+
+  const handleClickPrev = (e: MouseEvent) => {
+    e.stopPropagation();
+    slidePrev();
+  }
+
+  const handleClickNext = (e: MouseEvent) => {
+    e.stopPropagation();
+    slideNext();
+  }
+
+  return (
+    <div className={`pico ${styles['carousel-item']}`}>
+      <p>
+        Current Index : {curIndex}
+      </p>
+      <div>
+        <button onClick={handleClickPrev}>Prev</button>
+        <button onClick={handleClickNext}>Next</button>
+      </div>
+    </div>
+  )
+}
+```
+
+import CarouselItemWithContext from '@site/src/components/CarouselItemWithContext';
+import Carousel from '@site/src/components/Carousel';
+
+export const items = [
+  <CarouselItemWithContext />,
+  <CarouselItemWithContext />,
+  <CarouselItemWithContext />,
+]
+

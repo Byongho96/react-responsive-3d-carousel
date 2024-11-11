@@ -6,68 +6,29 @@ module.exports = {
     browser: true,
     commonjs: true,
   },
-  ignorePatterns: [
-    'dist',
-    'lib',
-    'node_modules',
-    'web',
-    'rollup.*',
-    '*.js',
-    '**/*.stories.ts',
-    '**/*.stories.tsx',
-    '**/*.test.ts',
-    '**/*.test.tsx',
-  ],
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    sourceType: 'module',
+    ecmaVersion: 6,
+    ecmaFeatures: {
+      jsx: true,
+    },
+    project: true,
+    tsconfigRootDir: './tsconfig.json',
+  },
+  ignorePatterns: ['/*', '!src'],
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-type-checked',
-    'plugin:import/recommended',
+    'plugin:storybook/recommended',
     'plugin:import/typescript',
-    'plugin:css-import-order/recommended',
-    'prettier',
-    'plugin:storybook/recommended',
-    'plugin:storybook/recommended',
-    'plugin:storybook/recommended',
+    'prettier', // must be last
   ],
-  parser: '@typescript-eslint/parser',
-  parserOptions: {
-    sourceType: 'module',
-    ecmaFeatures: {
-      jsx: true,
-    },
-    // typesciript settings
-    project: true,
-    tsconfigRootDir: './tsconfig.json',
-    ecmaVersion: 6,
-  },
-  plugins: [
-    '@typescript-eslint',
-    'react',
-    'import',
-    'unused-imports',
-    'css-import-order',
-  ],
-  settings: {
-    react: {
-      version: 'detect',
-    },
-    // eslint-import-resolver-typescript
-    'import/parsers': {
-      '@typescript-eslint/parser': ['.ts', '.tsx'],
-    },
-    'import/resolver': {
-      // eslint-import-resolver-typescript
-      typescript: {
-        project: './tsconfig.json',
-      },
-      node: true,
-    },
-  },
+  plugins: ['@typescript-eslint', 'react', 'import', 'unused-imports'],
   rules: {
-    '@typescript-eslint/no-explicit-any': 0,
-    '@typescript-eslint/no-unsafe-argument': 0,
+    'react/react-in-jsx-scope': 0,
     '@typescript-eslint/no-var-requires': 0, // allow commonJS
     'import/no-unresolved': [
       2,
@@ -77,11 +38,22 @@ module.exports = {
         ignore: ['\\.(jpg|gif|svg|png|webp)$', '\\.(css|scss)$'],
       },
     ],
-    // import/order
     'import/order': [
       2,
       {
-        groups: ['builtin', 'external', 'internal'],
+        groups: [
+          'builtin',
+          'external',
+          'internal',
+          'parent',
+          'sibling',
+          'index',
+        ],
+        'newlines-between': 'never',
+        alphabetize: {
+          order: 'asc',
+          caseInsensitive: true,
+        },
         pathGroups: [
           {
             pattern: 'react*',
@@ -89,25 +61,34 @@ module.exports = {
             position: 'before',
           },
         ],
-        pathGroupsExcludedImportTypes: [],
-        alphabetize: {
-          order: 'asc',
-          caseInsensitive: true,
-        },
-        'newlines-between': 'never',
+        pathGroupsExcludedImportTypes: ['builtin'],
       },
     ],
-    // unused-imports
     '@typescript-eslint/no-unused-vars': 0,
     'unused-imports/no-unused-imports': 2,
     'unused-imports/no-unused-vars': [
       'warn',
       {
-        vars: 'all',
-        varsIgnorePattern: '^_',
         args: 'after-used',
         argsIgnorePattern: '^_',
       },
     ],
   },
+  settings: {
+    react: {
+      version: 'detect',
+    },
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx'],
+    },
+    'import/resolver': {
+      typescript: {},
+      node: true,
+    },
+  },
+  overrides: [
+    {
+      files: ['src/**/*.{ts,tsx,js,jsx}'],
+    },
+  ],
 }

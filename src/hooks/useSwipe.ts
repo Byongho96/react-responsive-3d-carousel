@@ -1,60 +1,114 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 
-const MIN_SWIPE_DISTANCE = 30 // px
-const HORIZONTAL_SWIPE_RATIO = 3 // (offsetX / offsetY)
+const MIN_SWIPE_DISTANCE = 30 // Minimum distance in pixels to consider a swipe
 
-/**
- * Executes the corresponding function according to the direction of the touch swipe
- * @param containerRef HTML elements to detect touch events
- * @param onSwipeLeft Function to run when swiping to the left
- * @param onSwipeRight Function to run when swiping to the right
- */
-const useSwipe = (
-  containerRef: React.RefObject<HTMLDivElement>,
-  onSwipeLeft: () => void,
-  onSwipeRight: () => void
-) => {
+export type SwipeDirection = 'vertical' | 'horizontal'
+
+const useSwipe = ({
+  containerRef,
+  swipeable,
+  swipeDirection,
+  slideNext,
+  slidePrev,
+  onSwipeStart,
+  onSwipeEnd,
+  onSwipeMove,
+}: {
+  containerRef: React.RefObject<HTMLElement>
+  swipeable: boolean
+  swipeDirection: SwipeDirection
+  slideNext: () => void // Up & Left
+  slidePrev: () => void // Down & Right
+  onSwipeStart?: (event: TouchEvent) => void
+  onSwipeEnd?: (event: TouchEvent) => void
+  onSwipeMove?: (event: TouchEvent) => void
+}) => {
+  // Ref to track if a swipe is currently in progress
+  const isSwiping = useRef(false)
+
+  /**
+   * Handle swipe gestures on a container element
+   */
   useEffect(() => {
-    const container = containerRef.current as HTMLDivElement
+    if (!swipeable) return
 
-    // Touch start position
-    const touchStartPos = {
-      x: 0,
-      y: 0,
+    const container = containerRef.current
+    if (!container) return
+
+    let startX = 0
+    let startY = 0
+
+    const handleSwipeStart = (event: TouchEvent) => {
+      isSwiping.current = true
+      startX = event.touches[0].clientX
+      startY = event.touches[0].clientY
+      onSwipeStart && onSwipeStart(event)
     }
 
-    // Record touch start position
-    const touchStart = function (event: TouchEvent) {
-      const touch = event.touches[0]
-      touchStartPos.x = touch.clientX
-      touchStartPos.y = touch.clientY
+    const handleSwipeMove = (event: TouchEvent) => {
+      if (!isSwiping.current) return
+      onSwipeMove && onSwipeMove(event)
     }
 
-    // Determining the direction the touch & Execute the corresponding function
-    const touchEnd = function (event: TouchEvent) {
-      const lastTouch = event.changedTouches[event.changedTouches.length - 1]
-      const touchoffsetX = lastTouch.clientX - touchStartPos.x
-      const touchoffsetY = lastTouch.clientY - touchStartPos.y
+    const handleSwipeEnd = (event: TouchEvent) => {
+      if (!isSwiping.current) return
 
-      const isSwipe =
-        touchoffsetX ** 2 + touchoffsetY ** 2 > MIN_SWIPE_DISTANCE ** 2
-      if (!isSwipe) return
+      isSwiping.current = false
+      onSwipeEnd && onSwipeEnd(event)
 
-      const isHorizontalSwipe =
-        Math.abs(touchoffsetX) > HORIZONTAL_SWIPE_RATIO * Math.abs(touchoffsetY)
-      if (!isHorizontalSwipe) return
+      const endX = event.changedTouches[0].clientX
+      const endY = event.changedTouches[0].clientY
 
-      touchoffsetX < 0 ? onSwipeLeft() : onSwipeRight()
+      const deltaX = endX - startX
+      const deltaY = endY - startY
+
+      const absDeltaX = Math.abs(deltaX)
+      const absDeltaY = Math.abs(deltaY)
+      const absDelta = Math.sqrt(absDeltaX ** 2 + absDeltaY ** 2)
+
+      if (absDelta < MIN_SWIPE_DISTANCE) return
+
+      if (swipeDirection === 'horizontal' && absDeltaX > absDeltaY) {
+        event.preventDefault()
+        if (deltaX > 0) {
+          slidePrev()
+        } else {
+          slideNext()
+        }
+      } else if (swipeDirection === 'vertical' && absDeltaY > absDeltaX) {
+        event.preventDefault()
+        if (deltaY > 0) {
+          slidePrev()
+        } else {
+          slideNext()
+        }
+      }
     }
 
-    container.addEventListener('touchstart', touchStart, { passive: true })
-    container.addEventListener('touchend', touchEnd, { passive: true })
+    container.addEventListener('touchstart', handleSwipeStart, {
+      passive: true,
+    })
+    container.addEventListener('touchmove', handleSwipeMove, {
+      passive: true,
+    })
+    container.addEventListener('touchend', handleSwipeEnd)
 
     return () => {
-      container.removeEventListener('touchstart', touchStart)
-      container.removeEventListener('touchend', touchEnd)
+      container.removeEventListener('touchstart', handleSwipeStart)
+      container.removeEventListener('touchmove', handleSwipeMove)
+      container.removeEventListener('touchend', handleSwipeEnd)
     }
-  }, [containerRef, onSwipeLeft, onSwipeRight])
+  }, [
+    swipeable,
+    swipeDirection,
+    slideNext,
+    slidePrev,
+    onSwipeStart,
+    onSwipeEnd,
+    onSwipeMove,
+  ])
+
+  return { isSwiping }
 }
 
 export default useSwipe

@@ -1,57 +1,76 @@
 import React from 'react'
-import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import { render, fireEvent } from '@testing-library/react'
+import Arrows, { ArrowsProps } from './Arrows'
 import '@testing-library/jest-dom'
-import Arrows from './Arrows'
 
-describe('Render Arrows Properly', () => {
-  test('render arrows', () => {
-    render(<Arrows />)
-    const arrowElements = screen.getAllByRole('button')
-    expect(arrowElements).toHaveLength(2)
+describe('Arrows Component', () => {
+  const defaultProps: ArrowsProps = {
+    onClickNext: jest.fn(),
+    onClickPrev: jest.fn(),
+  }
 
-    for (const arrowEle of arrowElements) {
-      expect(arrowEle).toBeInTheDocument()
-    }
+  it('renders correctly with default props', () => {
+    const { getByLabelText } = render(<Arrows {...defaultProps} />)
+    const prevButton = getByLabelText('previous slide')
+    const nextButton = getByLabelText('next slide')
+
+    expect(prevButton).toBeInTheDocument()
+    expect(nextButton).toBeInTheDocument()
   })
 
-  test('render arrows with custom size', () => {
-    const width = '123px'
-    const height = '24rem'
+  it('calls onClickPrev when prev button is clicked', () => {
+    const { getByLabelText } = render(<Arrows {...defaultProps} />)
+    const prevButton = getByLabelText('previous slide')
 
-    render(<Arrows width={width} height={height} />)
-
-    const arrowElements = screen.getAllByRole('button')
-
-    for (const arrowEle of arrowElements) {
-      expect(arrowEle).toBeInTheDocument()
-
-      const arrowSvg = arrowEle.getElementsByTagName('svg')[0]
-      expect(arrowSvg).toHaveStyle(`width: ${width}`)
-      expect(arrowSvg).toHaveStyle(`height: ${height}`)
-    }
+    fireEvent.click(prevButton)
+    expect(defaultProps.onClickPrev).toHaveBeenCalled()
   })
-})
 
-describe('Click event of arrows', () => {
-  test('run the prop functions when clicked', async () => {
-    const user = userEvent.setup()
-    const onClickLeft = jest.fn()
-    const onClickRight = jest.fn()
-    render(<Arrows onClickLeft={onClickLeft} onClickRight={onClickRight} />)
+  it('calls onClickNext when next button is clicked', () => {
+    const { getByLabelText } = render(<Arrows {...defaultProps} />)
+    const nextButton = getByLabelText('next slide')
 
-    const arrowElements = screen.getAllByRole('button')
-    const leftArrowEle = arrowElements[0]
-    const rightArrowEle = arrowElements[1]
+    fireEvent.click(nextButton)
+    expect(defaultProps.onClickNext).toHaveBeenCalled()
+  })
 
-    await user.click(leftArrowEle)
-    expect(leftArrowEle).toBeInTheDocument()
-    expect(onClickLeft).toHaveBeenCalledTimes(1)
-    expect(onClickRight).toHaveBeenCalledTimes(0)
+  it('renders custom icons when provided', () => {
+    const CustomPrevIcon = () => <div>Custom Prev Icon</div>
+    const CustomNextIcon = () => <div>Custom Next Icon</div>
 
-    await user.click(rightArrowEle)
-    expect(rightArrowEle).toBeInTheDocument()
-    expect(onClickLeft).toHaveBeenCalledTimes(1)
-    expect(onClickRight).toHaveBeenCalledTimes(1)
+    const { getByText } = render(
+      <Arrows
+        {...defaultProps}
+        prevIcon={<CustomPrevIcon />}
+        nextIcon={<CustomNextIcon />}
+      />
+    )
+
+    expect(getByText('Custom Prev Icon')).toBeInTheDocument()
+    expect(getByText('Custom Next Icon')).toBeInTheDocument()
+  })
+
+  it('applies custom styles when props are provided', () => {
+    const { container } = render(
+      <Arrows
+        {...defaultProps}
+        width="4rem"
+        height="6rem"
+        color="#000000"
+        hoverColor="#333333"
+        shadow="0 0.1rem 0.2rem rgba(0, 0, 0, 0.5)"
+      />
+    )
+
+    const arrowsDiv = container.querySelector(
+      '.react-responsive-3d-carousel__arrows'
+    )
+    expect(arrowsDiv).toHaveStyle('--arrow-width: 4rem')
+    expect(arrowsDiv).toHaveStyle('--arrow-height: 6rem')
+    expect(arrowsDiv).toHaveStyle('--arrow-color: #000000')
+    expect(arrowsDiv).toHaveStyle('--arrow-hover-color: #333333')
+    expect(arrowsDiv).toHaveStyle(
+      '--arrow-drop-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.5)'
+    )
   })
 })
