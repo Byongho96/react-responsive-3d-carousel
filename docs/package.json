@@ -20,13 +20,15 @@
     "@docusaurus/theme-live-codeblock": "^3.6.1",
     "@mdx-js/react": "^3.0.0",
     "@picocss/pico": "^2.0.6",
+    "@types/three": "^0.170.0",
     "clsx": "^2.0.0",
     "docusaurus-plugin-sass": "^0.2.5",
     "prism-react-renderer": "^2.3.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-responsive-3d-carousel": "file:../",
-    "sass": "^1.80.6"
+    "sass": "^1.80.6",
+    "three": "^0.170.0"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.6.1",

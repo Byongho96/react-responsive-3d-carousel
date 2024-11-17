@@ -28,6 +28,23 @@ Pauses auto-play when hovering over a carousel item.
 <Carousel pauseOnHover={true} /> 
 ```
 
+## pauseOnTransition
+
+* **Default** : `both`
+* **Type** : `none | size | transform | both`
+
+Determines when sliding is allowed based on the completion of transition animations.
+
+- `'none'`: No restrictions; sliding is always allowed.
+- `'size'`: Sliding is allowed after both width and height transitions are completed (`sizeDuration`).
+- `'transform'`: Sliding is allowed after the transform transition is completed (`transformDuration`).
+- `'both'`: Sliding is allowed only after both size and transform transitions are completed.
+
+```tsx live
+<Carousel pauseOnTransition={'both'} /> 
+```
+
+
 ## autoFocus
 
 * **Default** : `false`

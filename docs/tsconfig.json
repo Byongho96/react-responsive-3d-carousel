@@ -4,6 +4,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
+      "@site/*": ["./*"],
       "react-responsive-3d-carousel/*": ["../"] 
     },
   }

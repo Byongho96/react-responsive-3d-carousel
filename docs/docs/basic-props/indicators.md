@@ -23,24 +23,24 @@ The following properties are effective only when `showIndicators` is `true`. All
 
 ### indicators.width
 
-* **Default** : `'0.6rem'`
+* **Default** : `'0.7rem'`
 * **Type** : `string`
 
 Sets the width of the indicators. Any CSS length unit can be used.
 
 ```tsx live
-<Indicators width='0.6rem' />
+<Indicators width='0.7rem' />
 ```
 
 ### indicators.height
 
-* **Default** : `'0.6rem'`
+* **Default** : `'0.7rem'`
 * **Type** : `string`
 
 Defines the height of the indicators. Any CSS length unit can be used.
 
 ```tsx live
-<Indicators height='0.6rem' />
+<Indicators height='0.7rem' />
 ```
 
 ### indicators.gap

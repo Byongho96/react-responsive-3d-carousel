@@ -99,7 +99,7 @@ function CarouselWithSizeTransition(props) {
         y: 0,
         z: 0,
       },
-      rotation: {
+      rotate: {
         x: 0,
         y: 0,
         z: 0,
@@ -118,7 +118,7 @@ function CarouselWithSizeTransition(props) {
         y: 0,
         z: 0,
       },
-      rotation: {
+      rotate: {
         x: 0,
         y: 0,
         z: 0,
@@ -153,7 +153,7 @@ function CarouselWithSizeTransition(props) {
         y: 0,
         z: 0,
       },
-      rotation: {
+      rotate: {
         x: 0,
         y: 0,
         z: 0,
@@ -172,7 +172,7 @@ function CarouselWithSizeTransition(props) {
         y: 0,
         z: 0,
       },
-      rotation: {
+      rotate: {
         x: 0,
         y: 0,
         z: 0,

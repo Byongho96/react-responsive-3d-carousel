@@ -8,15 +8,15 @@ The carousel's 3D features provide powerful customization options to create a un
 
 ## perspective
 
-* **Default** : `'auto'`
-* **Type** : `string`
+* **Default** : `1`
+* **Type** : `string | number`
 
 Defines the distance from the viewer's point of view to the carousel, similar to the [CSS perspective](https://developer.mozilla.org/en-US/docs/Web/CSS/perspective) property. A smaller value increases the depth, making items appear larger in the positive Z-axis and smaller in the negative Z-axis. Conversely, a larger value minimizes the depth effect.
 
-When set to `'auto'`, perspective adjusts proportionally to the container's width.
+If a numeric value is given, it scales with the container’s width.
 
 ```tsx live
-<Carousel perspective='auto' /> 
+<Carousel perspective={1} /> 
 ```
 
 ## perspectiveOrigin
