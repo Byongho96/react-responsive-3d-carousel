@@ -130,7 +130,7 @@ These props are only effective when `layout` is set to `'default'`.
 
 ### Custom Layout (`CarouselLayoutInfo`)
 
-Try [Custom Layout Editor](https://byongho96.github.io/react-responsive-3d-carousel/layout-eidtor) !
+Try using the [Custom Layout Editor](https://byongho96.github.io/react-responsive-3d-carousel/layout-eidtor) !
 
 `CarouselLayoutInfo` lets you define custom layouts for carousel items, controlling each item’s size, position, and rotation relative to the selected item. Each `CarouselLayoutInfo` entry consists of multiple `LayoutInfo` objects applied to items based on their index.
 
