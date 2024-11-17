@@ -36,11 +36,12 @@ export interface CarouselProps {
   /** Carousel 2D */
   width?: string | number // if it's a number, it's proportional to container width
   height?: string | number // if it's a number, it's proportional to container height
+  aspectRatio?: number | 'auto'
   align?: AlignType
   boxShadow?: string
 
   /** Carousel 3D */
-  perspective?: string
+  perspective?: number | string
   perspectiveOrigin?: string
   layout?: LayoutType
   defaultOption?: DefaultOption // Default layout option (layout === 'default')
@@ -54,6 +55,7 @@ export interface CarouselProps {
   /** Carousel Interaction */
   focusOnSelect?: boolean
   pauseOnHover?: boolean
+  pauseOnTransition?: 'none' | 'size' | 'transform' | 'both'
 
   /** Carousel Callback */
   onChange?: (index: number, item: JSX.Element) => void
@@ -123,11 +125,12 @@ const Carousel: React.FC<CarouselProps> = ({
   /** Carousel 2D */
   width: strNumWidth = '400px',
   height: strNumHeight = '300px',
+  aspectRatio = 'auto',
   align = 'center',
   boxShadow = '0 0.1rem 0.5rem rgba(0, 0, 0, 0.5)',
 
   /** Carousel 3D */
-  perspective = 'auto',
+  perspective = 1,
   perspectiveOrigin = 'center',
   layout = 'default',
   defaultOption,
@@ -141,6 +144,7 @@ const Carousel: React.FC<CarouselProps> = ({
   /** Carousel Interaction */
   focusOnSelect = true,
   pauseOnHover = true,
+  pauseOnTransition = 'both',
 
   /** Carousel Callback */
   onClickItem,
@@ -177,6 +181,7 @@ const Carousel: React.FC<CarouselProps> = ({
   const containerRef = useRef<HTMLDivElement>(null) // The carousel container element
   const listRef = useRef<HTMLUListElement>(null) // The carousel list element
   const pauseRef = useRef(false) // Flag to pause carousel auto play
+  const transitionRef = useRef({size: false, transform: false}) // Flag to prevent multiple transitions
 
   const [curIndex, setCurIndex] = useState(startIndex) // Current center carousel's index
 
@@ -210,27 +215,66 @@ const Carousel: React.FC<CarouselProps> = ({
     ) as HTMLElement[]
   }, [items])
 
+
+  /**
+   * Transition flags
+   */
+  useEffect(() => {
+    const sizeDurationOffset = sizeDuration - 100
+    const transformDurationOffset = transformDuration - 100
+
+    if (sizeDurationOffset > 0) transitionRef.current.size = true
+    if (transformDurationOffset > 0) transitionRef.current.transform = true
+
+    const sizeTimeoutId = setTimeout(() => {
+      transitionRef.current.size = false
+    }, sizeDurationOffset)
+
+    const transformTimeoutId = setTimeout(() => {
+      transitionRef.current.transform = false
+    }, transformDurationOffset )
+
+    return () => {
+      clearTimeout(sizeTimeoutId)
+      clearTimeout(transformTimeoutId)
+    }
+  }, [curIndex, sizeDuration, transformDuration])
+
   /**
    * Slide to the previous carousel item
    */
   const slidePrev = useCallback(() => {
-    if (pauseRef.current) return
+    if ((pauseOnTransition === 'size' || pauseOnTransition === 'both') && transitionRef.current.size) {
+      return
+    }
+
+    if ((pauseOnTransition === 'transform' || pauseOnTransition === 'both') && transitionRef.current.transform) {
+      return
+    }
+    
     setCurIndex((curIndex: number) => {
       if (!infiniteLoop && curIndex === 0) return curIndex
       return (curIndex - 1 + items.length) % items.length
     })
-  }, [items, infiniteLoop, setCurIndex])
-
+  }, [items, infiniteLoop, setCurIndex, pauseOnTransition])
+  
   /**
    * Slide to the next carousel item
-   */
-  const slideNext = useCallback(() => {
-    if (pauseRef.current) return
+  */
+ const slideNext = useCallback(() => {
+    if ((pauseOnTransition === 'size' || pauseOnTransition === 'both') && transitionRef.current.size) {
+     return
+    }
+    
+    if ((pauseOnTransition === 'transform' || pauseOnTransition === 'both') && transitionRef.current.transform) {
+      return
+    }
+    
     setCurIndex((curIndex: number) => {
       if (!infiniteLoop && curIndex === items.length - 1) return curIndex
       return (curIndex + 1) % items.length
     })
-  }, [items, infiniteLoop, setCurIndex])
+  }, [items, infiniteLoop, setCurIndex, pauseOnTransition])
 
   /**
    * Sync curIndex with startIndex, if startIndex is changed
@@ -262,7 +306,7 @@ const Carousel: React.FC<CarouselProps> = ({
   }, [curIndex, onChange])
 
   // Auto play
-  useAutoPlay(autoPlay, interval, curIndex, slideNext)
+  useAutoPlay(autoPlay, interval, slideNext, pauseRef)
 
   // Set width of the list and items as CSS variables
   useSize( items, htmlItemsRef,listRef, width, curIndex)
@@ -274,6 +318,7 @@ const Carousel: React.FC<CarouselProps> = ({
     align,
     width,
     height,
+    aspectRatio,
     layout,
     curIndex,
     defaultOption
@@ -336,16 +381,17 @@ const Carousel: React.FC<CarouselProps> = ({
 
   const listStyle = {
     perspective:
-      perspective === 'auto'
-        ? `var(${CSS_VARIABLE.CONTAINER_WIDTH})`
+      typeof perspective === 'number'
+        ? `calc(${perspective} * var(${CSS_VARIABLE.CONTAINER_WIDTH})`
         : perspective,
     perspectiveOrigin,
-    height: containerHeight === 'auto' ? height : '100%',
+    height: height === 'auto' ? containerHeight : height,
   }
 
   const itemStyle = {
-    width: width,
-    height: height,
+    width,
+    height,
+    aspectRatio,
     transition: `transform ${transformDuration}ms ${transformTimingFn}, width ${sizeDuration}ms ${sizeTimingFn}, height ${sizeDuration}ms ${sizeTimingFn}`,
     cursor: focusOnSelect ? 'pointer' : 'initial',
     top: align === 'top' ? '0%' : align === 'bottom' ? '100%' : '50%',
@@ -366,13 +412,14 @@ const Carousel: React.FC<CarouselProps> = ({
           style={listStyle}
           ref={listRef}
         >
+          <div className="react-responsive-3d-carousel__dummy" style={{...itemStyle, visibility: 'hidden' }}></div>
           {items.map((item, index) => {
             return (
               <li
                 key={index}
                 className={`react-responsive-3d-carousel__item 
-                ${width !== 'auto' ? 'fixed-width' : ''} 
-                ${height !== 'auto' ? 'fixed-height' : ''}`}
+                ${(width !== 'auto' || (height !== 'auto' && aspectRatio !== 'auto')) ? 'fixed-width' : ''} 
+                ${(height !== 'auto' || (width !== 'auto' && aspectRatio !== 'auto')) ? 'fixed-height' : ''}`}
                 onClick={(e) => handleClickItem(e, index)}
                 style={itemStyle}
                 onMouseEnter={handleMouseEnterItem}

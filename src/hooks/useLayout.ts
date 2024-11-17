@@ -18,6 +18,7 @@ const useLayout = (
   align: AlignType,
   width: string,
   height: string,
+  aspectRatio: number | 'auto',
   layout: LayoutType,
   curIndex: number,
   defaultOption?: DefaultOption
@@ -45,14 +46,14 @@ const useLayout = (
       item.style.transform = style.transform
 
       // Toggle item width class
-      if (item.style.width !== 'auto') {
+      if (item.style.width !== 'auto' || (item.style.height !== 'auto' && aspectRatio !== 'auto')) {
         item.classList.add('fixed-width')
       } else {
         item.classList.remove('fixed-width')
       }
 
       // Toggle item height class
-      if (item.style.height !== 'auto') {
+      if (item.style.height !== 'auto' || (item.style.width !== 'auto' && aspectRatio !== 'auto')) {
         item.classList.add('fixed-height')
       } else {
         item.classList.remove('fixed-height')
@@ -78,6 +79,6 @@ const useLayout = (
       // If there's no layout info for the index, apply the default layout
       applyStyle(item, layoutStyle.default)
     })
-  }, [items, width, height, layoutStyle, curIndex])
+  }, [items, width, height, aspectRatio, layoutStyle, curIndex])
 }
 export default useLayout
