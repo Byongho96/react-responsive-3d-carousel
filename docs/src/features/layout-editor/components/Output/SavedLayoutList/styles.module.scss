@@ -1,0 +1,85 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+
+  > h2 {
+    margin-left: 0.5rem;
+  }
+}
+
+.layout-list {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  overflow: auto;
+  margin: 0;
+  padding: 0.5rem 0;
+  list-style: none;
+  scrollbar-width: none;
+}
+
+
+.layout-list > li,
+.layout-list > div {
+  position: absolute;
+  transform: translate(0.5rem, calc(var(--position) * 4.2rem));
+  width: calc(100% - 1rem);
+  height: 4rem;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.layout-list.dragging > li:not(.dragging) {
+  pointer-events: none;
+}
+  
+.layout-list.dragging > li.dragging {
+  opacity: 0.5;
+}
+
+.layout-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-content: center;
+  gap: 1rem;
+  height: 3.5rem;
+  border-radius: 5px;
+  transition: opacity 0.2s ease;
+
+  > input {
+    width: auto !important;
+    margin: 0 !important;
+  }
+
+  > span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.layout-item.fade-out {
+  opacity: 0;
+}
+
+.layout-item.selected {
+  border: 2px solid var(--pico-primary);
+}
+
+.button-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  button {
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--pico-secondary);
+  }
+
+  button:hover {
+    color: var(--pico-secondary-hover);
+  }
+}

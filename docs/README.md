@@ -29,14 +29,6 @@ This command starts a local development server and opens up a browser window. Mo
 http://localhost:3000/react-responsive-3d-carousel/
 ```
 
-### Build
-
-```
-$ npm run build
-```
-
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
-
 ### Deployment
 
 It's automatically deployed to GitHub Pages when a commit is pushed to the `main` branch.

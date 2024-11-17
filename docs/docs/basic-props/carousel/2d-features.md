@@ -42,7 +42,7 @@ If the `height` prop is set to a responsive value like `'auto'`, `'*%'`, or `num
 :::
 
 ```tsx live
-<Carousel containerHeight='200px' /> 
+<Carousel containerHeight='100px' /> 
 ```
 
 ### containerPadding
@@ -73,10 +73,10 @@ Settings for customizing the dimensions and appearance of individual carousel it
 Sets a consistent width for all carousel items. You can use any CSS unit for this value.
 
 ```tsx live
-<Carousel width='20em' /> 
+<Carousel width='400px' /> 
 ```
 
-If a numeric value is given, it will represent a percentage of the container’s width.
+If a numeric value is given, it scales with the container’s width.
 
 ```tsx live
 <Carousel width={0.4} /> 
@@ -96,10 +96,10 @@ If set to `'auto'`, the width will automatically adjust based on the item’s as
 Defines the height of carousel items. Any CSS unit can be used.
 
 ```tsx live
-<Carousel height='15em' /> 
+<Carousel height='300px' /> 
 ```
 
-If a numeric value is given, the height is proportional to the container’s height.
+If a numeric value is given, the height scales with the container’s height.
 
 ```tsx live
 <Carousel height={0.8} containerHeight='350px' /> 
@@ -109,6 +109,17 @@ If set to `'auto'`, the height will adjust based on the item’s aspect ratio.
 
 ```tsx live
 <Carousel width='250px' height='auto' containerHeight='350px' /> 
+```
+
+### aspectRatio
+
+* **Default** : `'auto'`
+* **Type** : `'auto' | number`
+
+This represents the [CSS aspect-ratio](https://developer.mozilla.org/en-US/docs/Web/CSS/aspect-ratio) value. When either the width or height is fixed, the other dimension is calculated using the aspect ratio.
+
+```tsx live
+<Carousel width='40%' height='auto' aspectRatio={1.33} /> 
 ```
 
 ### align

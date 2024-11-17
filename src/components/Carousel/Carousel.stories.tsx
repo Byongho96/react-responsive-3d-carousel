@@ -12,8 +12,9 @@ const meta: Meta = {
   args: {
     width: '400px',
     height: '300px',
+    aspectRatio: 'auto',
     align: 'center',
-    perspective: 'auto',
+    perspective: 1,
     perspectiveOrigin: 'center',
     boxShadow: '0 0.1rem 0.5rem rgba(0, 0, 0, 0.5)',
     containerWidth: '100%',
@@ -256,7 +257,7 @@ export const CustomLayoutWithChildren: CarouselStory = {
           y: 0,
           z: -1,
         },
-        rotation: {
+        rotate: {
           x: 0,
           y: 0,
           z: 0,
@@ -275,7 +276,7 @@ export const CustomLayoutWithChildren: CarouselStory = {
           y: 0,
           z: -0.25 * Math.tan(72 * (Math.PI / 180)),
         },
-        rotation: {
+        rotate: {
           x: 0,
           y: 0,
           z: 0,
@@ -294,7 +295,7 @@ export const CustomLayoutWithChildren: CarouselStory = {
           y: 0,
           z: 0,
         },
-        rotation: {
+        rotate: {
           x: 0,
           y: 0,
           z: 0,
@@ -313,7 +314,7 @@ export const CustomLayoutWithChildren: CarouselStory = {
           y: 0,
           z: 0.5 * Math.tan(36 * (Math.PI / 180)),
         },
-        rotation: {
+        rotate: {
           x: 0,
           y: 0,
           z: 0,
@@ -332,7 +333,7 @@ export const CustomLayoutWithChildren: CarouselStory = {
           y: 0,
           z: 0,
         },
-        rotation: {
+        rotate: {
           x: 0,
           y: 0,
           z: 0,
@@ -351,7 +352,7 @@ export const CustomLayoutWithChildren: CarouselStory = {
           y: 0,
           z: -0.25 * Math.tan(72 * (Math.PI / 180)),
         },
-        rotation: {
+        rotate: {
           x: 0,
           y: 0,
           z: 0,

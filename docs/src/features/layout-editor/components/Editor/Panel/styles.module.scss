@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+
+  button {
+    margin-bottom: 1rem;
+  }
+
+  label {
+    border-bottom: none !important;
+  }
+
+  input:invalid {
+    border-color: var(--ifm-color-danger);
+  }
+}
+
+.column-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.row-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem
+}

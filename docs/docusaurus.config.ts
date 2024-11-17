@@ -66,6 +66,11 @@ const config: Config = {
         //   label: 'Docs',
         // },
         {
+          label: 'Editor',
+          to: '/layout-editor',
+          position: 'left',
+        },
+        {
           href: 'https://github.com/Byongho96/react-responsive-3d-carousel',
           label: 'GitHub',
           position: 'right',

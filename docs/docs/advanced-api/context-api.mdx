@@ -47,14 +47,6 @@ function CarouselItem() {
 
 ## Example
 
-<Carousel items={items} pauseOnHover={false} showArrows={false} showIndicators={false} />
-
-:::info
-
-To use the `slideNext` and `slidePrev` functions on carousel item clicks, ensure that the `pauseOnHover` prop is set to false.
-
-:::
-
 ```tsx
 import { useContext } from "react";
 import { CarouselContext } from "react-responsive-3d-carousel";
@@ -87,8 +79,8 @@ export default function CarouselItem() {
 }
 ```
 
-import CarouselItemWithContext from '@site/src/components/CarouselItemWithContext';
-import Carousel from '@site/src/components/Carousel';
+import CarouselItemWithContext from '@site/src/features/docs/components/CarouselItemWithContext';
+import Carousel from '@site/src/features/docs/components/Carousel';
 
 export const items = [
   <CarouselItemWithContext />,
@@ -96,3 +88,4 @@ export const items = [
   <CarouselItemWithContext />,
 ]
 
+<Carousel items={items} showArrows={false} showIndicators={false} />

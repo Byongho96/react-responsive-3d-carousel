@@ -11,7 +11,7 @@ describe('transformLayoutInfoToStyle', () => {
       width: 0.5, // 50% of container width
       height: 0.3, // 30% of container height
       translate: { x: 0.1, y: 0.2, z: 0.3 },
-      rotation: { x: 10, y: 20, z: 30 },
+      rotate: { x: 10, y: 20, z: 30 },
       offset: { x: 0.1, y: 0.2, z: 0.3 },
     }
     const align: AlignType = 'center'
@@ -31,7 +31,7 @@ describe('transformLayoutInfoToStyle', () => {
       width: '200px',
       height: '150px',
       translate: { x: '10px', y: '20px', z: '30px' },
-      rotation: { x: 0, y: 0, z: 0 },
+      rotate: { x: 0, y: 0, z: 0 },
       offset: { x: '5%', y: '10%', z: '15px' },
     }
     const align: AlignType = 'top'
@@ -47,7 +47,7 @@ describe('transformLayoutInfoToStyle', () => {
       width: 0.8,
       height: 0.6,
       translate: { x: 0.2, y: 0.1, z: 0 },
-      rotation: { x: 0, y: 0, z: 45 },
+      rotate: { x: 0, y: 0, z: 45 },
       offset: { x: 0, y: 0, z: 0 },
     }
     const align: AlignType = 'bottom'
@@ -63,12 +63,12 @@ describe('transformLayoutInfoToStyle', () => {
     )
   })
 
-  it('should handle zero rotation magnitude correctly', () => {
+  it('should handle zero rotate magnitude correctly', () => {
     const info = {
       width: 1,
       height: 1,
       translate: { x: 0, y: 0, z: 0 },
-      rotation: { x: 0, y: 0, z: 0 },
+      rotate: { x: 0, y: 0, z: 0 },
       offset: { x: 0, y: 0, z: 0 },
     }
     const align: AlignType = 'center'
@@ -92,21 +92,21 @@ describe('transformCarouselLayoutInfoToStyle', () => {
         width: 1,
         height: 1,
         translate: { x: 0, y: 0, z: 0 },
-        rotation: { x: 0, y: 0, z: 0 },
+        rotate: { x: 0, y: 0, z: 0 },
         offset: { x: 0, y: 0, z: 0 },
       },
       0: {
         width: 0.8,
         height: 0.8,
         translate: { x: 0.1, y: 0.1, z: 0 },
-        rotation: { x: 0, y: 0, z: 30 },
+        rotate: { x: 0, y: 0, z: 30 },
         offset: { x: 0, y: 0, z: 0 },
       },
       1: {
         width: '200px',
         height: '150px',
         translate: { x: '10px', y: '20px', z: '30px' },
-        rotation: { x: 0, y: 0, z: 0 },
+        rotate: { x: 0, y: 0, z: 0 },
         offset: { x: '5%', y: '10%', z: '15px' },
       },
     }
@@ -125,14 +125,14 @@ describe('transformCarouselLayoutInfoToStyle', () => {
         width: 1,
         height: 1,
         translate: { x: 0, y: 0, z: 0 },
-        rotation: { x: 0, y: 0, z: 0 },
+        rotate: { x: 0, y: 0, z: 0 },
         offset: { x: 0, y: 0, z: 0 },
       },
       0: {
         width: 0.5,
         height: 0.5,
         translate: { x: 0.2, y: 0.2, z: 0 },
-        rotation: { x: 0, y: 1, z: 0 },
+        rotate: { x: 0, y: 1, z: 0 },
         offset: { x: 0, y: 0, z: 0 },
       },
     }

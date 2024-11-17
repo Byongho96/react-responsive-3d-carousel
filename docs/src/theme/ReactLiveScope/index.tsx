@@ -1,8 +1,8 @@
 import React from 'react';
-import Carousel from '@site/src/components/Carousel';
-import Arrows from '@site/src/components/Arrows';
-import Indicators from '@site/src/components/Indicators';
-import Status from '@site/src/components/Status';
+import Carousel from '@site/src/features/docs/components/Carousel';
+import Arrows from '@site/src/features/docs/components/Arrows';
+import Indicators from '@site/src/features/docs/components/Indicators';
+import Status from '@site/src/features/docs/components/Status';
 
 
 // Add react-live imports you need here

@@ -2,22 +2,22 @@ import { AlignType } from '../components/Carousel/Carousel'
 import CSS_VARIABLE from '../constant/css'
 
 export type LayoutInfo = {
-  width?: number | string // if it's a number, it's proportional to container width
-  height?: number | string // if it's a number, it's proportional to container height
+  width?: number | string // if it's a number, it scales with container width
+  height?: number | string // if it's a number, it scales with container height
   translate: {
-    x: number | string // if it's a number, it's proportional to container width
-    y: number | string // if it's a number, it's proportional to container height
-    z: number | string // if it's a number, it's proportional to container width
+    x: number | string // if it's a number, it scales with container width
+    y: number | string // if it's a number, it scales with container height
+    z: number | string // if it's a number, it scales with container width
   }
-  rotation: {
+  rotate: {
     x: number // deg
     y: number // deg
     z: number // deg
   }
   offset: {
-    x: number | string // if it's a number, it's proportional to item width
-    y: number | string // if it's a number, it's proportional to item height
-    z: number | string // if it's a number, it's proportional to item width
+    x: number | string // if it's a number, it scales with item width
+    y: number | string // if it's a number, it scales with item height
+    z: number | string // if it's a number, it scales with item width
   }
 }
 
@@ -44,7 +44,7 @@ export const transformLayoutInfoToStyle = (
   info: LayoutInfo,
   align: AlignType
 ): LayoutStyle => {
-  const { width, height, translate, rotation, offset } = info
+  const { width, height, translate, rotate, offset } = info
 
   // Transform width
   const newWidth =
@@ -72,13 +72,13 @@ export const transformLayoutInfoToStyle = (
       break
   }
 
-  // Transform rotation
+  // Transform rotate
   const magnitude = Math.sqrt(
-    rotation.x ** 2 + rotation.y ** 2 + rotation.z ** 2
+    rotate.x ** 2 + rotate.y ** 2 + rotate.z ** 2
   )
-  const nx = magnitude ? rotation.x / magnitude : 0
-  const ny = magnitude ? rotation.y / magnitude : 0
-  const nz = magnitude ? rotation.z / magnitude : 0
+  const nx = magnitude ? rotate.x / magnitude : 0
+  const ny = magnitude ? rotate.y / magnitude : 0
+  const nz = magnitude ? rotate.z / magnitude : 0
 
   // Transform translate
   const translateX =

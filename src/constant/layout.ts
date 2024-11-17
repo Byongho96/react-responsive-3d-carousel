@@ -7,7 +7,7 @@ export const DEFAULT_TWO_CAROUSEL_INDEX_TRANSFORM: CarouselLayoutInfo = {
       y: 0,
       z: -1,
     },
-    rotation: {
+    rotate: {
       x: 0,
       y: 0,
       z: 0,
@@ -24,7 +24,7 @@ export const DEFAULT_TWO_CAROUSEL_INDEX_TRANSFORM: CarouselLayoutInfo = {
       y: 0,
       z: 0,
     },
-    rotation: {
+    rotate: {
       x: 0,
       y: 0,
       z: 0,
@@ -44,7 +44,7 @@ export const DEFAULT_THREE_CAROUSEL_INDEX_TRANSFORM: CarouselLayoutInfo = {
       y: 0,
       z: -1,
     },
-    rotation: {
+    rotate: {
       x: 0,
       y: 0,
       z: 0,
@@ -61,7 +61,7 @@ export const DEFAULT_THREE_CAROUSEL_INDEX_TRANSFORM: CarouselLayoutInfo = {
       y: 0,
       z: 0,
     },
-    rotation: {
+    rotate: {
       x: 0,
       y: 40,
       z: 0,
@@ -78,7 +78,7 @@ export const DEFAULT_THREE_CAROUSEL_INDEX_TRANSFORM: CarouselLayoutInfo = {
       y: 0,
       z: 0,
     },
-    rotation: {
+    rotate: {
       x: 0,
       y: 0,
       z: 0,
@@ -95,7 +95,7 @@ export const DEFAULT_THREE_CAROUSEL_INDEX_TRANSFORM: CarouselLayoutInfo = {
       y: 0,
       z: 0,
     },
-    rotation: {
+    rotate: {
       x: 0,
       y: -40,
       z: 0,
@@ -115,7 +115,7 @@ export const DEFAULT_FIVE_CAROUSEL_INDEX_TRANSFORM: CarouselLayoutInfo = {
       y: 0,
       z: -1,
     },
-    rotation: {
+    rotate: {
       x: 0,
       y: 0,
       z: 0,
@@ -132,7 +132,7 @@ export const DEFAULT_FIVE_CAROUSEL_INDEX_TRANSFORM: CarouselLayoutInfo = {
       y: 0,
       z: 0,
     },
-    rotation: {
+    rotate: {
       x: 0,
       y: 40,
       z: 0,
@@ -149,7 +149,7 @@ export const DEFAULT_FIVE_CAROUSEL_INDEX_TRANSFORM: CarouselLayoutInfo = {
       y: 0,
       z: 0,
     },
-    rotation: {
+    rotate: {
       x: 0,
       y: 20,
       z: 0,
@@ -166,7 +166,7 @@ export const DEFAULT_FIVE_CAROUSEL_INDEX_TRANSFORM: CarouselLayoutInfo = {
       y: 0,
       z: 0,
     },
-    rotation: {
+    rotate: {
       x: 0,
       y: 0,
       z: 0,
@@ -184,7 +184,7 @@ export const DEFAULT_FIVE_CAROUSEL_INDEX_TRANSFORM: CarouselLayoutInfo = {
       y: 0,
       z: 0,
     },
-    rotation: {
+    rotate: {
       x: 0,
       y: -20,
       z: 0,
@@ -201,7 +201,7 @@ export const DEFAULT_FIVE_CAROUSEL_INDEX_TRANSFORM: CarouselLayoutInfo = {
       y: 0,
       z: 0,
     },
-    rotation: {
+    rotate: {
       x: 0,
       y: -40,
       z: 0,

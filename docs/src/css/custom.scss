@@ -38,3 +38,67 @@
   --ifm-color-primary-lightest: #fafdfe;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
+
+.pico {
+  button.secondary {
+    --pico-border-color: var(--pico-secondary-border);
+    --pico-background-color: var(--pico-secondary-background);
+    
+    &:hover {
+      --pico-border-color: var(--pico-secondary-hover-border);
+      --pico-background-color: var(--pico-secondary-hover-background);
+    }
+  }
+
+  button.tertiary {
+    --pico-border-color: var(--pico-tertiary-border);
+    --pico-background-color: var(--pico-tertiary-background);
+    
+    &:hover {
+      --pico-border-color: var(--pico-tertiary-hover-border);
+      --pico-background-color: var(--pico-tertiary-hover-background);
+    }
+  }
+
+  button.outline {
+    --pico-color: var(--pico-primary-border);
+    --pico-border-color: var(--pico-primary-border);
+    --pico-background-color: transparent;
+    --pico-border-width: 0.12rem;
+
+
+    &:hover {
+      --pico-color: var(--pico-primary-inverse);
+      --pico-border-color: var(--pico-primary-hover-border);
+      --pico-background-color: var(--pico-primary-hover-background);
+    }
+  }
+
+  button.secondary.outline {
+    --pico-color: var(--pico-secondary-border);
+    --pico-border-color: var(--pico-secondary-border);
+    --pico-background-color: transparent;
+    --pico-border-width: 0.12rem;
+
+
+    &:hover {
+      --pico-color: var(--pico-secondary-inverse);
+      --pico-border-color: var(--pico-secondary-hover-border);
+      --pico-background-color: var(--pico-secondary-hover-background);
+    }
+  }
+
+  button.tertiary.outline {
+    --pico-color: var(--pico-tertiary-border);
+    --pico-border-color: var(--pico-tertiary-border);
+    --pico-background-color: transparent;
+    --pico-border-width: 0.12rem;
+    
+    &:hover {
+      --pico-color: var(--pico-tertiary-inverse);
+      --pico-border-color: var(--pico-tertiary-hover-border);
+      --pico-background-color: var(--pico-tertiary-hover-background);
+    }
+  }
+}
+
