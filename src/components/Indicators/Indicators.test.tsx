@@ -88,8 +88,8 @@ describe('Indicators Component', () => {
 
     expect(indicatorsUl).toHaveStyle('gap: 1.5rem')
     expect(indicatorsUl).toHaveStyle('transform: translate(0px, 0px)')
-    expect(indicatorsUl).toHaveStyle('--indicator-width: 0.6rem')
-    expect(indicatorsUl).toHaveStyle('--indicator-height: 0.6rem')
+    expect(indicatorsUl).toHaveStyle('--indicator-width: 0.7rem')
+    expect(indicatorsUl).toHaveStyle('--indicator-height: 0.7rem')
     expect(indicatorsUl).toHaveStyle('--indicator-color: #ffffff')
     expect(indicatorsUl).toHaveStyle('--indicator-active-color: #888888')
     expect(indicatorsUl).toHaveStyle(
