@@ -43,7 +43,7 @@
     "format:write": "npx eslint --fix . && prettier --write .",
     "test": "jest",
     "coverage": "jest --coverage",
-    "build": "npm run format:check && npm test && rollup -c rollup.config.mjs"
+    "build": "npm run format:write && npm test && rollup -c rollup.config.mjs"
   },
   "peerDependencies": {
     "react": ">=17.0.0"
