@@ -15,7 +15,7 @@ describe('adjustDefaultCarouselLayoutInfo', () => {
     const inputInfo: CarouselLayoutInfo = {
       default: {
         translate: { x: 0.5, y: 0, z: 0.5 },
-        rotation: { x: 10, y: 5, z: 0 },
+        rotate: { x: 10, y: 5, z: 0 },
         offset: { x: 0.1, y: 0, z: 0.2 },
       },
     }
@@ -30,7 +30,7 @@ describe('adjustDefaultCarouselLayoutInfo', () => {
     const expectedOutput: CarouselLayoutInfo = {
       default: {
         translate: { x: 1.0, y: 0, z: 1.0 },
-        rotation: { x: 40, y: 20, z: 0 },
+        rotate: { x: 40, y: 20, z: 0 },
         offset: { x: 0.2, y: 0, z: 0.6 },
       },
     }
@@ -43,17 +43,17 @@ describe('adjustDefaultCarouselLayoutInfo', () => {
     const inputInfo: CarouselLayoutInfo = {
       default: {
         translate: { x: 0, y: 0, z: 0 },
-        rotation: { x: 0, y: 0, z: 0 },
+        rotate: { x: 0, y: 0, z: 0 },
         offset: { x: 0, y: 0, z: 0 },
       },
       '0': {
         translate: { x: 0.3, y: 0, z: 0.3 },
-        rotation: { x: 15, y: 0, z: 0 },
+        rotate: { x: 15, y: 0, z: 0 },
         offset: { x: 0.2, y: 0, z: 0.1 },
       },
       '1': {
         translate: { x: 0.4, y: 0, z: 0.4 },
-        rotation: { x: 20, y: 0, z: 0 },
+        rotate: { x: 20, y: 0, z: 0 },
         offset: { x: 0.3, y: 0, z: 0.2 },
       },
     }
@@ -68,17 +68,17 @@ describe('adjustDefaultCarouselLayoutInfo', () => {
     const expectedOutput: CarouselLayoutInfo = {
       default: {
         translate: { x: 0, y: 0, z: 0 },
-        rotation: { x: 0, y: 0, z: 0 },
+        rotate: { x: 0, y: 0, z: 0 },
         offset: { x: 0, y: 0, z: 0 },
       },
       '0': {
         translate: { x: 0.45, y: 0, z: 0.45 },
-        rotation: { x: 45, y: 0, z: 0 },
+        rotate: { x: 45, y: 0, z: 0 },
         offset: { x: 0.3, y: 0, z: 0.2 },
       },
       '1': {
         translate: { x: 0.6, y: 0, z: 0.6 },
-        rotation: { x: 60, y: 0, z: 0 },
+        rotate: { x: 60, y: 0, z: 0 },
         offset: { x: 0.45, y: 0, z: 0.4 },
       },
     }

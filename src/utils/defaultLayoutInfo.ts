@@ -33,10 +33,10 @@ export const adjustDefaultCarouselLayoutInfo = (
       z: round((itemInfo.translate.z as number) * widthFactor, 3), // it's always number : constant/layout.ts
     }
 
-    const adjustedRotation = {
-      x: round(itemInfo.rotation.x * angleFactor, 3),
-      y: round(itemInfo.rotation.y * angleFactor, 3),
-      z: round(itemInfo.rotation.z * angleFactor, 3),
+    const adjustedRotate = {
+      x: round(itemInfo.rotate.x * angleFactor, 3),
+      y: round(itemInfo.rotate.y * angleFactor, 3),
+      z: round(itemInfo.rotate.z * angleFactor, 3),
     }
 
     const adjustedOffset = {
@@ -47,7 +47,7 @@ export const adjustDefaultCarouselLayoutInfo = (
 
     adjustedInfo[key] = {
       translate: adjustedTranslate,
-      rotation: adjustedRotation,
+      rotate: adjustedRotate,
       offset: adjustedOffset,
     }
   })
