@@ -385,7 +385,7 @@ const Carousel: React.FC<CarouselProps> = ({
         ? `calc(${perspective} * var(${CSS_VARIABLE.CONTAINER_WIDTH})`
         : perspective,
     perspectiveOrigin,
-    height: height === 'auto' ? containerHeight : height,
+    height: containerHeight === 'auto' ? 'auto' : '100%',
   }
 
   const itemStyle = {
