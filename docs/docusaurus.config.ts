@@ -67,7 +67,7 @@ const config: Config = {
         // },
         {
           label: 'Editor',
-          to: '/layout-editor',
+          to: 'layout-editor',
           position: 'left',
         },
         {
