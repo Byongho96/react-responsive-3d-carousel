@@ -180,9 +180,9 @@ class CarouselItem extends Mesh<PlaneGeometry, MeshBasicMaterial> {
   
   updateScale() {
     const padding = parseCssShorthand(this.container.containerPadding, this.container.scale.x * SCENE_SCALE, this.container.scale.y * SCENE_SCALE)
- 
-    this.width = formatCssUnit(this.width, this.scale.x, {numericValue: this.container.scale.x * SCENE_SCALE, percentValue: this.container.scale.x * SCENE_SCALE - padding.left - padding.right})
-    this.height = formatCssUnit(this.height, this.scale.y, {numericValue: this.container.scale.y * SCENE_SCALE, percentValue: this.container.scale.y * SCENE_SCALE - padding.top - padding.bottom})
+
+    this.width = formatCssUnit(this.width, this.scale.x * SCENE_SCALE, {numericValue: this.container.scale.x * SCENE_SCALE, percentValue: this.container.scale.x * SCENE_SCALE - padding.left - padding.right, autoValue: this.scale.x / this.container.scale.x * SCENE_SCALE})
+    this.height = formatCssUnit(this.height, this.scale.y * SCENE_SCALE, {numericValue: this.container.scale.y * SCENE_SCALE, percentValue: this.container.scale.y * SCENE_SCALE - padding.top - padding.bottom, autoValue: this.scale.y / this.container.scale.y * SCENE_SCALE})
   }
 
   reset() {
