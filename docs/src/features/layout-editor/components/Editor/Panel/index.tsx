@@ -94,13 +94,13 @@ const CarouselItemPanel = ({selectedObject, setSelectedObject}) => {
       <label data-tooltip="Scales with container width if a number">
         Width
         <input value={currentCarouselItem.width}
-        pattern="^(-?\d+(\.\d+)?(px|pt|rem|em|%)|auto)$"
+        pattern="^(-?\d+(\.\d+)?(px|pt|rem|em|%)?|auto)$"
         onChange={(e) => CarouselItemManager.updateWidth(selectedObject.uuid, e.currentTarget.value)}/>
       </label>
       <label data-tooltip="Scales with container height if a number">
         Height
         <input value={currentCarouselItem.height} 
-        pattern="^(-?\d+(\.\d+)?(px|pt|rem|em|%)|auto)$"
+        pattern="^(-?\d+(\.\d+)?(px|pt|rem|em|%)?|auto)$"
         onChange={(e) => CarouselItemManager.updateHeight(selectedObject.uuid, e.currentTarget.value)}/>
       </label>
       <div className={styles['column-item']}>

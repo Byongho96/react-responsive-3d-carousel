@@ -137,12 +137,12 @@ export default function LayoutContextProvider({children}): JSX.Element {
   }, [])
 
   useEffect(() => {
-    const savedLayoutList = JSON.parse(localStorage.getItem('outputList') || '[]')
+    const savedLayoutList = JSON.parse(localStorage.getItem('layout-list') || '[]')
     dispatch({ type: "SET_LAYOUT_LIST", payload: savedLayoutList })
   }, [])
 
   useEffect(() => {
-    localStorage.setItem('outputList', JSON.stringify(state.layoutList))
+    localStorage.setItem('layout-list', JSON.stringify(state.layoutList))
   }, [state.layoutList])
 
   useEffect(() => {

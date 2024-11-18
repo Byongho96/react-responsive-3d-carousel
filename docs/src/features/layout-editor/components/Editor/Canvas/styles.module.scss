@@ -18,4 +18,9 @@
   display: flex;
   gap: 1rem;
   transform: translateX(-50%);
+
+  > div {
+    display: flex;
+    gap: 0.1rem;
+  }
 }
