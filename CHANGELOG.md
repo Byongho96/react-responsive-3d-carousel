@@ -1,3 +1,10 @@
+## [2.1.1](https://github.com/Byongho96/react-responsive-3d-carousel/compare/v2.1.0...v2.1.1) (2024-11-18)
+
+
+### Bug Fixes
+
+* width and height value error when carouselItem is scaled with transformcontrols ([7a0ad09](https://github.com/Byongho96/react-responsive-3d-carousel/commit/7a0ad09cfaa9cb8413f9593d9bd56b670d0aa365))
+
 # [2.1.0](https://github.com/Byongho96/react-responsive-3d-carousel/compare/v2.0.1...v2.1.0) (2024-11-18)
 
 
