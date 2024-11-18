@@ -14,7 +14,7 @@ A 3D carousel component for React, designed to create immersive, interactive exp
 ## 🔗 Important Links
 
 - **[Documentation](https://byongho96.github.io/react-responsive-3d-carousel/)**
-- [Layout Editor](https://byongho96.github.io/react-responsive-3d-carousel/layout-eidtor)
+- [Layout Editor](https://byongho96.github.io/react-responsive-3d-carousel/layout-editor)
   <!-- - [Examples]() -->
 - [Storybook](https://byongho96.github.io/react-responsive-3d-carousel/storybook/)
 - [Github Repository](https://github.com/Byongho96/react-responsive-3d-carousel)
@@ -70,6 +70,8 @@ export default App
 </div>
 
 ## 📚 Documentation
+
+Check out the [full documentation](https://byongho96.github.io/react-responsive-3d-carousel/).
 
 ### Carousel Props
 
@@ -130,7 +132,7 @@ These props are only effective when `layout` is set to `'default'`.
 
 ### Custom Layout (`CarouselLayoutInfo`)
 
-Try using the [Custom Layout Editor](https://byongho96.github.io/react-responsive-3d-carousel/layout-eidtor) !
+Try using the [Custom Layout Editor](https://byongho96.github.io/react-responsive-3d-carousel/layout-editor) !
 
 `CarouselLayoutInfo` lets you define custom layouts for carousel items, controlling each item’s size, position, and rotation relative to the selected item. Each `CarouselLayoutInfo` entry consists of multiple `LayoutInfo` objects applied to items based on their index.
 
