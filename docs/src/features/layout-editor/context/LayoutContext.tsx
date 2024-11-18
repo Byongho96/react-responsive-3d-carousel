@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer, useRef } from "react";
 import SceneStore from "../stores/SceneStore";
 
 
@@ -8,7 +8,7 @@ interface State {
 }
 
 const initialState = {
-  layoutList: JSON.parse(localStorage.getItem('outputList') || '[]'),
+  layoutList: [],
   currentLayout: {
     id: null,
     layout: null,
@@ -17,10 +17,11 @@ const initialState = {
 
 type Action =
   | { type: "SAVE_LAYOUT"; payload: any }
-  | { type: "SET_LAYOUT"; payload: any }
+  | { type: "UPDATE_LAYOUT"; payload: any }
   | { type: "SELECT_LAYOUT"; payload: number }
   | { type: "UPDATE_NAME"; payload: { id: number, value: string } }
   | { type: "UPDATE_ORDER"; payload: { from: number, to: number } }
+  | { type: "SET_LAYOUT_LIST"; payload: any }
   | { type: "DELETE_LAYOUT"; payload: number }
 
 const reducer = (state, action) => {
@@ -53,7 +54,7 @@ const reducer = (state, action) => {
         ],
       };
     }     
-    case "SET_LAYOUT": {
+    case "UPDATE_LAYOUT": {
       return {
         ...state,
         currentLayout: {
@@ -92,6 +93,12 @@ const reducer = (state, action) => {
         layoutList: list
       }
     }
+    case "SET_LAYOUT_LIST": {
+      return {
+        ...state,
+        layoutList: action.payload
+      }
+    }
     case "DELETE_LAYOUT": {
       return {
         ...state,
@@ -115,7 +122,7 @@ export default function LayoutContextProvider({children}): JSX.Element {
   useEffect(() => {
     const handleChange = () => {
       dispatch({ 
-        type: "SET_LAYOUT", 
+        type: "UPDATE_LAYOUT", 
         payload: SceneStore.toCarouselJSON()
       });
     }
@@ -127,6 +134,11 @@ export default function LayoutContextProvider({children}): JSX.Element {
       SceneStore.reset()
       SceneStore.removeEventListener('change', handleChange );
     }
+  }, [])
+
+  useEffect(() => {
+    const savedLayoutList = JSON.parse(localStorage.getItem('outputList') || '[]')
+    dispatch({ type: "SET_LAYOUT_LIST", payload: savedLayoutList })
   }, [])
 
   useEffect(() => {

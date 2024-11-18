@@ -69,10 +69,8 @@ const CarouselItemPanel = ({selectedObject, setSelectedObject}) => {
   const currentLayout = state.currentLayout
 
   const currentCarouselItem = currentLayout.layout[selectedObject.index]
-  if (!currentCarouselItem) {
-    setSelectedObject(SceneStore.carouselContainer)
-    return null
-  }
+  if (!currentCarouselItem) return null
+  
 
   const handleDelete = () => {
     setSelectedObject(SceneStore.carouselContainer)
@@ -81,7 +79,18 @@ const CarouselItemPanel = ({selectedObject, setSelectedObject}) => {
 
   return (
     <>
-      {selectedObject.index !== 'default' && <button onClick={handleDelete}>Delete Carousel</button>}
+      {selectedObject.index !== 'default' && 
+        <>
+          <button onClick={handleDelete}>Delete Carousel</button>
+          <label>
+            Index
+            <input value={selectedObject.index}
+            type="number"
+            pattern="^-?\d+$"
+            onChange={(e) => CarouselItemManager.updateIndex(selectedObject.uuid, e.currentTarget.value)}/>
+          </label>
+        </>
+      }
       <label data-tooltip="Scales with container width if a number">
         Width
         <input value={currentCarouselItem.width}
