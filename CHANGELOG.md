@@ -1,3 +1,17 @@
+# [2.1.0](https://github.com/Byongho96/react-responsive-3d-carousel/compare/v2.0.1...v2.1.0) (2024-11-18)
+
+
+### Bug Fixes
+
+* resolve CSS style error in carousel list ([8df2f50](https://github.com/Byongho96/react-responsive-3d-carousel/commit/8df2f50ef7e60daff849db24867f1ffd743902a6))
+* resolve documentation build issue caused by localStorage reference ([606e5b5](https://github.com/Byongho96/react-responsive-3d-carousel/commit/606e5b56479b1b19371e69a9221fbfbae88c2e29))
+
+
+### Features
+
+* add responsive features to carousel ([f3bb6e5](https://github.com/Byongho96/react-responsive-3d-carousel/commit/f3bb6e50118ee88f6928010811e9d5069a6956cf))
+* increase default size of indicators prop ([4ecb24d](https://github.com/Byongho96/react-responsive-3d-carousel/commit/4ecb24d8f6f4ba1f35623fbd91db4a51ffde4360))
+
 # Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
