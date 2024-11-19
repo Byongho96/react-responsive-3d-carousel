@@ -218,7 +218,7 @@ class CarouselItem extends Mesh<PlaneGeometry, MeshBasicMaterial> {
       height: isNumeric(this.height) ? parseFloat(this.height) : this.height,
       translate: {
         x: isNumeric(this.translate.x) ? parseFloat(this.translate.x) : this.translate.x,
-        y: isNumeric(this.translate.y) ? parseFloat(this.translate.y) : this.translate.y,
+        y: isNumeric(this.translate.y) ? -1 * parseFloat(this.translate.y) : this.translate.y.startsWith('-') ? this.translate.y.slice(1) : `-${this.translate.y}`,
         z: isNumeric(this.translate.z) ? parseFloat(this.translate.z) : this.translate.z
       },
       rotate: {
@@ -228,7 +228,7 @@ class CarouselItem extends Mesh<PlaneGeometry, MeshBasicMaterial> {
       },
       offset: {
         x: isNumeric(this.offset.x) ? parseFloat(this.offset.x) : this.offset.x,
-        y: isNumeric(this.offset.y) ? parseFloat(this.offset.y) : this.offset.y,
+        y: isNumeric(this.offset.y) ? -1 * parseFloat(this.offset.y) : this.offset.y.startsWith('-') ? this.offset.y.slice(1) : `-${this.offset.y}`,
         z: isNumeric(this.offset.z) ? parseFloat(this.offset.z) : this.offset.z
       }
     }
@@ -238,13 +238,13 @@ class CarouselItem extends Mesh<PlaneGeometry, MeshBasicMaterial> {
     this.width = `${json.width}`
     this.height = `${json.height}`
     this.translate.x = `${json.translate.x}`
-    this.translate.y = `${json.translate.y}`
+    this.translate.y = `${json.translate.y}`.startsWith('-') ? `${json.translate.y}`.slice(1) : `-${json.translate.y}`
     this.translate.z = `${json.translate.z}`
     this.rotate.x = json.rotate.x
     this.rotate.y = json.rotate.y
     this.rotate.z = json.rotate.z
     this.offset.x = `${json.offset.x}`
-    this.offset.y = `${json.offset.y}`
+    this.offset.y = `${json.offset.y}`.startsWith('-') ? `${json.offset.y}`.slice(1) : `-${json.offset.y}`
     this.offset.z = `${json.offset.z}`
   }
 }
