@@ -18,7 +18,8 @@
     [
       "@semantic-release/github",
       {
-        "assets": ["dist/**/*.{js,ts,css}", "CHANGELOG.md"]
+        "assets": ["dist/**/*.{js,ts,css}", "CHANGELOG.md"],
+        "overwrite": true
       }
     ],
     [
