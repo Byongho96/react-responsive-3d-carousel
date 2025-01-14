@@ -1,3 +1,10 @@
+## [2.1.2](https://github.com/Byongho96/react-responsive-3d-carousel/compare/v2.1.1...v2.1.2) (2025-01-14)
+
+
+### Bug Fixes
+
+* exclude sourcemap on production ([8275cd0](https://github.com/Byongho96/react-responsive-3d-carousel/commit/8275cd0f9642cec8dcd8295bec22517c54368f94))
+
 ## [2.1.1](https://github.com/Byongho96/react-responsive-3d-carousel/compare/v2.1.0...v2.1.1) (2024-11-18)
 
 
