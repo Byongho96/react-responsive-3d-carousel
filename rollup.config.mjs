@@ -20,12 +20,10 @@ export default [
       {
         file: packageJson.main,
         format: 'cjs',
-        sourcemap: true,
       },
       {
         file: packageJson.module,
         format: 'esm',
-        sourcemap: true,
       },
     ],
     plugins: [
@@ -57,12 +55,10 @@ export default [
       {
         file: 'dist/index.cjs.min.js',
         format: 'cjs',
-        sourcemap: true,
       },
       {
         file: 'dist/index.esm.min.js',
         format: 'esm',
-        sourcemap: true,
       },
     ],
     plugins: [
@@ -94,12 +90,10 @@ export default [
       {
         file: 'dist/index.cjs.min.js.gz',
         format: 'cjs',
-        sourcemap: true,
       },
       {
         file: 'dist/index.esm.min.js.gz',
         format: 'esm',
-        sourcemap: true,
       },
     ],
     plugins: [
