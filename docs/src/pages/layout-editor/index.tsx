@@ -4,7 +4,9 @@ import styles from './styles.module.scss'
 
 export default function LayoutEditorPage(): JSX.Element {
   return (
-    <Layout>
+    <Layout
+      title="Layout Editor"
+      description="Effortlessly arrange your carousel using a 3D editor tool.">
       <main className={styles['wrapper']}>
         <h1>Custom Layout Editor</h1>
         <ul>
