@@ -28,23 +28,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-  build-and-deploy-docs:
-    needs: setup
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
       - name: Build Library
         run: npm run build
-
-      - name: Cache Docs Dependencies
-        uses: actions/cache@v3
-        with:
-          path: docs/node_modules
-          key: ${{ runner.os }}-docs-${{ hashFiles('docs/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-docs-
 
       - name: Build Documentation
         run: |
@@ -58,13 +43,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: docs/build
           destination_dir: '.'
-
-  build-and-deploy-storybook:
-    needs: build-and-deploy-docs
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
 
       - name: Build Storybook
         run: npm run build-storybook
