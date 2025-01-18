@@ -382,7 +382,7 @@ const Carousel: React.FC<CarouselProps> = ({
   const listStyle = {
     perspective:
       typeof perspective === 'number'
-        ? `calc(${perspective} * var(${CSS_VARIABLE.CONTAINER_WIDTH})`
+        ? `calc(${perspective} * var(${CSS_VARIABLE.CONTAINER_WIDTH}))`
         : perspective,
     perspectiveOrigin,
     height: containerHeight === 'auto' ? 'auto' : '100%',
