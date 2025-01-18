@@ -19,13 +19,16 @@
       "@semantic-release/github",
       {
         "assets": [
-          {
-            "path": "dist/**/*.{js,ts,css}",
-            "name": "${nextRelease.version}/[basename]"
-          },
+          "dist/index.cjs.js",
+          "dist/index.cjs.min.js",
+          "dist/index.cjs.min.js.gz",
+          "dist/index.d.ts",
+          "dist/index.esm.js",
+          "dist/index.esm.min.js",
+          "dist/index.esm.min.js.gz",
+          "dist/styles.css",
           "CHANGELOG.md"
-        ],
-        "overwrite": true
+        ]
       }
     ],
     [
