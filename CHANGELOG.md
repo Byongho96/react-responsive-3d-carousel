@@ -1,3 +1,10 @@
+## [2.1.4](https://github.com/Byongho96/react-responsive-3d-carousel/compare/v2.1.3...v2.1.4) (2025-01-18)
+
+
+### Bug Fixes
+
+* resolve duplicate release asset issue by versioning asset filenames ([d012e1d](https://github.com/Byongho96/react-responsive-3d-carousel/commit/d012e1d5615ae28073780fab94df87f832ba45c2))
+
 ## [2.1.3](https://github.com/Byongho96/react-responsive-3d-carousel/compare/v2.1.2...v2.1.3) (2025-01-18)
 
 
