@@ -18,7 +18,13 @@
     [
       "@semantic-release/github",
       {
-        "assets": ["dist/**/*.{js,ts,css}", "CHANGELOG.md"],
+        "assets": [
+          {
+            "path": "dist/**/*.{js,ts,css}",
+            "name": "${nextRelease.version}/[basename]"
+          },
+          "CHANGELOG.md"
+        ],
         "overwrite": true
       }
     ],
