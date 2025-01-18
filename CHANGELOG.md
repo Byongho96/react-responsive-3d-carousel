@@ -1,3 +1,11 @@
+## [2.1.3](https://github.com/Byongho96/react-responsive-3d-carousel/compare/v2.1.2...v2.1.3) (2025-01-18)
+
+
+### Bug Fixes
+
+* style issue caused by missing parenthesis ([ab5588b](https://github.com/Byongho96/react-responsive-3d-carousel/commit/ab5588b317364e84a34803dd29e7cd2fa87dde88))
+* wrap client-side only code with useEffect ([d79c465](https://github.com/Byongho96/react-responsive-3d-carousel/commit/d79c465c3b090075de79ed77a0565cf853000f3a))
+
 ## [2.1.2](https://github.com/Byongho96/react-responsive-3d-carousel/compare/v2.1.1...v2.1.2) (2025-01-14)
 
 
