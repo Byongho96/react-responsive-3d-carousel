@@ -1,3 +1,10 @@
+## [2.1.5](https://github.com/Byongho96/react-responsive-3d-carousel/compare/v2.1.4...v2.1.5) (2025-01-30)
+
+
+### Bug Fixes
+
+* omit non-essential types ([#56](https://github.com/Byongho96/react-responsive-3d-carousel/issues/56)) ([#57](https://github.com/Byongho96/react-responsive-3d-carousel/issues/57)) ([9341536](https://github.com/Byongho96/react-responsive-3d-carousel/commit/9341536c25eaac207d8f8a4425f5496a683214ef))
+
 ## [2.1.4](https://github.com/Byongho96/react-responsive-3d-carousel/compare/v2.1.3...v2.1.4) (2025-01-18)
 
 
