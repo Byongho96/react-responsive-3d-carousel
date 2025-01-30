@@ -84,7 +84,7 @@ export interface CarouselProps {
 
   /* Status */
   showStatus?: boolean
-  status?: StatusProps
+  status?: Omit<StatusProps, "length" | "curIndex">
 
   /* Arrows */
   showArrows?: boolean
@@ -92,7 +92,7 @@ export interface CarouselProps {
 
   /* Indicators */
   showIndicators?: boolean
-  indicators?: IndicatorsProps
+  indicators?: Omit<IndicatorsProps, "length" | "curIndex">
 }
 
 type DefaultContext = {
