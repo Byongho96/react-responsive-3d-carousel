@@ -39,7 +39,7 @@ const mobileLayout = {...layout}
 for (let i = -phrases.length; i <= phrases.length; i++) {
   layout[i] = {
     "translate": {
-      "x": Math.cos(-Math.PI * i / 8) * 0.3,
+      "x": Math.sin(-Math.PI * i / 8) * 0.1 * i,
       "y": Math.sin(-Math.PI * i / 8) * 0.5,
       "z": i > -1 ? -i * 0.2 : 1.5,
     },
@@ -49,8 +49,8 @@ for (let i = -phrases.length; i <= phrases.length; i++) {
       "z": 360 * ( -i / 8 )
     },
     "offset": {
-      "x": -Math.cos(-Math.PI * i / 8) * 0.3,
-      "y": 0,
+      "x": 0,
+      "y": -0.2,
       "z": 0
     }
   }
@@ -124,7 +124,7 @@ export default function Home() {
         <div className={styles['carousel-wrapper']}>
           <Carousel
             items={items}
-            layout={isMobile ? mobileLayout : layout}
+            layout={layout}
             startIndex={0}
             infiniteLoop={false}
             autoPlay={false}
@@ -134,17 +134,17 @@ export default function Home() {
             showIndicators={false}
             containerHeight='100%'
             width="auto"
-            height="2.3em"
-            aspectRatio={3.2}
+            height="auto"
             boxShadow='none'
           >
             <p className={styles['title-text']}>
               <span>
-                3D Carousel is...<br/>
+                3D Carousel is<br/>
               </span>
               <span>
-                Let's <Link to="/docs/getting-started/installation">get start</Link> it<br/>
-                right now!
+                Interactive and flexible 3D Carousel component<br/>
+                that enables smooth transitions<br/>
+                <Link to="/docs/getting-started/installation">Get Started</Link>
               </span>
             </p>
           </Carousel>
