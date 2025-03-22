@@ -1,12 +1,10 @@
-
-
 import { MouseEventHandler, useContext, useEffect, useRef } from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
-import useIsMobile from '../hooks/useIsMobile';
 import LightweightImageUrl from '@site/static/img/lightweight.png';
 import ResponsiveImageUrl from '@site/static/img/responsive.png';
 import CustomizableImageUrl from '@site/static/img/customizable.png';
+import CodeLink from '../atoms/CodeLink';
 import { Carousel, CarouselContext } from 'react-responsive-3d-carousel';
 import 'react-responsive-3d-carousel/dist/styles.css';
 import styles from './styles.module.scss'
@@ -110,8 +108,6 @@ function Card({imgUrl, title, description}) {
 
 export default function Home() {
 
-  const isMobile = useIsMobile()
-
   const items = phrases.map((phrase, index) => {
     return <Item key={phrase} index={index} phrase={phrase} isLast={index === phrases.length - 1}/>
   })
@@ -148,6 +144,7 @@ export default function Home() {
               </span>
             </p>
           </Carousel>
+          <CodeLink href="https://github.com/Byongho96/react-responsive-3d-carousel/blob/main/docs/src/pages/index.tsx"/>
         </div>
         <div className={styles['card-container']}>
           <Card imgUrl={LightweightImageUrl} title="LightWeight" description="By utilizing only the CSS transform property, the rendering process is optimized for better performance. This enables the delivery of stunning 3D carousel effects on the web with improved efficiency"/>
