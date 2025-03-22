@@ -1,0 +1,34 @@
+.examples-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3em;
+  padding: 3em;
+  list-style-type: none ;
+  
+  li {
+    border-radius: 5px;
+    padding: 1em;
+    box-shadow: 0 0 10px 1px rgba(103, 103, 103, 0.3);
+    transition: all 0.3s ease-in-out;
+
+    a {
+      text-decoration: none;
+    }
+
+    p {
+      color: var(--ifm-font-color-base);
+    }
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 10px 1px rgba(103, 103, 103, 0.6);
+    }
+  }
+}
+
+@media screen and (max-width: 996px) {
+  .examples-list {
+    grid-template-columns: 1fr;
+    gap: 1em;
+  }
+}

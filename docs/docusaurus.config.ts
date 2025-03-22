@@ -71,6 +71,11 @@ const config: Config = {
           position: 'left',
         },
         {
+          label: 'Examples',
+          to: 'examples',
+          position: 'left',
+        },
+        {
           href: 'https://github.com/Byongho96/react-responsive-3d-carousel',
           label: 'GitHub',
           position: 'right',
