@@ -15,14 +15,16 @@
       text-decoration: none;
     }
 
-    p {
-      color: var(--ifm-font-color-base);
+    img {
+      width: 100%;
+      aspect-ratio: 16/9;
     }
-
+    
     &:hover {
       transform: scale(1.05);
       box-shadow: 0 0 10px 1px rgba(103, 103, 103, 0.6);
     }
+
   }
 }
 
