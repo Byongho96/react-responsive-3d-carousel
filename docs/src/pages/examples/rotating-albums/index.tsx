@@ -1,5 +1,5 @@
+import { useState } from "react";
 import Layout from "@theme/Layout";
-import styles from './styles.module.scss'
 import blindingLightsCover from './images/Blinding_Lights.png';
 import shapeOfYouCover from './images/Shape_Of_You.png';
 import levitatingCover from './images/Levitating.png';
@@ -10,11 +10,11 @@ import badGuyCover from './images/Bad_Guy.png';
 import shallowCover from './images/Shallow.png';
 import someoneYouLovedCover from './images/Someone_You_Loved.png';
 import antiHeroCover from './images/Anti-Hero.png';
-import { Carousel } from 'react-responsive-3d-carousel';
-import { useState } from "react";
 import useIsMobile from "@site/src/hooks/useIsMobile";
-import CodeIcon from '@site/static/svg/code.svg';
 import CodeLink from "@site/src/atoms/CodeLink";
+import { Carousel } from 'react-responsive-3d-carousel';
+import 'react-responsive-3d-carousel/dist/styles.css';
+import styles from './styles.module.scss'
 
 const albums = [
   {
@@ -51,13 +51,13 @@ const albums = [
     title: 'Stay',
     artist: 'The Kid LAROI ft. Justin Bieber',
     cover: stayCover,
-    description: '“Stay” is a high-energy, emotionally charged track about desperation, regret, and the fear of losing someone. The lyrics are a plea to a lover to stay despite past mistakes. With punchy synths and a fast-paced beat, the song captures the chaotic rush of young love and emotional vulnerability.',
+    description: '\"Stay\" is a high-energy, emotionally charged track about desperation, regret, and the fear of losing someone. The lyrics are a plea to a lover to stay despite past mistakes. With punchy synths and a fast-paced beat, the song captures the chaotic rush of young love and emotional vulnerability.',
   },
   {
     title: 'Bad Guy',
     artist: 'Billie Eilish',
     cover: badGuyCover,
-    description: 'his minimalist, edgy pop hit subverts expectations with its sinister undertone and whispery vocals. Billie plays with the idea of being the “bad guy” in a relationship, flipping traditional gender dynamics and adding irony to pop norms. Its bold production and quirky style made it a global sensation.',
+    description: 'This minimalist, edgy pop hit subverts expectations with its sinister undertone and whispery vocals. Billie plays with the idea of being the “bad guy” in a relationship, flipping traditional gender dynamics and adding irony to pop norms. Its bold production and quirky style made it a global sensation.',
   },
   {
     title: 'Shallow',
@@ -75,7 +75,7 @@ const albums = [
     title: 'Anti-Hero',
     artist: 'Taylor Swift',
     cover: antiHeroCover,
-    description: 'ti-Hero” is an introspective pop track where Taylor Swift candidly explores her inner doubts and insecurities. With self-deprecating humor and vulnerability, she highlights the feeling of being one\'s own worst enemy. Its catchy hook contrasts with its deeply personal message, making it both fun and meaningful.',
+    description: 'Anti-Hero” is an introspective pop track where Taylor Swift candidly explores her inner doubts and insecurities. With self-deprecating humor and vulnerability, she highlights the feeling of being one\'s own worst enemy. Its catchy hook contrasts with its deeply personal message, making it both fun and meaningful.',
   },
 ]
 
