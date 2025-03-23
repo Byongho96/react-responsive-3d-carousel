@@ -13,7 +13,15 @@ export default function ExamplesPage(): JSX.Element {
             <article>
               <Link to="/examples/rotating-albums">
                 <h2>Rotating Albums</h2>
-                <p>Effortlessly arrange your carousel using a 3D editor tool. You can generate custom layout data that can be passed as props for full control over your design.</p>
+                <img src={require('@site/static/screenshots/rotating-albums.jpg').default} alt="Rotating Albums Screenshot"/>
+              </Link>
+            </article>
+          </li>
+          <li>
+            <article>
+              <Link to="/examples/puppy-days">
+                <h2>Puppy Days</h2>
+                <img src={require('@site/static/screenshots/puppy-days.jpg').default} alt="Puppy Days Screenshot"/>
               </Link>
             </article>
           </li>
